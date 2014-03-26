@@ -17,15 +17,11 @@ namespace TicketMachine
         public void Start()
         {
             showMenu();
-            next();
-        }
-
-        private void next()
-        {
-            Console.WriteLine("\r\n ==============================================");
-            Console.WriteLine(" Choose action (h for help)");
-            if(handleInput(read()))
-                next();
+            do
+            {
+                Console.WriteLine("\r\n ==============================================");
+                Console.WriteLine(" Choose action (h for help)");
+            } while (handleInput(read()));
         }
 
         private void write(string msg)
