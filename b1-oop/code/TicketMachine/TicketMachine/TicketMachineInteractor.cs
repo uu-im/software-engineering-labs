@@ -73,12 +73,11 @@ namespace TicketMachine
         private void showMenu()
         {
             Console.WriteLine("");
-            string menu = " (q) quit\t: Quit";
-            menu += "\r\n (i) insert \t: Insert money";
-            menu += "\r\n (r) refund \t: Refund money";
-            menu += "\r\n (t) ticket \t: Print ticket";
-            menu += "\r\n (p) price \t: Show price";
-            Console.WriteLine(menu);
+            Console.WriteLine(" (q) quit\t: Quit");
+            Console.WriteLine(" (i) insert \t: Insert money");
+            Console.WriteLine(" (r) refund \t: Refund money");
+            Console.WriteLine(" (t) ticket \t: Print ticket");
+            Console.WriteLine(" (p) price \t: Show price");
         }
     }
 }
