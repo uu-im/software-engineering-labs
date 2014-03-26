@@ -158,8 +158,6 @@ In your main \texttt{Program.cs} class you can then interact with the \texttt{Ti
 
 \begin{lstlisting}
 class Program{
-  private static ITicketMachine TM;
-  
   public static void Main(){
     // Instantiate a ticket machine
     ITicketMachine tm = new TicketMachine();
@@ -303,120 +301,100 @@ Consequently the last task of this exercise is to...
 
 \pagebreak
 \section{More Ticket Machines}
-So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we’ve achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes? Let’s try it out.
-\subsection{Altering the price}
-Try instantiating the ticket machine with a different price. Such as:
-\begin{lstlisting}
-"Program.cs"
+So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we've achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes?
 
-...
+Naturally we can change the ticket price at \textbf{compile time}:
+\begin{lstlisting}
 public static void Main ()
 { 
-  TM = new TicketMachine (1020);
-  // or maybe even
-  TM = new TicketMachine(40500);
+  ITicketMachine cheap = new TicketMachine (1020);
+  ITicketMachine expensive = new TicketMachine(40500);
 ...
 \end{lstlisting}
-We could of course even alter the price at \textbf{runtime}. Try this out:
+And naturally we can of course alter the price at \textbf{runtime}, by for example allowing the user to specifiy the price of a ticket:
 \begin{lstlisting}
-"Program.cs"
-
-...
 public static void Main ()
 { 
-  Console.Write("How much is a ticket (SEK): ");
-  int price = Console.ReadLine();
-  TM = new TicketMachine (price);
+  Console.Write("Specify how much a ticket is in SEK and press enter");
+  int price = Int32.Parse(Console.ReadLine());
+  ITicketMachine tm = new TicketMachine (price);
 ...
 \end{lstlisting}
-\subsection{The power of programming towards interfaces}
-Now let’s look at the mighty power of programming towards interfaces. We will be creating a donation machine with slightly different behavior. Create a new file called DonationMachine.cs and paste in the following class.
+But there's one thing we haven't really talked about yet. The power of programming towards interfaces. Our ticket machine is actually way more abstract than one might first imagine. Take note of the fact that the \texttt{TicketMachineInteractor} class does \textbf{not} accept a \texttt{TicketMachine}, but rather an \texttt{ITicketMachine}. This means that it can an instance of any class as long as that class implements the \texttt{ITicketMachine} interface.
+
+
+
+\subsection{Donation Machine}
+Let's build a new ticket machine that also implements the \texttt{ITicketMachine} interface, but exhibits different behaviour.
+\begin{steps}
+\item Create the file \texttt{DonationMachine.cs} and let it contain the class definition that implements the interface \texttt{ITicketMachine}.
+\item Implement the body of the members, according to the specification below.
+\end{steps}
+The pseudo-code below explains what the donation machine does.
 \begin{lstlisting}
-"DonationMachine.cs"
-
-public class DonationMachine : ITicketMachine
-{
-  int price, balance, total;
-
-  public DonationMachine (int minimumDonation)
-  {
-    this.price = minimumDonation;
-    this.balance = 0;
-    this.total = 0;
+public class DonationMachine : ITicketMachine{
+  public string InsertMoney(int amount){
+    // update the current balance as defined by amount
+    // only if amount is greater than 0
+    // return string that explains what happened
   }
-  
-  public int GetTicketPrice(){
-    return this.price;
+  public string ShowBalance (){
+    // return a string that describes the current balance
   }
-  
-  public int GetBalance(){
-    return this.balance;
+  public string ShowPrice (){
+    // return a string that describes the minimum donation
   }
-  
-  public void InsertMoney(int amount){
-    if (amount >= this.price) {
-      this.balance += amount;
-      Console.WriteLine ("* * * * * * * * * * * * * * * *");
-      Console.WriteLine ("* THANK YOU FOR YOUR DONATION :)");
-      Console.WriteLine ("* " + this.balance + " SEK");
-      Console.WriteLine ("* * * * * * * * * * * * * * * *");
-    }  else {
-      Console.WriteLine("# The minimum donation is: " + this.price);
-    }
+  public string PrintTicket (){
+    // if balance is greater than minimum donation
+    //    commit donation by
+    //      - update total balance with current balance
+    //      - reset current balance
+    //      - print total balance
+    // else
+    //    return error message and amount missing
   }
-  
-  public void PrintTicket(){
-    Console.WriteLine ("* * * * * * * * * * * * * *");
-    Console.WriteLine ("* THIS MACHINE HAS COLLECTED");
-    Console.WriteLine ("* Total: " + this.total + " SEK");
-    Console.WriteLine ("* Thank you everyone :)");
-    Console.WriteLine ("* * * * * * * * * * * * * *");
-  }
-  
-  public void RefundMoney(){
-    Console.WriteLine ("# Sorry, no refunds");
+  public string RefundMoney (){
+    // print the amount of money refunded
+    // reset the current balance
   }
 }
 \end{lstlisting}
-Make sure you now instantiate the DonationMachine instead of the TicketMachine from the main class. As below:
+Now we can see why programming towards interfaces is such a powerful idea. Instantiate and send a \texttt{DonationMachine} to the \texttt{TicketMachineInteractor} instead.
 \begin{lstlisting}
-"Program.cs"
-
-...
-public static void Main ()
-{ 
-  TM = new DonationMachine (1020);
-...
-\end{lstlisting}
-Run the application! Think about how little modification we had to do to the command line interface (Program.cs). The only thing we changed was the hard-coded instantiation of the class. Furthermore, this problem of instantiation is something that we will discuss further when looking at design patterns.
-\subsection{A parking machine - your turn!}
-Now let’s try to build a parking meter machine without changing anything, except which class we’re instantiating in Program.cs like so:
-\begin{lstlisting}
-"Program.cs"
-
-...
-public static void Main ()
-{ 
-  TM = new ParkingMachine (20);
-...
-\end{lstlisting}
-And also creating the class, as follows:
-\begin{lstlisting}
-"ParkingMachine.cs"
-
-public class ParkingMachine : ITicketMachine
-{
-  ... write your definition here ...
+class Program{
+  public static void Main(){
+    ITicketMachine tm = new DonationMachine(10);
+    TicketMachineInteractor interactor = new TicketMachineInteractor(tm);
+    interactor.Start();
+  }
 }
 \end{lstlisting}
-While the parking meter machines have different behaviors in different places this particular machine works just like the TicketMachine in the first assignment. Except for the following few things.
+\begin{steps}
+\item Run the application! And consider how we didn't have to make any modifications to the \texttt{TicketMachineInteractor} class.
+\end{steps}
+Because the \texttt{TicketMachineInteractor} class is prpgrammed towards an interface rather than an implementation -- it is fully functional with whatever implementation we choose to build, so long as the implementation implements the \texttt{ITicketMachine} interface.
+
+
+
+
+
+\subsection{Parking Machine}
+While we're at it, let's create another machine. A regular 'ol Swedish parking machine.
+
+\begin{steps}
+\item Create a new class called \texttt{ParkingMachine} and let it implement the \texttt{ITicketMachine} interface. It's implementation should follow the specification below.
+\end{steps}
 \begin{itemize}
-  \item The price is the value of 10 minutes of parking
-  \item So when the user asks for a ticket the ticket must show how many minutes of parking the user receives
+  \item The price is the value of 10 minutes of parking.
+  \item The price should (as in the other machines) be set via the constructor.
+  \item When the user asks for a ticket the ticket must show how many minutes of parking the user receives.
   \item Parking time can only be in full multiplications of 10 minutes, the rest the user will receive as change.
   \item So, if the price of a ticket is 5 SEK, and the user inserts 13 SEK, the parking time would be 20 minutes, and the change 3 SEK.
 \end{itemize}
-\subsection{When you are done...}
+
+
+
+\subsection{Wrap up}
 Consider again the power of interfaces. While the above examples might be slightly contrived, take a minute to consider the implications of adding a class such as the one below.
 \begin{lstlisting}
 public class ExternalTicketMachine : ITicketMachine
@@ -428,27 +406,22 @@ public class ExternalTicketMachine : ITicketMachine
     this.price = // make a web request to get the price of a ticket
     this.balance = 0;
   }
-
-  public int GetTicketPrice(){
+  public string InsertMoney(int amount){
+    // increase current balance locally
+  }
+  public string ShowBalance(){
+    // return current balance locally
+  }
+  public string ShowPrice(){
     // make a web request to get the price of a ticket
   }
-
-  public int GetBalance(){
-    // return current balance
-  }
-
-  public void InsertMoney(int amount){
-    // increase current balance
-  }
-
-  public void PrintTicket(){
+  public string PrintTicket(){
     // make a web request to an external service
     // sending some user details and the current balance
     // returning the ticket recieved by the web request call
   }
-
-  public void RefundMoney(){
-    // refund money
+  public string RefundMoney(){
+    // refund money locally
   }
 }
 \end{lstlisting}
