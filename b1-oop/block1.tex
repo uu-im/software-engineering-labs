@@ -76,7 +76,7 @@ In this first block we’ll refresh our object oriented skills and dive into con
 This is a summary of the deliverables for this block.
 
 \subsubsection*{Exercise 1 -- Ticket machines}
-The completed \texttt{Visual Studio} solution. Containing one project with full implementation of the following classes/interfaces:
+The completed \texttt{Visual Studio} solution. One project with full implementation of the following classes/interfaces:
 \begin{enumerate}
   \item \texttt{ITicketMachine}
   \item \texttt{TicketMachine}
@@ -85,7 +85,7 @@ The completed \texttt{Visual Studio} solution. Containing one project with full 
 \end{enumerate}
 
 \subsubsection*{Exercise 2 -- Chat system}
-The deliverable from this exercise is a working chat system consting of two (potentially three depending on if you put the helper methods in a separate project) projects. All in one \texttt{Visual Studio} solution.
+A working chat system consting of two (potentially three depending on if you put the helper methods in a separate project) projects. All in one \texttt{Visual Studio} solution.
 
 \subsubsection*{Exercise 3 -- Iterator}
 \begin{enumerate}
@@ -101,13 +101,16 @@ The deliverable from this exercise is a working chat system consting of two (pot
 
 
 \pagebreak
-\section{ A Simple Ticket Machine }
+\section{ Ticket Machines }
 The purpose of this first exercise is simply to get up to speed. Familiarize ourselves with the C\# language, Visual studio environment and refresh our knowledge in object oriented programming.
 
+We're building ticket machines to illustrate the power of programming towards interfaces rather than towards implementations. We'll start off with a very simple ticket machine, and later move on to more complex ones.
+
+\subsection{Simple Ticket Machine}
 In this exercise we’re building a very simple ticket machine. You can think of the ticket machine as an automated ticket machine at the cinemas. You insert money, press ok, and get a ticket.
 
 
-\subsection{An interface for the ticket machine}
+\subsubsection{An interface for the ticket machine}
 Naturally we'll build thins ticket machine as a class. The class will be called \texttt{TicketMachine} and it will contain a number of public methods. Let's describe the class using a \texttt{C\# interface}.
 
 \begin{lstlisting}
@@ -129,7 +132,7 @@ interface ITicketMachine {
 
 
 
-\subsection{Implementing the interface}
+\subsubsection{Implementing the interface}
 Let’s create the actual class. The ticket machine that will implement the interace.
 \begin{steps}
 \item Create a new class called \texttt{TicketMachine.cs} and tell it to implement the interface we just created. Like so:
@@ -169,7 +172,7 @@ class TestMachine : ITicketMachine
 Superb! Now we, at least, have an application that builds.
 
 
-\subsection{Command line interface}
+\subsubsection{Command line interface}
 So, now we have the ``shell'' for a class that will act as the ticket machine. But we need a way to interact with the ticket machine. I.e. we need a class that will use the ticket machine class.
 
 For the sake of simplicity you've been provided with a command line interface (CLI) class that you can \href{https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/b1-oop/code/TicketMachine/TicketMachine/TicketMachineInteractor.cs}{download here}.
@@ -214,7 +217,7 @@ If you, when running your application, do make one of the choices above -- of co
 
 
 
-\subsection{Ticket Machine ticket costs}
+\subsubsection{Ticket Machine ticket costs}
 Before we get into implementing the body of each method in the concrete ticket machine class -- let's declare a constructor. The constructor will take an integer as an argument. The integer represents the price of a single ticket. Consequently, our constructor needs to save the value passed in, as an instance variable so that we can use it later on. We need it to  Let's do it:
 \begin{steps}
 \item Implement a constructor in the ticket machine class, that takes an integer as an argument, and saves that value to an instance variable.
@@ -231,7 +234,7 @@ class TicketMachine : ITicketMachine{
 
 
 
-\subsection{Full implementation}
+\subsubsection{Full implementation}
 Now it's time to actually implement the members of the concrete ticket machine class. Below you'll find a runtime example of what a session with the ticket machine could look like.
 \begin{lstlisting}[style=terminal]
  Choose action (h for help)
@@ -414,7 +417,7 @@ While we're at it, let's create another machine. A regular 'ol Swedish parking m
 
 
 
-\subsubsection{Wrap up}
+\subsection{Wrap up}
 Consider again the power of interfaces. While the above examples might be slightly contrived, take a minute to consider the implications of adding a class such as the one below.
 \begin{lstlisting}
 public class ExternalTicketMachine : ITicketMachine
