@@ -7,5 +7,10 @@ namespace TicketMachine
 {
     public interface ITicketMachine
     {
+        string InsertMoney(int amount);
+        string ShowBalance();
+        string RefundMoney();
+        string PrintTicket();
+        string GetTicketPrice();
     }
 }

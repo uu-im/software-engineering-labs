@@ -7,8 +7,13 @@ namespace TicketMachine
 {
     class Program
     {
-        static void Main(string[] args)
+        private static TicketMachineInteractor _interactor;
+
+        public static void Main()
         {
+            ITicketMachine machine = new TicketMachine(200);
+            _interactor = new TicketMachineInteractor(machine);
+            _interactor.Start();
         }
     }
 }
