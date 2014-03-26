@@ -58,7 +58,7 @@ namespace TicketMachine
             }
         }
 
-        public string GetTicketPrice()
+        public string ShowPrice()
         {
             return "The price of one ticket is " + _cost.ToString() + " kr";
         }

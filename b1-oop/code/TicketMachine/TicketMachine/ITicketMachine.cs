@@ -5,12 +5,12 @@ using System.Text;
 
 namespace TicketMachine
 {
-    public interface ITicketMachine
+    interface ITicketMachine
     {
         string InsertMoney(int amount);
         string ShowBalance();
+        string ShowPrice();
         string RefundMoney();
         string PrintTicket();
-        string GetTicketPrice();
     }
 }
