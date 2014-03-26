@@ -68,10 +68,30 @@
 
 
 
-\section*{ Introduction }
+\section*{Introduction}
 In this first block we’ll refresh our object oriented skills and dive into concepts such as constructors, public and private membership, interfaces and inheritance as well as a couple of more technical features such as threads and GUI’s.
 
 
+\subsection*{Deliverables}
+This is a summary of the deliverables for this block.
+
+\subsubsection*{Exercise 1 -- Ticket machines}
+The completed \texttt{Visual Studio} solution. Containing one project with full implementation of the following classes/interfaces:
+\begin{enumerate}
+  \item \texttt{ITicketMachine}
+  \item \texttt{TicketMachine}
+  \item \texttt{DonationMachine}
+  \item \texttt{ParkingMachine}
+\end{enumerate}
+
+\subsubsection*{Exercise 2 -- Chat system}
+The deliverable from this exercise is a working chat system consting of two (potentially three depending on if you put the helper methods in a separate project) projects. All in one \texttt{Visual Studio} solution.
+
+\subsubsection*{Exercise 3 -- Iterator}
+\begin{enumerate}
+  \item The completed \texttt{Visual Studio} phonebook solution.
+  \item The iterator diagram.
+\end{enumerate}
 
 
 
@@ -427,17 +447,6 @@ public class ExternalTicketMachine : ITicketMachine
 \end{lstlisting}
 When we are programming to interfaces we are more prepared for change.
 
-\subsection{Deliverables}
-The deliverable from this exercise is the completed \texttt{Visual Studio} solution. Containing one project with full implementation of the following classes/interfaces:
-\begin{enumerate}
-  \item \texttt{ITicketMachine}
-  \item \texttt{TicketMachine}
-  \item \texttt{DonationMachine}
-  \item \texttt{ParkingMachine}
-\end{enumerate}
-
-
-
 
 
 
@@ -578,10 +587,6 @@ Send message to socket.
 clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));
 \end{lstlisting}
 
-\subsection{Deliverables}
-The deliverable from this exercise is a working chat system consting of two (potentially three depending on if you put the helper methods in a separate project) projects. All in one \texttt{Visual Studio} solution.
-
-
 
 
 
@@ -596,8 +601,9 @@ In this exercise we'll explore the iterator pattern using the phone book example
   \item Draw a class diagram for the iterator, without using diagram generation in \texttt{Visual Studio}.
   \item Implement the \texttt{iterator pattern} for the phone book, populate the phone book and iterate over it, printing its contents.
 \end{steps}
-\subsection{Deliverables}
-The deliverables from this exercise is (1) the project, and (2) the diagram.
+
+
+
 
 
 \end{document}
