@@ -1,9 +1,13 @@
 \documentclass{article}
-
+\usepackage{fullpage}
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{xcolor}
 \usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
 
 
 
@@ -29,6 +33,23 @@
   stringstyle=\color[rgb]{0.6,0.1,0.5},
   backgroundcolor=\color[rgb]{0.95,0.95,0.95},
   showstringspaces=false
+}
+
+% steps
+\newcounter{stepcounter}
+\setcounter{stepcounter}{0}
+\newenvironment{steps}{ 
+  \begin{enumerate}[label=\color{red}Step \theenumi)]
+    \setcounter{enumi}{\value{stepcounter}}
+}{
+  \setcounter{stepcounter}{\value{enumi}}
+  \end{enumerate}
+}
+
+% hrefs
+\hypersetup{
+  colorlinks=true,
+  urlcolor=cyan
 }
 
 
@@ -61,242 +82,213 @@ In this first block we’ll refresh our object oriented skills and dive into con
 
 \pagebreak
 \section{ A Simple Ticket Machine }
-The purpose of this first exercise is to get you up to speed. Familiarizing ourselves with the C\# language, Visual studio environment and hopefully refresh your object oriented memory. In this exercise we’re building a very simple ticket machine. Think of this machine as an automated ticket clerk - or a parking meter where you pay upfront. We put money in to the meter, and when we’ve put enough money, then we press “buy ticket”. The machine “swallow” the money and “spits out” a ticket.
+The purpose of this first exercise is simply to get up to speed. Familiarize ourselves with the C\# language, Visual studio environment and refresh our knowledge in object oriented programming.
 
-We will implement this ticket machine as a class, that expose four simple methods to the outside world: (1) InsertMoney takes a number as a parameter and you can think of this action as putting coins into the machine. The balance in the machine is updated. However we can at any time call (2) RefundMoney (think - press the return money/undo button) and the machine will return our money and reset the balance. The (3) PrintTicket method prints us a ticket given we have put enough money into the machine. Lastly (4) GetTicketPrice simply displays the price of a ticket.
+In this exercise we’re building a very simple ticket machine. You can think of the ticket machine as an automated ticket machine at the cinemas. You insert money, press ok, and get a ticket.
+
 
 \subsection{An interface for the ticket machine}
-The interface for the TicketMachine is provided below. Either open the Visual Studio solution for this lab (which already contain the file for this interface) or create a new Console Application project and create a new file. In either case, make sure your interface contain the following code:
+Naturally we'll build thins ticket machine as a class. The class will be called \texttt{TicketMachine} and it will contain a number of public methods. Let's describe the class using a \texttt{C\# interface}.
+
 \begin{lstlisting}
-"ITicketMachine.cs"
-
-public interface ITicketMachine {
-  void InsertMoney(int amount);
-  void RefundMoney();
-  void PrintTicket();
-  int GetTicketPrice();
+interface ITicketMachine {
+  string InsertMoney(int amount);
+  string ShowPrice();
+  string ShowBalance();
+  string RefundMoney();
+  string PrintTicket();
 }
-    \end{lstlisting}
+\end{lstlisting}
+\begin{steps}
+\item Open up \texttt{Visual Studio} and create a new \texttt{C\#} solution. Make sure you choose \texttt{C\#} as the language, and not \texttt{Visual Basic} or any other language.
+\item Add a new interface file to your project. Call it \texttt{ITicketMachine} and save it as \texttt{ITicketMachine.cs}.
+\item Make sure your interface looks like the code example above.
+\end{steps}
 
 
-    \subsection{Creating the class}
-    Let’s now create the TicketMachine class. Create a new class called TicketMachine.cs and   tell it to implement the interface we just created:
-    \begin{lstlisting}
-"TicketMachine.cs"
 
-public class TicketMachine : ITicketMachine
+
+
+\subsection{Implementing the interface}
+Let’s create the actual class. The ticket machine that will implement the interace.
+\begin{steps}
+\item Create a new class called \texttt{TicketMachine.cs} and tell it to implement the interface we just created. Like so:
+\end{steps}
+\begin{lstlisting}
+class TicketMachine : ITicketMachine
 {
-    ...
 }
-    \end{lstlisting}
-    Try building the application at this moment and notice why it fails. We have yet not implemented all the members of the interface we created earlier.
-
-    For now, let’s not concern ourselves with what the methods must do, but let’s just add them so we can get an application that actually builds. 
-
-    \begin{lstlisting}
-"TicketMachine.cs"
-
-public class TicketMachine : ITicketMachine
+\end{lstlisting}
+\begin{steps}
+\item Build the project (by pressing \texttt{F5}) and contemplate why it won't build.
+\end{steps}
+To make sure the application will build. Let's actually implement the members of the interface in the concrete ticket machine class.
+\begin{steps}
+\item Open the concrete ticket machine class and right-click the name of the interface in the class definition. Then select \texttt{Implement Interface > Implement Interface}. Or simply implement all of the members of the interface manually.
+\end{steps}
+\begin{lstlisting}
+class TestMachine : ITicketMachine
 {
-  public int GetTicketPrice(){
-    throw new NotImplementedException ();
+  public string InsertMoney(int amount){
+    throw new NotImplementedException();
   }
-
-  public int GetBalance(){
-    throw new NotImplementedException ();
+  public string ShowBalance(){
+    throw new NotImplementedException();
   }
-
-  public void InsertMoney(int amount){
-    throw new NotImplementedException ();
+  public string ShowPrice(){
+    throw new NotImplementedException();
   }
-
-  public void PrintTicket(){
-    throw new NotImplementedException ();
+  public string RefundMoney(){
+    throw new NotImplementedException();
   }
-
-  public void RefundMoney(){
-    throw new NotImplementedException ();
+  public string PrintTicket(){
+    throw new NotImplementedException();
   }
 }
-    \end{lstlisting}
+\end{lstlisting}
+Superb! Now we, at least, have an application that builds.
+
 
 \subsection{Command line interface}
-Ok, let’s now create a CLI so that we can interact with our TicketMachine class. You should already have a file called Program.cs. Copy and paste the following code into this file. Have a look at the contents of this code and discuss it with a lab partner.  
+So, now we have the ``shell'' for a class that will act as the ticket machine. But we need a way to interact with the ticket machine. I.e. we need a class that will use the ticket machine class.
+
+For the sake of simplicity you've been provided with a command line interface (CLI) class that you can \href{https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/b1-oop/code/TicketMachine/TicketMachine/TicketMachineInteractor.cs}{download here}.
+
+In your main \texttt{Program.cs} class you can then interact with the \texttt{TicketMachineInteractor} like so:
 
 \begin{lstlisting}
-"Program.cs"
-
-class Program
-{
+class Program{
   private static ITicketMachine TM;
   
-  public static void Main ()
-  {
-    TM = new TicketMachine (200);
-    
-    // Display menu once
-    DisplayMenu ();
+  public static void Main(){
+    // Instantiate a ticket machine
+    ITicketMachine tm = new TicketMachine();
 
-    // Start the CLI
-    string userInput = WaitForUserInput ();
-    while (userInput != "0"){
-      HandleUserInput(userInput);
-      userInput = WaitForUserInput();
-    }
-  }
-  
-  private static string WaitForUserInput(){
-    Console.Write("Enter action (1-5) and press RETURN: ");
-    return Console.ReadLine();
-  }
+    // Instantiate an interactor, and pass in the ticket machine
+    TicketMachineInteractor interactor = new TicketMachineInteractor(tm);
 
-  private static void DisplayMenu(){
-    Console.WriteLine("- - - - MENU - - - -");
-    Console.WriteLine("0: Exit");
-    Console.WriteLine("1: Show this menu");
-    Console.WriteLine("2: Insert money");
-    Console.WriteLine("3: Refund money");
-    Console.WriteLine("4: Print ticket");
-    Console.WriteLine("5: Show ticket price");
-    Console.WriteLine("- - - - - - - - - - -");
-  }
-  
-  private static void HandleUserInput(string userInput){
-    switch(userInput)
-    {
-    case "1":
-      DisplayMenu();
-      break;
-    case "2":
-      Console.Write("Enter the amount you wish to put in (SEK): ");
-      int amount = Int32.Parse (Console.ReadLine());
-      TM.InsertMoney (amount);
-      break;
-    case "3":
-      TM.RefundMoney();
-      break;
-    case "4":
-      TM.PrintTicket ();
-      break;
-    case "5":
-      int price = TM.GetTicketPrice ();
-      Console.WriteLine ("# The price of a ticket is: " + price + " SEK");
-      break;
-    default:
-      Console.WriteLine ("# Invalid input");
-      break;
-    }
+    // Start the interactor
+    interactor.Start();
   }
 }
 \end{lstlisting}
 
+Ok, let’s now create a CLI so that we can interact with our TicketMachine class. You should already have a file called Program.cs. Copy and paste the following code into this file. Have a look at the contents of this code and discuss it with a lab partner.
 
-You should now be able to run the project and get the following output in the console.
+\begin{steps}
+\item Try running your application!
+\end{steps}
+The output should be similar to this:
 
 \begin{lstlisting}[style=terminal]
-- - - - MENU - - - -
-0: Exit
-1: Show this menu
-2: Insert money
-3: Refund money
-4: Print ticket
-5: Show ticket price
-- - - - - - - - - - -
-Enter action (1-5) and press ENTER: 
+ (q) Quit
+ (i) Insert money
+ (b) Show balance
+ (p) Show price
+ (r) Refund money
+ (t) Print ticket
+ ==============================================
+ Choose action (h for help)
+ >
 \end{lstlisting}
-However if you do make one of the choices above, a NotImplementedException is thrown.  So let’s implement the actual body of the TicketMachine class.
+If you, when running your application, do make one of the choices above -- of course a \texttt{NotImplementedException} will be thrown because that's all our concerete Ticket Machine does for now.
 
 
 
 
-\subsection{Constructor and properties of the TicketMachine}
-So, let’s first make sure that the ticket machine knows how much a ticket is. Inject the price as an integer through the TicketMachines constructor and add a private class variable that can hold the price. While we’re at it. Let’s also add the balance so that we can keep track of how much a user has inserted into the ticket machine at any given time. Like so:
+\subsection{Ticket Machine ticket costs}
+Before we get into implementing the body of each method in the concrete ticket machine class -- let's declare a constructor. The constructor will take an integer as an argument. The integer represents the price of a single ticket. Consequently, our constructor needs to save the value passed in, as an instance variable so that we can use it later on. We need it to  Let's do it:
+\begin{steps}
+\item Implement a constructor in the ticket machine class, that takes an integer as an argument, and saves that value to an instance variable.
+\end{steps}
 \begin{lstlisting}
-"TicketMachine.cs"
+class TicketMachine : ITicketMachine{
+  private int price;
 
-public class TicketMachine : ITicketMachine
-{
-  private int price, balance;
-
-  public TicketMachine (int ticketCost)
-  {
+  public TicketMachine (int ticketCost){
     this.price = ticketCost;
-    this.balance = 0;
   }
-  ...
+}
 \end{lstlisting}
 
 
 
-\subsection{A runtime example - your turn!}
-So, now it’s your turn to implement the bodies of the methods of the ticket machine class. Below is a sample of what the application execution should look like when you are done. 
+\subsection{Full implementation}
+Now it's time to actually implement the members of the concrete ticket machine class. Below you'll find a runtime example of what a session with the ticket machine could look like.
 \begin{lstlisting}[style=terminal]
-- - - - MENU - - - -
-0: Exit program
-1: Show this menu
-2: Insert money
-3: Refund money
-4: Print ticket
-5: Show ticket price
-- - - - - - - - - - -
-Enter action (1-5) and press RETURN: 5
-# The price of a ticket is: 200 SEK
-Enter action (1-5) and press RETURN: 2
-Enter the amount you wish to put in (SEK): 150
-# Current amount: 150 SEK
-Enter action (1-5) and press RETURN: 4
-# The price of a ticket is 200 SEK, but you've only inserted 150 SEK
-Enter action (1-5) and press RETURN: 2
-Enter the amount you wish to put in (SEK): 25
-# Current amount: 175 SEK
-Enter action (1-5) and press RETURN: 4
-# The price of a ticket is 200 SEK, but you've only inserted 175 SEK
-Enter action (1-5) and press RETURN: 3
-# Refunding: 175 SEK
-# Current amount: 0 SEK
-Enter action (1-5) and press RETURN: 2
-Enter the amount you wish to put in (SEK): 300
-# Current amount: 300 SEK
-Enter action (1-5) and press RETURN: 4
-* * * * * *
-* TICKET
-* 200 SEK
-* * * * * *
-# Your change is 100 SEK
-Enter action (1-5) and press RETURN: 
+ Choose action (h for help)
+ >   i
+ >>> Enter the amount you wish to insert (SEK):
+ >   50
+ >>> Inserted 50 kr
+ ==============================================
+ Choose action (h for help)
+ >   t
+ >>> Insufficient funds.. Missing 150 kr
+ ==============================================
+ Choose action (h for help)
+ >   p
+ >>> The price of one ticket is 200 kr
+ ==============================================
+ Choose action (h for help)
+ >   i
+ >>> Enter the amount you wish to insert (SEK):
+ >   175
+ >>> Inserted 175 kr
+ ==============================================
+ Choose action (h for help)
+ >   t
+ >>> Printing ticket....
+ ==============================================
+ Choose action (h for help)
+ >   b
+ >>> Your balance is currently: 25 kr
+ ==============================================
+ Choose action (h for help)
+ >   i
+ >>> Enter the amount you wish to insert (SEK):
+ >   75
+ >>> Inserted 75 kr
+ ==============================================
+ Choose action (h for help)
+ >   r
+ >>> Refunding 100 kr
+ ==============================================
+ Choose action (h for help)
+ >
 \end{lstlisting}
-Firstly, don’t sweat it! We've already built a functioning command line interface so all you need to do is to instantiate the TicketMachine correctly and then implement the members of the TicketMachine class. Below is some pseudo-code to get you started.
+If you find the runtime example above too confusing -- there's some comments below explaining what each method should do. Please note: all the methods return strings that will be printed by the interactor.
 
 \begin{lstlisting}
-"TicketMachine.cs"
-
-public int GetTicketPrice(){
-  // return the price of a ticket
+public string InsertMoney(int amount){
+  // update the current balance as defined by amount
+  // only if amount is greater than 0
+  // return string that explains what happened
 }
-
-public int GetBalance(){
-  // return the amount of currently inserted money;
+public string ShowBalance(){
+  // return a string that describes the current balance
 }
-
-public void InsertMoney(int amount){
-  // update the amount of inserted money
-  // print the current balance using Console.WriteLine
+public string ShowPrice(){
+  // return a string that describes the price of a ticket
 }
-
-public void PrintTicket(){
-  // if enough money is inserted,
-  //    print the ticket
-  //    and print the change
-  // if not enough money is inserted,
-  //  print an error message
-  //    displaying the price and currently inserted money
+public string PrintTicket(){
+  // if balance is enough
+  //    reduce balance accordingly, and
+  //    return string describing ticket
+  // if balance is not enough
+  //    return error message and amount missing
 }
-
-public void RefundMoney(){
+public string RefundMoney(){
   // print the amount of money refunded
   // reset the current amount and print it
 }
 \end{lstlisting}
+Consequently the last task of this exercise is to...
+\begin{steps}
+\item Implement the intended functionality of all the \texttt{ITicketMachine} members in the concrete \texttt{TicketMachine}.
+\end{steps}
+
+
 
 
 
@@ -478,7 +470,7 @@ When we are programming to interfaces we are more prepared for change.
 \pagebreak
 \section{Basic GUI coding and Event Handling}
 In this assignment, you should build a basic desktop application using Microsoft Visual Studio. The assignment should be solved using the programming language C\#.NET. The course literature McConnell (2009) primarily shows code examples in VB.NET and C++. It is up to you to and good C\# tutorials on Internet.
-\begin{enumerate}[a)]
+\begin{enumerate}
   \item The application should be a windows application consisting of one form. On that form, place one multiple-row textbox component, one listbox with dummy content (e.g. \texttt{"line1"}, \texttt{"line2"} et cetera) and one single-row textbox component. When something is written in the single-line textbox and \texttt{ENTER} is pressed, you should take the selected value from the listbox (e.g. \texttt{"line 1"}, 14 merge it with \texttt{" : "} and the content of the single-row textbox. Then you should add the result string to the multiple-row textbox.
   \item Add a button on the form with the text \texttt{"Store message"}. When the button is clicked, the content of both text boxes should be cleared.
   \item Add another button on the form with the text \texttt{"Start simulation"}. When the button is pressed, you should start a new thread. We will discuss the concept of threads further in the lab sessions. The thread should pick a message from a random list of messages, and add it to the multiple-row textbox. The idea is that the thread simulates 'real' chat messages.
