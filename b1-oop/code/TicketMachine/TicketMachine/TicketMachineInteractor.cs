@@ -17,15 +17,11 @@ namespace TicketMachine
         public void Start()
         {
             showMenu();
-            next();
-        }
-
-        private void next()
-        {
-            Console.WriteLine("\r\n ==============================================");
-            Console.WriteLine(" Choose action (h for help)");
-            if(handleInput(read()))
-                next();
+            do
+            {
+                Console.WriteLine("\r\n ==============================================");
+                Console.WriteLine(" Choose action (h for help)");
+            } while (handleInput(read()));
         }
 
         private void write(string msg)
@@ -60,7 +56,7 @@ namespace TicketMachine
                     write(_ticketMachine.PrintTicket());
                     return true;
                 case "p": case "price":
-                    write(_ticketMachine.GetTicketPrice());
+                    write(_ticketMachine.ShowPrice());
                     return true;
                 case "q": case "quit":
                     return false;
@@ -75,9 +71,10 @@ namespace TicketMachine
             Console.WriteLine("");
             Console.WriteLine(" (q) quit\t: Quit");
             Console.WriteLine(" (i) insert \t: Insert money");
+            Console.WriteLine(" (b) balance \t: Show balance");
+            Console.WriteLine(" (p) price \t: Show price");
             Console.WriteLine(" (r) refund \t: Refund money");
             Console.WriteLine(" (t) ticket \t: Print ticket");
-            Console.WriteLine(" (p) price \t: Show price");
         }
     }
 }
