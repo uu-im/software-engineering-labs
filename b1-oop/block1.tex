@@ -442,24 +442,132 @@ When we are programming to interfaces we are more prepared for change.
 
 \pagebreak
 \section{Basic GUI coding and Event Handling}
-In this assignment, you should build a basic desktop application using Microsoft Visual Studio. The assignment should be solved using the programming language C\#.NET. The course literature McConnell (2009) primarily shows code examples in VB.NET and C++. It is up to you to and good C\# tutorials on Internet.
-\begin{enumerate}
-  \item The application should be a windows application consisting of one form. On that form, place one multiple-row textbox component, one listbox with dummy content (e.g. \texttt{"line1"}, \texttt{"line2"} et cetera) and one single-row textbox component. When something is written in the single-line textbox and \texttt{ENTER} is pressed, you should take the selected value from the listbox (e.g. \texttt{"line 1"}, 14 merge it with \texttt{" : "} and the content of the single-row textbox. Then you should add the result string to the multiple-row textbox.
-  \item Add a button on the form with the text \texttt{"Store message"}. When the button is clicked, the content of both text boxes should be cleared.
-  \item Add another button on the form with the text \texttt{"Start simulation"}. When the button is pressed, you should start a new thread. We will discuss the concept of threads further in the lab sessions. The thread should pick a message from a random list of messages, and add it to the multiple-row textbox. The idea is that the thread simulates 'real' chat messages.
-\end{enumerate}
-By solving (a) to (c), we build a 'dummy prototype' for the client side of a chat system. In assignment 2, we will elaborate on the application to provide it with real chat functionality. However, in this assignment, we concentrate on building a GUI and some test functionality to simulate chat messages. In the lab sessions, we will discuss how to structure the code to make it as easy as possible to make the transfer from dummy messages to 'real' chat functionality.
+In this assignment we're going to build a local network chat system. One server part and one client part. The idea is that you start up one server, then multiple clients. Messages sent from connected clients will be broadcasted to all connected clients.
 
-Work in pairs. You are completely free to discuss with other groups, as long as you are able to understand and motivate your solution in the examination seminar.
-\subsection{Chat system}
-In this exercise, you have been given a partially completed solution for a full chat system. Both the client project and the server project are incomplete and contain errors. jointly build a chat server in the lab room. Your mission is to complete this solution and make it a working chat system. If you wish to use your chat client GUI created in the last exercise you are most welcome to do so.
+\textbf{This assignment is preferably solved in pairs of two}. Groups of more than two people are however not allowed.
+\begin{steps}
+\item Create a new Visual Studio C\# solution. In the solution, create two separate \texttt{Windows Forms} projects. One for the \texttt{client} and one for the \texttt{server}.
+\end{steps}
+To tackle this task as easily as possible we're going to take it in two turns. We'll start off by simply creating a dummy chat client. Basically just the UI. When we've got that all set up, we'll move on to actually building the fully functional chat system.
+
+\subsection{Client GUI}
+ \begin{steps}
+\item Open up the \texttt{client} project's main \texttt{form} and modify the UI so that it contains the following...
+  \begin{itemize}
+  \item a \texttt{ListBox} for displaying chat messages.
+  \item a \texttt{TextBox} for writing nickname and/or chat messages.
+  \item a \texttt{Button} for connecting/disconnecting.
+  \item a \texttt{Button} for sending chat messages.
+  \end{itemize}
+\item Add logic so that the following behaviour is exhibited:
+  \begin{enumerate}
+  \item If the user is not connected. When he/she enters a name in the textbox and presses the connect button, an entry should be posted in the listbox saying \texttt{"[nickname] connected"}. The text of the connect button should switch from \texttt{"connect"} to \texttt{"disconnect"}.
+  \item When a connected user presses the \texttt{"disconnect"} button, an entry should be posted in the listbox saying \texttt{"[nickname] disconnected"}. The text of the connect button should switch from \texttt{"disconnect"} to \texttt{"connect"}.
+  \item Whatever is in the textbox at the time of pressing connect is used as a nickname. It's not allowed to connect without a nickname.
+  \item When a connected user presses the send button whatever is in the textbox is sent as a chat message, and consequently shows up in the listbox in the following form: \texttt{"[nickname] says: [message]"}. It's not allowed to post empty messages.
+  \end{enumerate}
+\end{steps}
 
 
+\subsection{Real chat}
+Now we'll convert our dummy chat to an actual chat.
+\begin{steps}
+\item Make a backup-copy of your chat GUI.
+\item Convert your chat GUI into a real chat system that allows for multiple clients to connect to the same server. This means you're going to have to build the server as well. The requirements are simple:
+  \begin{enumerate}
+    \item All messages sent to the listbox in the last exercise, should be broadcasted to all clients connected to the chat. 
+    \item Two clients cannot have the same nickname.
+  \end{enumerate}
+\end{steps}
+It's basically up to you to figure out how to solve this exercise. However it's reasonable to assume that you're going to have to work with \texttt{socket}'s and \texttt{threads}. Below you'll find some code snippets to get you started.
+
+\subsubsection{Helper methods}
+These are quite handy to have since we're going to convert from byte arrays to strings and vice versa. These are useful both for the client and for the server so it's a good idea to put the class in a new project, but in the same solution. To add a reference to another project in the same solution, right click the \texttt{References} foldr in the \texttt{Solution Explorer}. Then choose \texttt{Add Reference > Projects > [proj.name]}
+\begin{lstlisting}
+public class ConversionUtils
+{
+  public static String ByteArrayToString(byte[] byteArray){
+    return System.Text.Encoding.UTF8.GetString(byteArray);
+  }
+  public static String ByteArrayToString(byte[] byteArray, int index, int count){
+    return System.Text.Encoding.UTF8.GetString(byteArray, index, count);
+  }
+  public static byte[] StringToByteArray(String message){
+    return System.Text.Encoding.UTF8.GetBytes(message);
+  } 
+}
+\end{lstlisting}
+
+\subsubsection{Client snippets}
+Connecting to a socket.\\
+Hint: this probably needs to spawn a new thread listening for contents from the socket.
+\begin{lstlisting}
+try{
+  byte[] serverIP = { 127, 0, 0, 1 };
+  IPAddress serverAddress = new IPAddress(serverIP);
+  Socket socket = new Socket(AddressFamily.InterNetwork,
+                             SocketType.Stream,
+                             ProtocolType.IP);
+  socket.Connect(serverAddress, 5000);
+  ...
+}
+catch(Exception e){
+  ...
+}
+\end{lstlisting}
+Receiving (listening for) contents from a socket.\\
+Hint: This probably needs to be done in a separate thread (i.e. not the UI thread).
+\begin{lstlisting}
+byte[] buffer = new byte[1024];
+int byteCount;
+while(true){
+    byteCount = socket.Receive(buffer);
+    String incomingMessage =
+      ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
+}
+\end{lstlisting}
 
 
+\subsubsection{Server snippets}
+Start a server.
+\begin{lstlisting}
+byte[] byteip = { 127, 0, 0 , 1};
+IPAddress ip = new IPAddress( ip );
+TcpListener listener = new TcpListener(ip, 5000);
+listener.Start();
+\end{lstlisting}
 
+Listen for incoming connections.\\
+Hint: Probably needs to be done in a separate thread because of the eternal loop.
+\begin{lstlisting}
+while (true)
+{
+  try
+  {
+    // Wait for a connection
+    Socket clientsocket = listener.AcceptSocket();
 
+    try {
+      byte[] buffer = new byte[1024];
+  
+      // Wait for data (nickname)
+      byteCount = clientsocket.Receive(buffer);
+      String requestedNickname =
+        ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
 
+      // make sure nickname is not taken
+      // and start off a new thread listening for
+      // more incoming data on the clientsocket
+    }
+    catch (Exception ex){ ... }
+  }
+  catch (Exception ex){ ... }
+}
+\end{lstlisting}
+Send message to socket.
+\begin{lstlisting}
+clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));
+\end{lstlisting}
 
 
 
