@@ -123,7 +123,7 @@ string Count(int n);
       Say the goal is to produce the function \texttt{F(x)=x*x}. Then say we write a test, that calls \texttt{F(2)}, and expects (asserts) a return value of \texttt{4}. If we are "sliming", then we write the simplest function we can possibly write to ensure the test is satisfied. So we write the following function:
 
       \begin{lstlisting}
-int f(int x){
+int F(int x){
   return 4;
 }
       \end{lstlisting}
@@ -131,8 +131,11 @@ int f(int x){
       Unintelligent code indeed. Say we continue by writing a new test, calling \texttt{F(10)}, that expects a return value of \texttt{100}. Since we are sliming, we will change our production code to the following:
 
       \begin{lstlisting}
-int f(int x){
-  return x == 2 ? 4 : 100;
+int F(int x){
+  if(x == 2)
+    return 4;
+  else
+    return 100;
 }
       \end{lstlisting}
 
