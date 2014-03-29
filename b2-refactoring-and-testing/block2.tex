@@ -185,10 +185,15 @@ int F(int x){
 
 
 \pagebreak
-\section{ TDD practice (Bowling game kata)}
-  \paragraph{}
-  If you are finished with all of the above, this \emph{optional} exercise allows you to practice your TDD skills by doing the Bowling game kata. You've been provided with some basic code to get you started with the exercise. The bowling game class exposes two public methods whose bodies you need to implement.
-  
+\section{ Test Driven Design (Bowling game kata)}
+  Many developers use TDD to ``drive'' their design forward. Calling it Test Driven Design instead of simply Test Driven Development. Often times we loose focus and end up working on multiple things at once. This is unwanted for many reasons. For example it splits our attention, and cause our (version control) commits to be sprawled.
+
+  On the other hand, many developers find the cost of TDD to be too high in relation to it's payoff. Some disregard testing alltogether. Some disregard the idea of using tests as a way to drive design. In this exercise we'll approach a common programming exercise using the teachings of test driven design, and then reflect upon our findings.
+
+  A ``kata'' is used to practice one's programming skills. Much like musicians practice scales. This exercise asks you to perform, what has come to be known as, the Bowling Game Kata. The bowling game class exposes two public methods. Your job is to implement these bodies TDD-style.
+
+  Remember that this is an exercise in Test Driven Design. So you must follow the \emph{red-green-refactor}-cycle at all times. And reflect upon the design decisions that you are making as you go along.
+
     \begin{lstlisting}
 void Roll(int pins)
   // Where pins is the number of pins knocked
@@ -198,7 +203,8 @@ int Score()
   // Returns the current score at the given time
     \end{lstlisting}
 
-    \subsection*{ The rules of bowling }
+    \subsection*{The rules of bowling}
+    The rules of bowling, and consequently the requirements of the game, are outlined below.
       \begin{enumerate}
         \item Each game consist of 10 frames (rounds)
         \item Each frame consist of 2 rolls
@@ -212,8 +218,8 @@ int Score()
         \item In the tenth frame the player will have one extra roll \emph{if} a strike or spare is rolled
       \end{enumerate}
 
-      \paragraph{ Remember! }
-        Red-green-refactor.
+\subsection{ Contemplation (Testing to drive design) }
+  Write a few sentances (max half-a-page) and reflect upon your new won experiences and opinions about using tests as a means to drive design. Does it help? Does it not? Does it enforce good design decisions. Does it enforce bad design decisions? Is it worth it?
 
 
 
