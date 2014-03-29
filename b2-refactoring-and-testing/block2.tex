@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage{fullpage}
 \usepackage{amssymb}
 \usepackage{listings}
 
@@ -12,13 +13,60 @@
 
   \lstset{language=[Sharp]C}
 
-  \section*{ Introduction }
     \paragraph{}
       In this block we'll mainly focus on application testing. While there are many ways to test code we will focus on unit testing. We will be creating the same application three times. First through test-after development (TAD), then test-driven development (TDD), and finally through exceptionally strict TDD. Try to complete the exercises in the same order as outlined below.
     \paragraph{}
       Please feel free to work in pairs and take turns on writing code. Good luck!
 
-  \section{ Testing existing code (FizzBuzz) }
+
+
+\pagebreak{}
+\section*{Deliverables}
+This is a summary of the deliverables for this block.
+
+\subsubsection*{Exercise 1 -- Introduction to testing}
+Three projects and one text file.
+\begin{enumerate}
+  \item TAD (Visual Studio solution)
+  \item TDD (Visual Studio solution)
+  \item Sliming (Visual Studio solution)
+  \item Contemplation (Text file in .txt-format)
+\end{enumerate}
+
+\subsubsection*{Exercise 2 -- Debugging via Tests}
+One project and one text file.
+\begin{enumerate}
+  \item Matrix (Visual Studio solution)
+  \item Contemplation (Text file in .txt-format)
+\end{enumerate}
+
+\subsubsection*{Exercise 3 -- Test coverage}
+One project and one text file.
+\begin{enumerate}
+  \item PhoneBook (Visual Studio solution)
+  \item Contemplation (Text file in .txt-format)
+\end{enumerate}
+
+\subsubsection*{Exercise 4 -- TDD practice}
+One project and one text file.
+\begin{enumerate}
+  \item BowlingGameKata (Visual Studio solution)
+  \item Contemplation (Text file in .txt-format)
+\end{enumerate}
+
+\subsubsection*{Exercise 5 -- Refactoring}
+One project and one text file.
+\begin{enumerate}
+  \item MovieRental (Visual Studio solution)
+  \item Contemplation (Text file in .txt-format)
+\end{enumerate}
+
+
+
+
+\pagebreak{}
+  \section{Introduction to testing}
+  \subsection{ Testing existing code (FizzBuzz) }
     \paragraph{}
       You've been provided with a project containing a working implementation of the FizzBuzz problem (from the lectures). Your job is to write unit tests with reasonable coverage. When you are done, it should be hard to introduce errors to the application without also making tests fail. At a minimum, write tests for the following cases:
       \begin{enumerate}
@@ -31,7 +79,7 @@
     \paragraph{Are these tests enough?}
       While the answer to this question of course greatly depends on how you have written your tests, it is quite likely that the answer is no. Do keep this question in mind as you approximate the section on "sliming".
 
-  \section{ Test-driven development (FizzBuzz) }
+  \subsection{ Test-driven development (FizzBuzz) }
     \paragraph{}
       Create a new console project. We're now going to build the FizzBuzz application again, but this time through test-driven development (TDD). Basically this means that we must build our application only by iterating the steps below:
       \begin{enumerate}
@@ -44,7 +92,7 @@
 
     An easy way to remember the above steps is to think of the idiom red-green-refactor. Basically it means that we should produce a state where some test fail (red). Then write enough code to make it pass (green). Only then, are we allowed to refactor code.
 
-    \subsection*{New requirements}
+    \subsubsection*{New requirements}
     This time we'll introduce a new requirements. Apart from the \texttt{FizzOrBuzz(int n)} method you should add another public method to the Fizzbuzzer:
 
     \begin{lstlisting}
@@ -54,7 +102,7 @@ string Count(int n);
   // "1 2 Fizz 4 Buzz"
     \end{lstlisting}
 
-  \section{ "Sliming" (FizzBuzz) }
+  \subsection{ "Sliming" (FizzBuzz) }
     \paragraph{}
       Create a new console project. Once again, we'll build the FizzBuzz application (with the new requirement). Once again, will we use use TDD. However this time we will "slime" every step of implementation.
 
@@ -78,16 +126,31 @@ int f(int x){
 
       Utterly stupid code, and as humans we know this is not even close to the final behaviour we want. However, by doing this process, we are forced to write more (or better) tests. We only stop sliming when it becomes harder than writing the implementation we actually want to write.
 
-  \section{ Contemplation (TDD vs TAD) }
+  \subsection{ Contemplation (TDD vs TAD) }
     \paragraph{}
       What are the positives and negatives of TDD? TAD? Write a few sentances (max half-a-page) about your thoughts on these concepts. When are they good to use? Less good? Was sliming helpful? Always? Who are tests for? Is testing useful for only one or many things?
 
+
+
+
+
+
+
+
+
+  \pagebreak
   \section{ Debugging using tests (Matrix) }
     \paragraph{}
       You have been provided with code for a class that handles mathematical operations on Matrices. A class which supposedly was written by a really lousy programmer. It does not behave as expected. Your job is to use either TDD or TAD to provide the matrix class with desired behaviour (free from logical errors). Use testing as a means of localizing errors.
 
       A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult Wikipedia (as a suggestion) to learn how matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Knowledge about matrix operations is vital to write good test cases, and to solve this assignment.
 
+
+
+
+
+
+\pagebreak
 \section{ Test coverage (Phone book) }
   \paragraph{}
     You've been provided with a class, simliar to the previously discussed phone book example. Your job is to write tests for this class, attempting to achieve \emph{as high test coverage as possible}. In a perfect world it will be impossible to introduce errors to the class without any tests failing.
@@ -96,10 +159,17 @@ int f(int x){
 
     When you believe you have achieved a high level of coverage. Grab a friend and let her or him try to make your tests report false-positives. A false-positive is when a test is passing, but the functionality it is supposed to test has actually been broken. It is easy to get snowblind watching your own code so having someone else attempting to "break" it is usually a good idea.
 
-\section{ Contemplation (Test-coverage) }
+\subsection{ Contemplation (Test-coverage) }
   \paragraph{}
     Does full test-coverage ensure perfect code? Write a few sentances (max half-a-page) about your thoughts on the positives and negatives of test-coverage. What is it good for? Not good for? How good is it? When is it relevant? When not? Is there a golden mean? Etc.
 
+
+
+
+
+
+
+\pagebreak
 \section{ TDD practice (Bowling game kata)}
   \paragraph{}
   If you are finished with all of the above, this \emph{optional} exercise allows you to practice your TDD skills by doing the Bowling game kata. You've been provided with some basic code to get you started with the exercise. The bowling game class exposes two public methods whose bodies you need to implement.
@@ -130,6 +200,13 @@ int Score()
       \paragraph{ Remember! }
         Red-green-refactor.
 
+
+
+
+
+
+
+\pagebreak
 \section{ Refactoring (Movie rental case) }
   \paragraph{}
   Now, it's time to forget about testing (for now) and instead focus on refactoring. The lousy programmer has been at it again. He or she has built a system for a movie rental shop handling customer orders. However, since the lousy programmer was focused on meeting the deadline the code is way more procedural than object oriented.
