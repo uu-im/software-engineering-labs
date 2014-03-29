@@ -7,6 +7,7 @@
 *.fdb_latexmk
 *.synctex.gz
 *.out
+*.toc
 
 
 ## Ignore Visual Studio temporary files, build results, and
