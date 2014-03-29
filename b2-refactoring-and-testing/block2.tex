@@ -3,6 +3,7 @@
 \usepackage{fullpage}
 \usepackage{amssymb}
 \usepackage{listings}
+\usepackage{color}
 
 \begin{document}
 
@@ -11,7 +12,18 @@
   \date{ Spring 2013 }
   \maketitle
 
-  \lstset{language=[Sharp]C}
+  % csharp code styling
+  % (as default to save typing)
+  \lstset{
+    language=[Sharp]C,
+    basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily,
+    keywordstyle=\color[rgb]{0,0.5,0.5},
+    numberstyle=\color[rgb]{0.7,0.7,0.7},
+    commentstyle=\color[rgb]{0.1,0.5,0.1},
+    stringstyle=\color[rgb]{0.6,0.1,0.5},
+    backgroundcolor=\color[rgb]{0.95,0.95,0.95},
+    showstringspaces=false
+  }
 
     \paragraph{}
       In this block we'll mainly focus on application testing. While there are many ways to test code we will focus on unit testing. We will be creating the same application three times. First through test-after development (TAD), then test-driven development (TDD), and finally through exceptionally strict TDD. Try to complete the exercises in the same order as outlined below.
