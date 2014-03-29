@@ -4,7 +4,17 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{xcolor}
 \usepackage{hyperref}
+
+
+% color urls
+\hypersetup{
+  colorlinks=true,
+  urlcolor=purple,
+  linkcolor=purple
+}
+
 
 \begin{document}
 
@@ -26,8 +36,23 @@
     showstringspaces=false
   }
 
+
     \paragraph{}
-      In this block we'll mainly focus on application testing. While there are many ways to test code we will focus on unit testing. We will be creating the same application three times. First through test-after development (TAD), then test-driven development (TDD), and finally through exceptionally strict TDD. Try to complete the exercises in the same order as outlined below.
+      In this block we'll focus on application testing and refactoring. While there are many ways to test code we will focus on unit testing. This basically means that we will assert that input to methods on class or instance level yield expected input.
+
+      The first exercise will focus on building the same application three times, employing different testing strategies. Test-after development, \href{http://www.extremeprogramming.org/rules/testfirst.html}{Test-first development} (or more specifically \href{Test-driven development}) and finally through one school of thought's \href{http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation}{expectionally strict test-driven development}.
+
+      In the second exercise we'll focus on how we can use testing to locate bugs. When we're using tests to locate bugs, we're not only finding the bug. We're also ``locking in'' the code. We're making sure the same bug won't be reintroduced unnoticed, because we now have a test to find it.
+
+      In the third exercise we'll look at test coverage, often times called \href{http://en.wikipedia.org/wiki/Code_coverage}{code coverage}. It intends to be a measure of how much of a code base that is tested. It's value is an \href{http://martinfowler.com/bliki/TestCoverage.html}{issue of debate}.
+
+      In the fourth exercise we'll look at how we can use tests to ``drive'' the design process. \href{http://stackoverflow.com/questions/7538744/is-test-driven-development-the-same-as-test-driven-design}{Test-Driven Design} is essentially the same idea as Test-Driven Development. However adding the explicit claim that code design will improve through TDD. That TDD force us to think about how we want to use our own code.  Consequently that TDD, for example, would lead to better designed public interfaces.
+
+      Finally we'll look at refactoring existing code. Using the classic example \href{http://www.cs.unc.edu/~stotts/723/refactor/chap1.html}{movie rental case} by \emph{Martin Fowler}.
+
+
+
+
     \paragraph{}
       Please feel free to work in pairs and take turns on writing code. Good luck!
 
