@@ -39,7 +39,7 @@
 \newcounter{stepcounter}
 \setcounter{stepcounter}{0}
 \newenvironment{steps}{ 
-  \begin{enumerate}[label=\color{red}Step \theenumi)]
+  \begin{enumerate}[label=\color{red}Step \thesection-\theenumi)]
     \setcounter{enumi}{\value{stepcounter}}
 }{
   \setcounter{stepcounter}{\value{enumi}}
@@ -100,6 +100,7 @@ A working chat system consting of two (potentially three depending on if you put
 
 
 
+\setcounter{stepcounter}{0}
 \pagebreak
 \section{ Ticket Machines }
 The purpose of this first exercise is simply to get up to speed. Familiarize ourselves with the C\# language, Visual studio environment and refresh our knowledge in object oriented programming.
@@ -322,6 +323,7 @@ Consequently the last task of this exercise is to...
 
 
 
+\setcounter{stepcounter}{0}
 \pagebreak
 \subsection{More Ticket Machines}
 So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we've achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes?
@@ -461,6 +463,7 @@ When we are programming to interfaces we are more prepared for change.
 
 
 
+\setcounter{stepcounter}{0}
 \pagebreak
 \section{Basic GUI coding and Event Handling}
 In this assignment we're going to build a local network chat system. One server part and one client part. The idea is that you start up one server, then multiple clients. Messages sent from connected clients will be broadcasted to all connected clients.
@@ -596,6 +599,7 @@ clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));
 
 
 
+\setcounter{stepcounter}{0}
 \pagebreak
 \section{Iterator}
 In this exercise we'll explore the iterator pattern using the phone book example from the lectures.
