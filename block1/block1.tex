@@ -54,6 +54,10 @@
 }
 
 
+% limit level of toc
+\setcounter{tocdepth}{2}
+
+
 \begin{document}
 
   \title{ Software Engineering | Lab 1 }
@@ -82,7 +86,7 @@ In this first block we'll refresh our object oriented skills and dive into conce
 This is a summary of the deliverables for this block.
 
 \subsubsection*{Exercise 1 -- Ticket machines}
-One Visual Studio solution.
+One Visual Studio solution and one text document.
 \begin{enumerate}
   \item TicketMachines -- with full implementations of the following:
   \begin{enumerate}
@@ -91,6 +95,7 @@ One Visual Studio solution.
     \item \texttt{DonationMachine.cs}
     \item \texttt{ParkingMachine.cs}
   \end{enumerate}
+  \item Contemplation (text document in .txt format)
 \end{enumerate}
 
 \subsubsection*{Exercise 2 -- Chat system}
@@ -326,19 +331,7 @@ Consequently the last task of this exercise is to...
 
 
 
-
-
-
-
-
-
-
-
-
-
-\setcounter{stepcounter}{0}
-\pagebreak
-\subsection{More Ticket Machines}
+\subsubsection{Contemplation}
 So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we've achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes?
 
 Naturally we can change the ticket price at \textbf{compile time}:
@@ -362,7 +355,12 @@ But there's one thing we haven't really talked about yet. The power of programmi
 
 
 
-\subsubsection{Donation Machine}
+
+
+
+\setcounter{stepcounter}{0}
+\pagebreak
+\subsection{Donation Machine}
 Let's build a new ticket machine that also implements the \texttt{ITicketMachine} interface, but exhibits different behaviour.
 \begin{steps}
 \item Create the file \texttt{DonationMachine.cs} and let it contain the class definition that implements the interface \texttt{ITicketMachine}.
@@ -416,7 +414,7 @@ Because the \texttt{TicketMachineInteractor} class is prpgrammed towards an inte
 
 
 
-\subsubsection{Parking Machine}
+\subsection{Parking Machine}
 While we're at it, let's create another machine. A regular 'ol Swedish parking machine.
 
 \begin{steps}
@@ -432,8 +430,11 @@ While we're at it, let's create another machine. A regular 'ol Swedish parking m
 
 
 
-\subsection{Wrap up}
-Consider again the power of interfaces. While the above examples might be slightly contrived, take a minute to consider the implications of adding a class such as the one below.
+
+
+
+\subsection{Contemplation}
+Consider again the power of interfaces. While the Ticket machine examples might feel slightly contrived. Take a minute to consider the implications of creating a class like the one below, that inherits from the \texttt{ITicketMachine} interface. Any other class expecting an \texttt{ITicketMachine} can interchangebly use this class.
 \begin{lstlisting}
 public class ExternalTicketMachine : ITicketMachine
 { 
@@ -463,8 +464,10 @@ public class ExternalTicketMachine : ITicketMachine
   }
 }
 \end{lstlisting}
-When we are programming to interfaces we are more prepared for change.
 
+\begin{steps}
+  \item Write a few sentances (max half a page) about your thoughts on the power of programming towards interfaces. What does it mean to program to an interface rather than an implementation? Is it useful? Why? What are the implications? Many claim we are more ready to cope with change when programming towards interfaces rather than implementations. Is it true? Is it not? Why and how?
+\end{steps}
 
 
 
