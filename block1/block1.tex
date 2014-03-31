@@ -54,6 +54,10 @@
 }
 
 
+% limit level of toc
+\setcounter{tocdepth}{2}
+
+
 \begin{document}
 
   \title{ Software Engineering | Lab 1 }
@@ -326,19 +330,7 @@ Consequently the last task of this exercise is to...
 
 
 
-
-
-
-
-
-
-
-
-
-
-\setcounter{stepcounter}{0}
-\pagebreak
-\subsection{More Ticket Machines}
+\subsubsection{Contemplation}
 So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we've achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes?
 
 Naturally we can change the ticket price at \textbf{compile time}:
@@ -362,7 +354,12 @@ But there's one thing we haven't really talked about yet. The power of programmi
 
 
 
-\subsubsection{Donation Machine}
+
+
+
+\setcounter{stepcounter}{0}
+\pagebreak
+\subsection{Donation Machine}
 Let's build a new ticket machine that also implements the \texttt{ITicketMachine} interface, but exhibits different behaviour.
 \begin{steps}
 \item Create the file \texttt{DonationMachine.cs} and let it contain the class definition that implements the interface \texttt{ITicketMachine}.
@@ -416,7 +413,7 @@ Because the \texttt{TicketMachineInteractor} class is prpgrammed towards an inte
 
 
 
-\subsubsection{Parking Machine}
+\subsection{Parking Machine}
 While we're at it, let's create another machine. A regular 'ol Swedish parking machine.
 
 \begin{steps}
@@ -432,7 +429,7 @@ While we're at it, let's create another machine. A regular 'ol Swedish parking m
 
 
 
-\subsection{Wrap up}
+\subsection{Contemplation}
 Consider again the power of interfaces. While the above examples might be slightly contrived, take a minute to consider the implications of adding a class such as the one below.
 \begin{lstlisting}
 public class ExternalTicketMachine : ITicketMachine
