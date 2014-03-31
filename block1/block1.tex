@@ -86,7 +86,7 @@ In this first block we'll refresh our object oriented skills and dive into conce
 This is a summary of the deliverables for this block.
 
 \subsubsection*{Exercise 1 -- Ticket machines}
-One Visual Studio solution.
+One Visual Studio solution and one text document.
 \begin{enumerate}
   \item TicketMachines -- with full implementations of the following:
   \begin{enumerate}
@@ -95,6 +95,7 @@ One Visual Studio solution.
     \item \texttt{DonationMachine.cs}
     \item \texttt{ParkingMachine.cs}
   \end{enumerate}
+  \item Contemplation (text document in .txt format)
 \end{enumerate}
 
 \subsubsection*{Exercise 2 -- Chat system}
@@ -429,8 +430,11 @@ While we're at it, let's create another machine. A regular 'ol Swedish parking m
 
 
 
+
+
+
 \subsection{Contemplation}
-Consider again the power of interfaces. While the above examples might be slightly contrived, take a minute to consider the implications of adding a class such as the one below.
+Consider again the power of interfaces. While the Ticket machine examples might feel slightly contrived. Take a minute to consider the implications of creating a class like the one below, that inherits from the \texttt{ITicketMachine} interface. Any other class expecting an \texttt{ITicketMachine} can interchangebly use this class.
 \begin{lstlisting}
 public class ExternalTicketMachine : ITicketMachine
 { 
@@ -460,8 +464,10 @@ public class ExternalTicketMachine : ITicketMachine
   }
 }
 \end{lstlisting}
-When we are programming to interfaces we are more prepared for change.
 
+\begin{steps}
+  \item Write a few sentances (max half a page) about your thoughts on the power of programming towards interfaces. What does it mean to program to an interface rather than an implementation? Is it useful? Why? What are the implications? Many claim we are more ready to cope with change when programming towards interfaces rather than implementations. Is it true? Is it not? Why and how?
+\end{steps}
 
 
 
