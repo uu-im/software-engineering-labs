@@ -464,8 +464,7 @@ include partials/layout
 
 
   h4 Client snippets
-  p Connecting to a socket.
-  p Hint: this probably needs to spawn a new thread listening for contents from the socket.
+  p Connecting to a socket. Hint: this probably needs to spawn a new thread listening for contents from the socket.
   pre
     code.language-csharp
       | try{
@@ -480,8 +479,7 @@ include partials/layout
       | catch(Exception e){
       |   ...
       | }
-  p Receiving (listening for) contents from a socket.
-  p Hint: This probably needs to be done in a separate thread (i.e. not the UI thread).
+  p Receiving (listening for) contents from a socket. Hint: This probably needs to be done in a separate thread (i.e. not the UI thread).
   pre
     code.language-csharp
       | byte[] buffer = new byte[1024];
@@ -505,8 +503,7 @@ include partials/layout
       | TcpListener listener = new TcpListener(ip, 5000);
       | listener.Start();
 
-  p Listen for incoming connections.
-  p Hint: Probably needs to be done in a separate thread because of the eternal loop.
+  p Listen for incoming connections. Hint: Probably needs to be done in a separate thread because of the eternal loop.
   pre
     code.language-csharp
       | while (true)
