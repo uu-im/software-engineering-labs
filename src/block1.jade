@@ -1,1 +1,552 @@
-h1 block1
+include partials/header
+mixin header("Block 1")
+
+header
+  h1 Software Engineering &mdash; Lab 1
+  p Uppsala University &mdash; Spring 2014
+
+
+.preamble
+  h2 Introduction
+  p In this first block we'll refresh our object oriented skills and dive into concepts such as constructors, public and private membership, interfaces and inheritance as well as a couple of more technical features such as threads and GUIs.
+
+
+  h2 Deliverables
+  p This is a summary of the deliverables for this block.
+
+
+  h3 Exercise 1 &mdash; Interfaces
+  p One Visual Studio solution and one text document.
+  ol
+    li TicketMachines (Visual Studio solution, containing the following files:)
+      ul
+        li ITicketMachine.cs
+        li TicketMachine.cs
+        li DonationMachine.cs
+        li ParkingMachine.cs
+    li Contemplation (text document in .txt format)
+
+  h3 Exercise 2 &mdash; Chat system
+  p One Visual Studio solution.
+  ol
+    li Chat System
+
+  h3 Exercise 3 &mdash; Iterator
+  p One Visual Studio solution and one diagram.
+  ol
+    li The completed <em>Visual Studio</em> phonebook solution.
+    li The iterator diagram.
+
+
+
+
+
+
+
+h2 Exercise 1 &mdash; Interfaces
+p The purpose of this first exercise is simply to get up to speed. Familiarize ourselves with the C# language, Visual studio environment and refresh our knowledge in object oriented programming.
+
+p We're building ticket machines to illustrate the power of programming towards interfaces rather than towards implementations. We'll start off with a very simple ticket machine, and later move on to more complex ones.
+
+h3 Simple Ticket Machine
+p In this exercise we’re building a very simple ticket machine. You can think of the ticket machine as an automated ticket machine at the cinemas. You insert money, press ok, and get a ticket.
+
+
+h4 An interface for the ticket machine
+p Naturally we'll build thins ticket machine as a class. The class will be called <code>TicketMachine</code> and it will contain a number of public methods. Let's describe the class using a <em>C# interface</em>.
+
+pre
+  code.language-csharp
+    | interface ITicketMachine {
+    |   string InsertMoney(int amount);
+    |   string ShowPrice();
+    |   string ShowBalance();
+    |   string RefundMoney();
+    |   string PrintTicket();
+    | }
+
+
+p.step Open up <em>Visual Studio</em> and create a new <em>C#</em> solution. Make sure you choose <em>C#</em> as the language, and not <em>Visual Basic</em> or any other language.
+p.step Add a new interface file to your project. Call it <code>ITicketMachine</code> and save it as <code>ITicketMachine.cs</code>.
+p.step Make sure your interface looks like the code example above.
+
+
+
+
+h4 Implementing the interface
+p Let’s create the actual class. The ticket machine that will implement the interace.
+p.step Create a new class called <code>TicketMachine.cs</code> and tell it to implement the interface we just created. Like so:
+pre
+  code.language-csharp
+    | class TicketMachine : ITicketMachine
+    | {
+    | }
+
+p.step Build the project (by pressing <code>F5</code>) and contemplate why it won't build.
+
+p To make sure the application will build. Let's actually implement the members of the interface in the concrete ticket machine class.
+
+
+p.step Open the concrete ticket machine class and right-click the name of the interface in the class definition. Then select <code>Implement Interface &gt; Implement Interface</code>. Or simply implement all of the members of the interface manually.
+
+pre
+  code.language-csharp
+    | class TestMachine : ITicketMachine
+    | {
+    |   public string InsertMoney(int amount){
+    |     throw new NotImplementedException();
+    |   }
+    |   public string ShowBalance(){
+    |     throw new NotImplementedException();
+    |   }
+    |   public string ShowPrice(){
+    |     throw new NotImplementedException();
+    |   }
+    |   public string RefundMoney(){
+    |     throw new NotImplementedException();
+    |   }
+    |   public string PrintTicket(){
+    |     throw new NotImplementedException();
+    |   }
+    | }
+
+p Superb! Now we, at least, have an application that builds.
+
+
+h4 Command line interface
+p So, now we have the "shell" for a class that will act as the ticket machine. But we need a way to interact with the ticket machine. I.e. we need a class that will use the ticket machine class.
+
+p For the sake of simplicity you've been provided with a command line interface (CLI) class that you can 
+  a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/b1-oop/code/TicketMachine/TicketMachine/TicketMachineInteractor.cs") download here
+  |.
+
+p In your main <code>Program.cs</code> class you can then interact with the <code>TicketMachineInteractor</code> like so:
+
+pre
+  code.language-csharp
+    | class Program{
+    |   public static void Main(){
+    |     // Instantiate a ticket machine
+    |     ITicketMachine tm = new TicketMachine();
+    | 
+    |     // Instantiate an interactor, and pass in the ticket machine
+    |     TicketMachineInteractor interactor = new TicketMachineInteractor(tm);
+    | 
+    |     // Start the interactor
+    |     interactor.Start();
+    |   }
+    | }
+
+
+p Ok, let’s now create a CLI so that we can interact with our TicketMachine class. You should already have a file called Program.cs. Copy and paste the following code into this file. Have a look at the contents of this code and discuss it with a lab partner.
+
+p.step Try running your application!
+p The output should be similar to this:
+
+pre.terminal
+  | (q) Quit
+  | (i) Insert money
+  | (b) Show balance
+  | (p) Show price
+  | (r) Refund money
+  | (t) Print ticket
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;
+p If you, when running your application, do make one of the choices above -- of course a <code>NotImplementedException</code> will be thrown because that's all our concerete Ticket Machine does for now.
+
+
+
+h4 Ticket Machine ticket costs
+p Before we get into implementing the body of each method in the concrete ticket machine class -- let's declare a constructor. The constructor will take an integer as an argument. The integer represents the price of a single ticket. Consequently, our constructor needs to save the value passed in, as an instance variable so that we can use it later on. We need it to  Let's do it:
+p.step Implement a constructor in the ticket machine class, that takes an integer as an argument, and saves that value to an instance variable.
+pre
+  code.language-csharp
+    | class TicketMachine : ITicketMachine{
+    |   private int price;
+    | 
+    |   public TicketMachine (int ticketCost){
+    |     this.price = ticketCost;
+    |   }
+    | }
+
+
+h4 Full implementation
+p Now it's time to actually implement the members of the concrete ticket machine class. Below you'll find a runtime example of what a session with the ticket machine could look like.
+pre.terminal
+  | Choose action (h for help)
+  | &gt;   i
+  | &gt;&gt;&gt; Enter the amount you wish to insert (SEK):
+  | &gt;   50
+  | &gt;&gt;&gt; Inserted 50 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   t
+  | &gt;&gt;&gt; Insufficient funds.. Missing 150 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   p
+  | &gt;&gt;&gt; The price of one ticket is 200 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   i
+  | &gt;&gt;&gt; Enter the amount you wish to insert (SEK):
+  | &gt;   175
+  | &gt;&gt;&gt; Inserted 175 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   t
+  | &gt;&gt;&gt; Printing ticket....
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   b
+  | &gt;&gt;&gt; Your balance is currently: 25 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   i
+  | &gt;&gt;&gt; Enter the amount you wish to insert (SEK):
+  | &gt;   75
+  | &gt;&gt;&gt; Inserted 75 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;   r
+  | &gt;&gt;&gt; Refunding 100 kr
+  | ==============================================
+  | Choose action (h for help)
+  | &gt;
+p If you find the runtime example above too confusing -- there's some comments below explaining what each method should do. Please note: all the methods return strings that will be printed by the interactor.
+
+pre
+  code.language-csharp
+    | public string InsertMoney(int amount){
+    |   // update the current balance as defined by amount
+    |   // only if amount is greater than 0
+    |   // return string that explains what happened
+    | }
+    | public string ShowBalance(){
+    |   // return a string that describes the current balance
+    | }
+    | public string ShowPrice(){
+    |   // return a string that describes the price of a ticket
+    | }
+    | public string PrintTicket(){
+    |   // if balance is enough
+    |   //    reduce balance accordingly, and
+    |   //    return string describing ticket
+    |   // if balance is not enough
+    |   //    return error message and amount missing
+    | }
+    | public string RefundMoney(){
+    |   // print the amount of money refunded
+    |   // reset the current amount and print it
+    | }
+p Consequently the last task of this exercise is to...
+p.step Implement the intended functionality of all the <code>ITicketMachine</code> members in the concrete <code>TicketMachine</code>.
+
+
+
+
+
+
+
+h3 Contemplation
+p So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we've achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes?
+
+p Naturally we can change the ticket price at <strong>compile time</strong>:
+pre
+  code.language-csharp
+    | public static void Main ()
+    | { 
+    |   ITicketMachine cheap = new TicketMachine (1020);
+    |   ITicketMachine expensive = new TicketMachine(40500);
+    | ...
+p And naturally we can of course alter the price at <strong>runtime</strong>, by for example allowing the user to specifiy the price of a ticket:
+pre
+  code.language-csharp
+    | public static void Main ()
+    | { 
+    |   Console.Write("Specify how much a ticket is in SEK and press enter");
+    |   int price = Int32.Parse(Console.ReadLine());
+    |   ITicketMachine tm = new TicketMachine (price);
+    | ...
+p But there's one thing we haven't really talked about yet. The power of programming towards interfaces. Our ticket machine is actually way more abstract than one might first imagine. Take note of the fact that the <code>TicketMachineInteractor</code> class does <strong>not</strong> accept a <code>TicketMachine</code>, but rather an <code>ITicketMachine</code>. This means that it accepts an instance of any class as long as the given class implements the <code>ITicketMachine</code> interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+h3 Donation Machine
+p Let's build a new ticket machine that also implements the <code>ITicketMachine</code> interface, but exhibits different behaviour.
+p.step Create the file <code>DonationMachine.cs</code>} and let it contain the class definition that implements the interface <code>ITicketMachine</code>.
+p.step Implement the body of the members, according to the specification below.
+p The pseudo-code below explains what the donation machine does.
+pre
+  code.language-csharp
+    | public class DonationMachine : ITicketMachine{
+    |   public string InsertMoney(int amount){
+    |     // update the current balance as defined by amount
+    |     // only if amount is greater than 0
+    |     // return string that explains what happened
+    |   }
+    |   public string ShowBalance (){
+    |     // return a string that describes the current balance
+    |   }
+    |   public string ShowPrice (){
+    |     // return a string that describes the minimum donation
+    |   }
+    |   public string PrintTicket (){
+    |     // if balance is greater than minimum donation
+    |     //    commit donation by
+    |     //      - update total balance with current balance
+    |     //      - reset current balance
+    |     //      - print total balance
+    |     // else
+    |     //    return error message and amount missing
+    |   }
+    |   public string RefundMoney (){
+    |     // print the amount of money refunded
+    |     // reset the current balance
+    |   }
+    | }
+p Now we can see why programming towards interfaces is such a powerful idea. Instantiate and send a <code>DonationMachine</code> to the <code>TicketMachineInteractor</code> instead.
+pre
+  code.language-csharp
+    | class Program{
+    |   public static void Main(){
+    |     ITicketMachine tm = new DonationMachine(10);
+    |     TicketMachineInteractor interactor = new TicketMachineInteractor(tm);
+    |     interactor.Start();
+    |   }
+    | }
+p.step Run the application! And consider how we didn't have to make any modifications to the <code>TicketMachineInteractor</code> class.
+p Because the <code>TicketMachineInteractor</code> class is prpgrammed towards an interface rather than an implementation -- it is fully functional with whatever implementation we choose to build, so long as the implementation implements the <code>ITicketMachine</code> interface.
+
+
+
+
+
+
+
+
+
+
+
+
+h3 Parking Machine
+p While we're at it, let's create another machine. A regular 'ol Swedish parking machine.
+
+p.step Create a new class called <code>ParkingMachine</code> and let it implement the <code>ITicketMachine</code> interface. It's implementation should follow the specification below.
+ul
+  li The price is the value of 10 minutes of parking.
+  li The price should (as in the other machines) be set via the constructor.
+  li When the user asks for a ticket the ticket must show how many minutes of parking the user receives.
+  li Parking time can only be in full multiplications of 10 minutes, the rest the user will receive as change.
+  li So, if the price of a ticket is 5 SEK, and the user inserts 13 SEK, the parking time would be 20 minutes, and the change 3 SEK.
+
+
+
+
+
+
+
+
+
+
+h3 Contemplation
+p Consider again the power of interfaces. While the Ticket machine examples might feel slightly contrived. Take a minute to consider the implications of creating a class like the one below, that inherits from the <code>ITicketMachine</code> interface. Any other class expecting an <code>ITicketMachine</code> can interchangebly use this class.
+
+pre
+  code.language-csharp
+    | public class ExternalTicketMachine : ITicketMachine
+    | { 
+    |   private int price, balance;
+    | 
+    |   public ExternalTicketMachine ()
+    |   {
+    |     this.price = // make a web request to get the price of a ticket
+    |     this.balance = 0;
+    |   }
+    |   public string InsertMoney(int amount){
+    |     // increase current balance locally
+    |   }
+    |   public string ShowBalance(){
+    |     // return current balance locally
+    |   }
+    |   public string ShowPrice(){
+    |     // make a web request to get the price of a ticket
+    |   }
+    |   public string PrintTicket(){
+    |     // make a web request to an external service
+    |     // sending some user details and the current balance
+    |     // returning the ticket recieved by the web request call
+    |   }
+    |   public string RefundMoney(){
+    |     // refund money locally
+    |   }
+    | }
+p.step Write a few sentances (max half a page) about your thoughts on the power of programming towards interfaces. What does it mean to program to an interface rather than an implementation? Is it useful? Why? What are the implications? Many claim we are more ready to cope with change when programming towards interfaces rather than implementations. Is it true? Is it not? Why and how?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h2 Basic GUI coding and Event Handling
+p In this assignment we're going to build a local network chat system. One server part and one client part. The idea is that you start up one server, then multiple clients. Messages sent from connected clients will be broadcasted to all connected clients.
+
+p <strong>This assignment is preferably solved in pairs of two</strong>. Groups of more than two people are however not allowed.
+
+p.step Create a new Visual Studio C\# solution. In the solution, create two separate <code>Windows Forms</code> projects. One for the <code>client</code> and one for the <code>server</code>.
+p To tackle this task as easily as possible we're going to take it in two turns. We'll start off by simply creating a dummy chat client. Basically just the UI. When we've got that all set up, we'll move on to actually building the fully functional chat system.
+
+
+h3 Client GUI
+p.step Open up the <code>client</code> project's main <code>form</code> and modify the UI so that it contains the following...
+ul
+  li a <code>ListBox</code> for displaying chat messages.
+  li a <code>TextBox</code> for writing nickname and/or chat messages.
+  li a <code>Button</code> for connecting/disconnecting.
+  li a <code>Button</code> for sending chat messages.
+p.step Add logic so that the following behaviour is exhibited:
+ol
+  li If the user is not connected. When he/she enters a name in the textbox and presses the connect button, an entry should be posted in the listbox saying <code>"[nickname] connected"</code>. The text of the connect button should switch from <code>"connect"</code> to <code>"disconnect"</code>.
+  li When a connected user presses the <code>"disconnect"</code> button, an entry should be posted in the listbox saying <code>"[nickname] disconnected"</code>. The text of the connect button should switch from <code>"disconnect"</code> to <code>"connect"</code>.
+  li Whatever is in the textbox at the time of pressing connect is used as a nickname. It's not allowed to connect without a nickname.
+  li When a connected user presses the send button whatever is in the textbox is sent as a chat message, and consequently shows up in the listbox in the following form: <code>"[nickname] says: [message]"</code>. It's not allowed to post empty messages.
+
+
+h3 Real chat
+p Now we'll convert our dummy chat to an actual chat.
+p.step Make a backup-copy of your chat GUI.
+p.step Convert your chat GUI into a real chat system that allows for multiple clients to connect to the same server. This means you're going to have to build the server as well. The requirements are simple:
+ol
+li All messages sent to the listbox in the last exercise, should be broadcasted to all clients connected to the chat. 
+li Two clients cannot have the same nickname.
+p It's basically up to you to figure out how to solve this exercise. However it's reasonable to assume that you're going to have to work with <code>socket</code>'s and <code>threads</code>. Below you'll find some code snippets to get you started.
+
+h4 Helper methods
+p These are quite handy to have since we're going to convert from byte arrays to strings and vice versa. These are useful both for the client and for the server so it's a good idea to put the class in a new project, but in the same solution. To add a reference to another project in the same solution, right click the <code>References</code> foldr in the <code>Solution Explorer</code>. Then choose <code>Add Reference &gt; Projects &gt; [proj.name]</code>
+pre
+  code.language-csharp
+    | public class ConversionUtils
+    | {
+    |   public static String ByteArrayToString(byte[] byteArray){
+    |     return System.Text.Encoding.UTF8.GetString(byteArray);
+    |   }
+    |   public static String ByteArrayToString(byte[] byteArray, int index, int count){
+    |     return System.Text.Encoding.UTF8.GetString(byteArray, index, count);
+    |   }
+    |   public static byte[] StringToByteArray(String message){
+    |     return System.Text.Encoding.UTF8.GetBytes(message);
+    |   } 
+    | }
+
+
+
+h4 Client snippets
+p Connecting to a socket.
+p Hint: this probably needs to spawn a new thread listening for contents from the socket.
+pre
+  code.language-csharp
+    | try{
+    |   byte[] serverIP = { 127, 0, 0, 1 };
+    |   IPAddress serverAddress = new IPAddress(serverIP);
+    |   Socket socket = new Socket(AddressFamily.InterNetwork,
+    |                              SocketType.Stream,
+    |                              ProtocolType.IP);
+    |   socket.Connect(serverAddress, 5000);
+    |   ...
+    | }
+    | catch(Exception e){
+    |   ...
+    | }
+p Receiving (listening for) contents from a socket.
+p Hint: This probably needs to be done in a separate thread (i.e. not the UI thread).
+pre
+  code.language-csharp
+    | byte[] buffer = new byte[1024];
+    | int byteCount;
+    | while(true){
+    |     byteCount = socket.Receive(buffer);
+    |     String incomingMessage =
+    |       ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
+    | }
+
+
+
+
+
+h3 Server snippets
+p Start a server.
+pre
+  code.language-csharp
+    | byte[] byteip = { 127, 0, 0 , 1};
+    | IPAddress ip = new IPAddress( ip );
+    | TcpListener listener = new TcpListener(ip, 5000);
+    | listener.Start();
+
+p Listen for incoming connections.
+p Hint: Probably needs to be done in a separate thread because of the eternal loop.
+pre
+  code.language-csharp
+    | while (true)
+    | {
+    |   try
+    |   {
+    |     // Wait for a connection
+    |     Socket clientsocket = listener.AcceptSocket();
+    | 
+    |     try {
+    |       byte[] buffer = new byte[1024];
+    |   
+    |       // Wait for data (nickname)
+    |       byteCount = clientsocket.Receive(buffer);
+    |       String requestedNickname =
+    |         ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
+    | 
+    |       // make sure nickname is not taken
+    |       // and start off a new thread listening for
+    |       // more incoming data on the clientsocket
+    |     }
+    |     catch (Exception ex){ ... }
+    |   }
+    |   catch (Exception ex){ ... }
+    | }
+p Send message to socket.
+pre
+  code.language-csharp
+    | clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));
+
+
+
+
+
+
+
+
+
+h2 Iterator
+p In this exercise we'll explore the iterator pattern using the phone book example from the lectures.
+ol
+  li Create a new <code>C#</code> project, and implement the phone book examples from the notes. But refactor the find method to throw an exception instead of returning <code>-1</code>.
+  li Draw a class diagram for the iterator, without using diagram generation in <code>Visual Studio</code>.
+  li Implement the <code>iterator pattern</code> for the phone book, populate the phone book and iterate over it, printing its contents.
+
+
