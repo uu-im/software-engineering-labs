@@ -39,6 +39,7 @@
 \newcounter{stepcounter}
 \setcounter{stepcounter}{0}
 \newenvironment{steps}{ 
+  \setlist{leftmargin=1.55cm, rightmargin=1.2cm}
   \begin{enumerate}[label=\color{red}Step \thesection-\theenumi)]
     \setcounter{enumi}{\value{stepcounter}}
 }{
