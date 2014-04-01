@@ -1,6 +1,11 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    jade = require('gulp-jade');
 
 
 gulp.task('default', function(){
-  console.log("Running...");
+  gulp.watch('src/**/*.jade', function(e){
+    gulp.src(e.path)
+      .pipe(jade())
+      .pipe(gulp.dest('./dist'));
+  });
 });
