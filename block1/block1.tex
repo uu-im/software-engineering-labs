@@ -351,7 +351,7 @@ public static void Main ()
   ITicketMachine tm = new TicketMachine (price);
 ...
 \end{lstlisting}
-But there's one thing we haven't really talked about yet. The power of programming towards interfaces. Our ticket machine is actually way more abstract than one might first imagine. Take note of the fact that the \texttt{TicketMachineInteractor} class does \textbf{not} accept a \texttt{TicketMachine}, but rather an \texttt{ITicketMachine}. This means that it can an instance of any class as long as that class implements the \texttt{ITicketMachine} interface.
+But there's one thing we haven't really talked about yet. The power of programming towards interfaces. Our ticket machine is actually way more abstract than one might first imagine. Take note of the fact that the \texttt{TicketMachineInteractor} class does \textbf{not} accept a \texttt{TicketMachine}, but rather an \texttt{ITicketMachine}. This means that it accepts an instance of any class as long as the given class implements the \texttt{ITicketMachine} interface.
 
 
 
