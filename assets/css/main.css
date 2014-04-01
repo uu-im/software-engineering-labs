@@ -30,6 +30,8 @@ h2{
 
 a{
   text-decoration: none;
+  color: #EC5751;
+  font-weight: bold;
 }
 a:hover{
   text-decoration: underline;
