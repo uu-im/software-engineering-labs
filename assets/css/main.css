@@ -44,3 +44,12 @@ li > code{
   font-size: 1.2em;
   color: #333;
 }
+
+
+
+.terminal{
+  background: #222;
+  padding:    1em;
+  font-size:  1.2em;
+  color:      #fff;
+}
