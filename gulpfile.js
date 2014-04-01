@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 
 
 gulp.task('default', function(){
-  gulp.watch('src/**/*.jade', function(e){
+  gulp.watch('src/*.jade', function(e){
     console.log("Running jade on:  " + e.path);
     gulp.src(e.path)
       .pipe(jade())
