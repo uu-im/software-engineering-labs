@@ -525,6 +525,17 @@ include partials/layout
       | clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));
 
 
+  h3 Threads
+  p Running a method in a different thread.
+  pre
+    code.language-csharp
+      | // Create the thread object and pass the method to run
+      | Thread thread = new Thread(new ThreadStart(myAwesomeFunction));
+      | 
+      | // Start the thread
+      | thread.Start();
+
+
 
 
 
