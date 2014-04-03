@@ -499,7 +499,7 @@ include partials/layout
   pre
     code.language-csharp
       | byte[] byteip = { 127, 0, 0 , 1};
-      | IPAddress ip = new IPAddress( ip );
+      | IPAddress ip = new IPAddress( byteip );
       | TcpListener listener = new TcpListener(ip, 5000);
       | listener.Start();
 
