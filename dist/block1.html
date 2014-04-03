@@ -221,4 +221,8 @@ listener.Start();</code></pre><p>Listen for incoming connections. Hint: Probably
 Thread thread = new Thread(new ThreadStart(myAwesomeFunction));
  
 // Start the thread
-thread.Start();</code></pre><h2 id="exercise-3">Exercise 3 &mdash; Iterator</h2><p>In this exercise we'll explore the iterator pattern using the phone book example from the lectures.</p><ol><li>Create a new <code>C#</code> project, and implement the phone book examples from the notes. But refactor the find method to throw an exception instead of returning <code>-1</code>.</li><li>Draw a class diagram for the iterator, without using diagram generation in <code>Visual Studio</code>.</li><li>Implement the <code>iterator pattern</code> for the phone book, populate the phone book and iterate over it, printing its contents.</li></ol></div><script src="../assets/js/prism.js"></script></body>
+thread.Start();</code></pre><p>Run a UI-method from a non-UI thread in a thred-safe manner. You'll know this is the snippet you need, when you run in to the error.</p><pre><code class="language-csharp">if (InvokeRequired){
+  Invoke(new MethodInvoker(delegate{
+      // do work here...
+  }));
+}</code></pre><h2 id="exercise-3">Exercise 3 &mdash; Iterator</h2><p>In this exercise we'll explore the iterator pattern using the phone book example from the lectures.</p><ol><li>Create a new <code>C#</code> project, and implement the phone book examples from the notes. But refactor the find method to throw an exception instead of returning <code>-1</code>.</li><li>Draw a class diagram for the iterator, without using diagram generation in <code>Visual Studio</code>.</li><li>Implement the <code>iterator pattern</code> for the phone book, populate the phone book and iterate over it, printing its contents.</li></ol></div><script src="../assets/js/prism.js"></script></body>
