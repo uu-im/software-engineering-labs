@@ -486,8 +486,7 @@ include partials/layout
       | int byteCount;
       | while(true){
       |     byteCount = socket.Receive(buffer);
-      |     String incomingMessage =
-      |       ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
+      |     String incomingMessage = ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
       | }
 
 
@@ -514,16 +513,9 @@ include partials/layout
       |     Socket clientsocket = listener.AcceptSocket();
       | 
       |     try {
-      |       byte[] buffer = new byte[1024];
-      |   
-      |       // Wait for data (nickname)
-      |       byteCount = clientsocket.Receive(buffer);
-      |       String requestedNickname =
-      |         ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
-      | 
-      |       // make sure nickname is not taken
-      |       // and start off a new thread listening for
-      |       // more incoming data on the clientsocket
+      |       // Here you can listen for incoming data
+      |       // on the socket. In the same way as in the
+      |       // client example. 
       |     }
       |     catch (Exception ex){ ... }
       |   }

@@ -200,10 +200,9 @@ catch(Exception e){
 int byteCount;
 while(true){
     byteCount = socket.Receive(buffer);
-    String incomingMessage =
-      ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
+    String incomingMessage = ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
 }</code></pre><h3>Server snippets</h3><p>Start a server.</p><pre><code class="language-csharp">byte[] byteip = { 127, 0, 0 , 1};
-IPAddress ip = new IPAddress( ip );
+IPAddress ip = new IPAddress( byteip );
 TcpListener listener = new TcpListener(ip, 5000);
 listener.Start();</code></pre><p>Listen for incoming connections. Hint: Probably needs to be done in a separate thread because of the eternal loop.</p><pre><code class="language-csharp">while (true)
 {
@@ -213,16 +212,9 @@ listener.Start();</code></pre><p>Listen for incoming connections. Hint: Probably
     Socket clientsocket = listener.AcceptSocket();
  
     try {
-      byte[] buffer = new byte[1024];
-  
-      // Wait for data (nickname)
-      byteCount = clientsocket.Receive(buffer);
-      String requestedNickname =
-        ConversionUtils.ByteArrayToString(buffer, 0, byteCount);
- 
-      // make sure nickname is not taken
-      // and start off a new thread listening for
-      // more incoming data on the clientsocket
+      // Here you can listen for incoming data
+      // on the socket. In the same way as in the
+      // client example. 
     }
     catch (Exception ex){ ... }
   }
