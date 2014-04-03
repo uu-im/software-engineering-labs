@@ -217,7 +217,7 @@ listener.Start();</code></pre><p>Listen for incoming connections. Hint: Probably
     catch (Exception ex){ ... }
   }
   catch (Exception ex){ ... }
-}</code></pre><p>Send message to socket.</p><pre><code class="language-csharp">clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));</code></pre><h3>Threads</h3><p>Running a method in a different thread.</p><pre><code class="language-csharp">// Create the thread object and pass the method to run
+}</code></pre><p>Send message to socket.</p><pre><code class="language-csharp">clientsocket.Send(ConversionUtils.StringToByteArray("Hello world"));</code></pre><h3>Threads</h3><p>Running a method in a new thread.</p><pre><code class="language-csharp">// Create the thread object and pass the method to run
 Thread thread = new Thread(new ThreadStart(myAwesomeFunction));
  
 // Start the thread
