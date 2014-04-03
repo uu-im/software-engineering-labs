@@ -470,9 +470,7 @@ include partials/layout
       | try{
       |   byte[] serverIP = { 127, 0, 0, 1 };
       |   IPAddress serverAddress = new IPAddress(serverIP);
-      |   Socket socket = new Socket(AddressFamily.InterNetwork,
-      |                              SocketType.Stream,
-      |                              ProtocolType.IP);
+      |   Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
       |   socket.Connect(serverAddress, 5000);
       |   ...
       | }
