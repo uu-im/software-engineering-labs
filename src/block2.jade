@@ -1,0 +1,247 @@
+include partials/layout
++layout("Block 2")
+  header
+    h1 Software Engineering &mdash; Lab 2
+    p Spring 2014
+
+  .preamble
+    p In this block we'll focus on application testing and refactoring. While there are many ways to test code we will focus on unit testing. This basically means that we will assert that input to methods on class or instance level yield expected input.
+    p The first exercise will focus on building the same application three times, employing different testing strategies. Test-after development, <a href="http://www.extremeprogramming.org/rules/testfirst.html">Test-first development</a> (or more specifically <a href="http://en.wikipedia.org/wiki/Test-driven_development">Test-driven development</a> and finally through one school of thought's <a href="http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation">expectionally strict test-driven development</a> &mdash; dubbed "sliming".
+    p In the second exercise we'll focus on how we can use testing to locate bugs. When we're using tests to locate bugs, we're not only finding the bug. We're also "locking in" the code. We're making sure the same bug won't be reintroduced unnoticed, because we now have a test to find it.
+    p In the third exercise we'll look at test coverage, often times called <a href="http://en.wikipedia.org/wiki/Code_coverage">code coverage</a>. It intends to be a measure of how much of a code base that is tested. It's value is an <a href="http://martinfowler.com/bliki/TestCoverage.html">issue of debate</a>.
+    p In the fourth exercise we'll look at how we can use tests to "drive" the design process. <a href="http://stackoverflow.com/questions/7538744/is-test-driven-development-the-same-as-test-driven-design">Test-Driven Design</a> is essentially the same idea as Test-Driven Development. However adding the explicit claim that code design will improve through TDD. That TDD force us to think about how we want to use our own code. Consequently that TDD, for example, would lead to better designed public interfaces.
+    p Finally we'll look at refactoring existing code. Using the classic example <a href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html">movie rental case</a> by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
+
+
+
+
+  h2 Deliverables
+  p This is a summary of the deliverables for this block.
+
+
+  h3 Exercise 1 &mdash; 
+    a(href="#exercise-1") Introduction to testing
+  p Three Visual Studio projects (preferably in the same solution) and one text file.
+  ol
+    li Testing (Visual Studio solution containing the following projects..)
+    ol
+      li TAD (<em>Visual Studio</em> project)
+      li TDD (<em>Visual Studio</em> project)
+      li Sliming (visual Studio project)
+    li Contemplation (text document in <code>.txt</code> format)
+
+  h3 Exercise 2 &mdash; 
+    a(href="#exercise-2") Debugging via Tests
+  p One Visual Studio solution and one text file.
+  ol
+    li Matrix (<em>Visual Studio</em> solution)
+    li Contemplation (Text file in <code>.txt</code>-format)
+
+  h3 Exercise 3 &mdash; 
+    a(href="#exercise-3") Test Coverage
+  p One Visual Studio solution and one diagram.
+  ol
+    li PhoneBook (<em>Visual Studio</em> solution)
+    li Contemplation (Text-file in <code>.txt</code>-format)
+
+  h3 Exercise 4 &mdash; 
+    a(href="#exercise-4") Refactoring
+  p One Visual Studio solution and one text file.
+  ol
+    li MovieRental (<em>Visual Studio</em> solution)
+    li Contemplation (Text-file in <code>.txt</code>-format)
+
+  h3 Exercise 5 &mdash; 
+    a(href="#exercise-5") TDD Practice <strong>(optional)</strong>
+  p One Visual Studio solution and one text file.
+  ol
+    li BowlingGameKata (<em>Visual Studio</em> solution)
+    li Contemplation (Text-file in <code>.txt</code>-format)
+
+
+
+
+
+
+
+  h2#exercise-1 Exercise 1 &mdash; Introduction to testing
+  p In this first exercise we want you to approach the same problem using three more or less different strategies. After that we'll reflect over their differences.
+
+
+
+  h3 Test-after development
+  p You've been provided with a project containing a working implementation of the FizzBuzz problem. Your job is to write unit tests with reasonable coverage. When you are done, it should be hard to introduce errors to the application without also making tests fail. At a minimum, write tests for the following cases:
+  ul
+    li <code>Fizz</code> is returned, when given some number divisible by 3
+    li <code>Buzz</code> is returned, when given some number divisible by 5
+    li <code>FizzBuzz</code> is returned, when given some number divisible by 3 <strong>and</strong> 5
+    li The input number itself is returned, when given some input number not divisible by 3 <strong>nor</strong> 5
+  p If you can't remember what the rules of the FizzBuzz game are, then the above cases is basically an explanation for the rules of the game (if you change the word "some" for "any").
+  p Are these tests enough?
+  p While the answer to this question of course greatly depends on how you have written your tests, it is quite likely that the answer is no. Do keep this question in mind as you approximate the section on "sliming".
+
+
+
+  h3 Test-driven development
+  p Create a new console project. We're now going to build the FizzBuzz application again, but this time through test-driven development (TDD). Basically this means that we must build our application only by iterating the steps below:
+  ol
+    li Introduce a (or change an existing) test
+    li Watch the test fail (for the right reason)
+    li Write the minimal code needed to make it pass
+
+  p Different schools of thought argue the meaning of "minimal code needed". However, in this exercise, think of it as: writing the simplest production code possible, that reflects the "idea" of the test, making it pass.
+
+  p An easy way to remember the above steps is to think of the idiom red-green-refactor. Basically it means that we should produce a state where some test fail (red). Then write enough code to make it pass (green). Only then, are we allowed to refactor code.
+
+  h3 New requirements
+  p This time we'll introduce a new requirements. Apart from the <code>FizzOrBuzz(int n)</code> method you should add another public method to the Fizzbuzzer:
+
+  pre
+    code.language-csharp
+      | string Count(int n);
+      | // Where n represent the number to count to
+      | // Example, if n = 5 then the output should be
+      | // "1 2 Fizz 4 Buzz"
+
+
+
+
+  h3 Exercise 3 &mdash; "Sliming"
+  p Create a new console project. Once again, we'll build the FizzBuzz application (with the new requirement). Once again, will we use use TDD. However this time we will "slime" every step of implementation.
+
+  p Sliming (fake it 'til you make it) is a tactic used as a means to force yourself to ensure high test-coverage. Usually, when we are "writing the minimal code needed, we tend to write "sensible" code (the implementation we actually want). However "sliming" propose we should really write the simplest possible code, no matter how dumb it is.
+
+  p Say the goal is to produce the function <code>F(x)=x*x</code>. Then say we write a test, that calls <code>F(2)</code>, and expects (asserts) a return value of <code>4</code>. If we are "sliming", then we write the simplest function we can possibly write to ensure the test is satisfied. So we write the following function:
+
+  pre
+    code.language-csharp
+      | int F(int x){
+      |   return 4;
+      | }
+
+  p Unintelligent code indeed. Say we continue by writing a new test, calling <code>F(10)</code>, that expects a return value of <code>100</code>. Since we are sliming, we will change our production code to the following:
+
+  pre
+    code.language-csharp
+      | int F(int x){
+      |   if(x == 2)
+      |     return 4;
+      |   else
+      |     return 100;
+      | }
+
+  p Utterly stupid code, and as humans we know this is not even close to the final behaviour we want. However, by doing this process, we are forced to write more (or better) tests. We only stop sliming when it becomes harder than writing the implementation we actually want to write.
+
+
+
+
+  h3 Contemplation (TDD vs TAD)
+  p What are the positives and negatives of TDD? TAD? Write a few sentances (max half-a-page) about your thoughts on these concepts. When are they good to use? Less good? Was sliming helpful? Always? Who are tests for? Is testing useful for only one or many things?
+
+
+
+
+
+
+
+
+  h2#exercise-2 Exercise 2 &mdash; Debugging via tests
+  p You have been provided with code for a class that handles mathematical operations on Matrices. A class which supposedly was written by a really lousy programmer. It does not behave as expected. Your job is to use either TDD or TAD to provide the matrix class with desired behaviour (free from logical errors). Use testing as a means of localizing errors.
+  p A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult (e.g.) Wikipedia to learn how matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Knowledge about matrix operations is vital to write good test cases for this assignment.
+
+
+
+
+
+
+
+
+  h2#exercise-3 Exercise 3 &mdash; Test coverage 
+  p You've been provided with a class, simliar to the phone book example discussed in class. Your job is to write tests for this class, attempting to achieve <em>as high test coverage as possible</em>. In a perfect world it will be impossible to introduce errors to the class without any tests failing. This would, in theory, be the highest level of test coverage possible. In practice however it's all about compromise. It's not reasonable to assume that we can maintain a suite of tests that employ full test coverage.
+
+  p In this exercise you are expected to modify the code of the given class. However you're <strong>not</strong> allowed to introduce or remove any public methods. Nor to change the signatures of the existing ones.
+
+  p When you believe you have achieved a high level of coverage. Grab a friend and let her or him try to make your tests report false-positives. A false-positive is when a test is passing, but the functionality it is supposed to test has actually been broken. It is easy to get snowblind watching your own code so having someone else attempting to ``break'' it is usually a good idea.
+
+  h3 Contemplation
+  p Does full test-coverage ensure perfect code? Write a few sentances (max half-a-page) about your thoughts on the positives and negatives of test-coverage. What is it good for? Not good for? How good is it? When is it relevant? When not? How much <em>can</em> we test? How much <em>should</em> we test? Is there a golden mean? Etc.
+
+
+
+
+
+
+
+  h2#exercise-4 Refactoring
+  p Now, it's time to forget about testing (for now) and instead focus on refactoring. The lousy programmer has been at it again. He or she has built a system for a movie rental shop handling customer orders. However, since the lousy programmer was focused on meeting the deadline the code is way more procedural than object oriented.
+  p The <code>Customer</code> class has a <code>Statement()</code> method, that returns a string of information on a given customers current rentals. However, as a requirement to print the statement as a HTML formatted string just came in, the lousy programmer realized the code is not at all prepared for change.
+  p Your job is now to refactor the system so that the new method can be implemented without introducing significant duplication.
+
+  h3 Ideas on what to refactor
+  p A good place to start is to have a look at the <code>Statement()</code> method itself. It is way too long! Apart from that, think about the following points:
+
+  ul
+    li
+      b Method extraction
+      |  Can some behavior be extracted into a different method?
+    li
+      b Replacing case statements
+      |  Can we use inheritance instead of case statements?
+    li
+      b Creation methods
+      |  Can we use creation methods to make instantiation safer?
+    li
+      b Moving behavior
+      |  Should a given behavior really be defined on another class? A rule-of-thumb is to consider the Law of Demeter, which say that a class should <em>only</em> talk to its closest neighbors. Meaning, it's OK to say: 
+      code instanceOfSomeClass.Method()
+      |  But it's not OK to say: 
+      code instanceOfSomeClass.instanceOfSomeOtherClass.Method()
+
+
+
+
+
+
+
+  h2#exercise-5 TDD Practice &mdash; optional
+  p Many developers use TDD to "drive" their design forward. Calling it Test Driven Design instead of simply Test Driven Development. Often times we loose focus and end up working on multiple things at once. This is unwanted for many reasons. For example it splits our attention, and cause our (version control) commits to be sprawled.
+
+  p On the other hand, many developers find the cost of TDD to be too high in relation to it's payoff. Some disregard testing alltogether. Some disregard the idea of using tests as a way to drive design. In this exercise we'll approach a common programming exercise using the teachings of test driven design, and then reflect upon our findings.
+
+  p A ``kata'' is used to practice one's programming skills. Much like musicians practice scales. This exercise asks you to perform, what has come to be known as, the Bowling Game Kata. The bowling game class exposes two public methods. Your job is to implement these bodies TDD-style.
+
+  p Remember that this is an exercise in Test Driven Design. So you must follow the <em>red-green-refactor</em>-cycle at all times. And reflect upon the design decisions that you are making as you go along.
+
+  pre
+    code.language-csharp
+      | void Roll(int pins)
+      | // Where pins is the number of pins knocked
+      | // down by the player in this roll
+      | 
+      | int Score()
+      | // Returns the current score at the given time
+
+  p The rules of bowling, and consequently the requirements of the game, are outlined below.
+  ul
+    li Each game consist of 10 frames (rounds)
+    li Each frame consist of 2 rolls
+    li Each roll can knock down 0-10 pins
+    li The score for the frame is the total number of pins knocked down in that frame + plus bonuses for strikes and spares
+    li A spare is when the player knocks down all 10 pins in two rolls
+    li The score of a spare is the number of pins knocked down in the next roll
+    li A strike is when the player knocks down all 10 pins in the first roll
+    li The score of a strike is the number of pins knocked down in the next frame
+    li A frame only consist of one roll if the player rolls a strike
+    li In the tenth frame the player will have one extra roll <em>if</em> a strike or spare is rolled
+
+  h3 Contemplation
+  p Write a few sentances (max half-a-page) and reflect upon your new won experiences and opinions about using tests as a means to drive design. Does it help? Does it not? Does it enforce good design decisions. Does it enforce bad design decisions? Is it worth it?
+
+
+
+
+
+
+
+
+
