@@ -5,12 +5,20 @@ include partials/layout
     p Spring 2014
 
   .preamble
-    p In this block we'll focus on application testing and refactoring. While there are many ways to test code we will focus on unit testing. This basically means that we will assert that input to methods on class or instance level yield expected input.
-    p The first exercise will focus on building the same application three times, employing different testing strategies. Test-after development, <a href="http://www.extremeprogramming.org/rules/testfirst.html">Test-first development</a> (or more specifically <a href="http://en.wikipedia.org/wiki/Test-driven_development">Test-driven development</a> and finally through one school of thought's <a href="http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation">expectionally strict test-driven development</a> &mdash; dubbed "sliming".
-    p In the second exercise we'll focus on how we can use testing to locate bugs. When we're using tests to locate bugs, we're not only finding the bug. We're also "locking in" the code. We're making sure the same bug won't be reintroduced unnoticed, because we now have a test to find it.
-    p In the third exercise we'll look at test coverage, often times called <a href="http://en.wikipedia.org/wiki/Code_coverage">code coverage</a>. It intends to be a measure of how much of a code base that is tested. It's value is an <a href="http://martinfowler.com/bliki/TestCoverage.html">issue of debate</a>.
-    p In the fourth exercise we'll look at how we can use tests to "drive" the design process. <a href="http://stackoverflow.com/questions/7538744/is-test-driven-development-the-same-as-test-driven-design">Test-Driven Design</a> is essentially the same idea as Test-Driven Development. However adding the explicit claim that code design will improve through TDD. That TDD force us to think about how we want to use our own code. Consequently that TDD, for example, would lead to better designed public interfaces.
-    p Finally we'll look at refactoring existing code. Using the classic example <a href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html">movie rental case</a> by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
+    p In this block we'll focus on <em>testing</em> and <em>refactoring</em>. While there are many ways to test code we will focus on unit testing. In essance, unit testing means testing individual methods/functions in isolation. Asserting that a some input yield the expected input.
+    p The first exercise will focus on building the same application three times, employing different testing strategies. (1) 
+      a(href="http://stackoverflow.com/questions/7199313/what-are-the-pitfalls-of-test-after-development") Test-after development
+      |, (2) 
+      a(href="http://www.extremeprogramming.org/rules/testfirst.html") Test-first development 
+      | (or more specifically 
+      a(href="http://en.wikipedia.org/wiki/Test-driven_development") Test-driven development
+      | ) and finally through one strand of exceptionally strict test-driven development &mdash; often dubbed (3) 
+      a(href="http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation") "sliming"
+      |.
+    p After having familiarized ourselves with some different schools of testing we willfocus on how we can use testing to locate bugs. When we're using tests to locate bugs, we're not only finding the bug. We're also "locking in" the bug. Because if we have a test that targets a specific bug, then we can, with some level of certainty, say that we will know if the bug is accidentally reintroduced.
+    p In the third exercise we'll look at <em>test coverage</em>, often times called <a href="http://en.wikipedia.org/wiki/Code_coverage">code coverage</a>. It intends to be a measure of how much of a code base that is tested. It's value is an <a href="http://martinfowler.com/bliki/TestCoverage.html">issue of debate</a>.
+    p In the fourth exercise we'll take a step back from testing and look at refactoring existing code. Using the classic example <a href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html">movie rental case</a> by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
+    p Lastly we'll look at how we can use tests to "drive" the process of designing a code base. <a href="http://stackoverflow.com/questions/7538744/is-test-driven-development-the-same-as-test-driven-design">Test-Driven Design</a> is essentially the same idea as Test-Driven Development. However adding the explicit claim that code design will improve through TDD.
 
 
 
