@@ -127,7 +127,35 @@ include partials/layout
 
 
   h2#exercise-1 Exercise 1 &mdash; Introduction to testing
-  p TODO
+  p In this exercise we're going to familiarize ourselves with the concept of unit testing.
+  ol
+    li Create a new Visual Studio Solution.
+    li Add a new 
+      code Class Library
+      |  project, and name it 
+      code MathLibrary
+      |.
+    li Add a new 
+      code Unit Test Project
+      |  and name it 
+      code MathLibraryTests
+    li Create a new class in your <code>MathLibrary</code> project. Name it <code>MathLib.cs</code>.
+    li Copy the contents of the  
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/MathLibrary/MathLib.cs") <code>MathLib</code> example class
+      |  and paste it into your class file.
+    li Create a new class in your <code>MathLibraryTests</code> project. Name it <code>MathLibTests</code>.
+    li Copy the contents of the 
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/TestProject/MathLibraryTests.cs") <code>MathLibTests</code> example class
+      |  and paste it into your class file.
+    li Add a reference (via <code>Solution Explorer</code>) to the <code>MathLibrary</code> project in the <code>MathLibraryTests</code> project. We do this because the test project is going to test classes in the <code>MathLibrary</code> project.
+  p So, if you've set up your solution according to the above, then we are ready to rock. The <code>MathLib</code> project contain a bunch of public static methods that does some math related stuff.
+  p If you take a closer look at the <code>MathLib</code> class you'll notice that not all methods are fully implemented. If you take a closer look at the <code>MathLibTests</code> class you'll notice that not all tests are fully implemented. However you've been given the outline. 
+  p In this exercise you should not add or remove any public methods or tests. Your job is to:
+  ol
+    li Complete the implementation of each method in the <code>MathLib</code> class.
+    li Complete the implementation of each test method in the <code>MathLibTests</code> class.
+  p Remember to continuously run your tests. And remember that tests without implementation report "false positives". Meaning that tests without implementation are listed as "passing" tests. 
+
 
 
 
