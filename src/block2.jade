@@ -163,8 +163,18 @@ include partials/layout
 
 
   h2#exercise-2 Exercise 2 &mdash; Debugging via tests
-  p You have been provided with code for a class that handles mathematical operations on Matrices. A class which supposedly was written by a really lousy programmer. It does not behave as expected. Your job is to use either TDD or TAD to provide the matrix class with desired behaviour (free from logical errors). Use testing as a means of localizing errors.
-  p A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult (e.g.) Wikipedia to learn how matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Knowledge about matrix operations is vital to write good test cases for this assignment.
+  p In this exercise we're going to explore the idea of using tests as a means of locating bugs.
+
+  p Start off by 
+    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") downloading this <code>Matrix</code> class
+    |. Supposedly, it was written by a really lousy programmer. And consequently it contains a bunch of bugs. More specifically a bunch of logical errors.
+    
+  p Create a new solution. Add in the <code>Matrix</code> class. And create a test project.
+
+  p Your job is to eliminate all bugs in the <code>Matrix</code> class. You must do this by introducing test cases that will help you determine where the errors actually reside.
+
+  p
+    em A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult (e.g.) Wikipedia to learn how (e.g.) matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Some knowledge about matrix operations is vital, in being able to write good test cases for the class.
 
 
 
