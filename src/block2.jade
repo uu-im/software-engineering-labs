@@ -285,42 +285,59 @@ include partials/layout
         code FizzBuzzSlimingTests.cs
   p ... or similarly.
 
+  p The rules of the game of FizzBuzz reads as follows:
+  ul
+    li <code>Fizz</code> is returned, when given a number divisible by 3
+    li <code>Buzz</code> is returned, when given a number divisible by 5
+    li <code>FizzBuzz</code> is returned, when given a number divisible by 3 <strong>and</strong> 5
+    li The input number itself is returned, when given an input number not divisible by 3 <strong>nor</strong> 5
 
 
   h3 5.1 Test-after development (TAD)
-  p Create a new console project. You've been provided with a project containing a working implementation of the FizzBuzz problem. Your job is to write unit tests with reasonable coverage. When you are done, it should be hard to introduce errors to the application without also making tests fail. At a minimum, write tests for the following cases:
-  ul
-    li <code>Fizz</code> is returned, when given some number divisible by 3
-    li <code>Buzz</code> is returned, when given some number divisible by 5
-    li <code>FizzBuzz</code> is returned, when given some number divisible by 3 <strong>and</strong> 5
-    li The input number itself is returned, when given some input number not divisible by 3 <strong>nor</strong> 5
-  p If you don't know the rules of the game of FizzBuzz &mdash; the above list is actually all the rules there is. If you change the word "some" to "all", when reading as rules, it probably makes more sense.
-  p Stop for a minute and consider how much code coverage you've achieved. Is it enough? Keep this question in mind as you move on to the next exercise.
+  p Create a new console project. Add a class called <code>FizzBuzz.cs</code>, and give it a public static method like so:
+  pre
+    code.language-csharp
+      | class FizzBuzz{
+      |     public static string FizzOrBuzz(int n)
+      |     {
+      |         // returns "Fizz" if divisible by 3
+      |         // returns "Buzz" if divisible by 5
+      |         // returns "FizzBuzz" if divisible by 3 and 5
+      |     }
+      | }
+  p Your job is now to...
+  ol
+    li Implement the body of the <code>FizzOrBuzz(int n)</code> function, so that it behaves according to specification.
+    p And when you're done. Then..
+    li Create a test project and write suitable tests that will ensure reasonable test coverage of the method.
+
+  p When you're done. Stop for a minute and consider how much code coverage you've achieved. Is it enough? Is it really hard to introduce errors without having tests that fail? Keep this question in mind as you move on to the next exercise.
 
 
   h3 5.2 Test-driven development (TDD)
-  p Create a new console project. We're now going to build the FizzBuzz application again, but this time through test-driven development (TDD). Basically this means that we must build our application only by iterating the steps below:
+  p We're now going to build the FizzBuzz application again, but this time through test-driven development (TDD). Create a new console project.
+  p Remember, that we are now developing software according to the rules of TDD. This means that we at all times must follow the steps below.
   ol
-    li Introduce a (or change an existing) test
-    li Watch the test fail (for the right reason)
-    li Write the minimal code needed to make it pass
-  p Different schools of thought argue the meaning of "minimal code needed". However, in this exercise, think of it as: writing the simplest production code possible, that reflects the "idea" of the test, making it pass.
-  p An easy way to remember the above steps is to think of the idiom red-green-refactor. Basically it means that we should produce a state where some test fail (red). Then write enough code to make it pass (green). Only then, are we allowed to refactor code.
-
-  h4 New requirements
-  p This time we'll introduce a new requirements. Apart from the <code>FizzOrBuzz(int n)</code> method you should add another public method to the Fizzbuzzer:
+    li Introduce a (or change an existing) test.
+    li Watch the test fail (for the right reason).
+    li Write the minimal code needed to make it pass.
+  p An easy way to remember the above steps is to think of the idiom 
+    a(href="http://en.wikipedia.org/wiki/Test-driven_development") red-green-refactor
+    |. In essence the idea is we start by producing a state where we have a test that fails (red). Then we write enough code to make it pass (green). Only then, are we allowed to refactor code. When done we restart, by introducing another failing test.
+  p This time we have some new requirements though. Another public static method must be added to the FizzBuzzer:
   pre
     code.language-csharp
-      | string Count(int n);
-      | // Where n represent the number to count to
-      | // Example, if n = 5 then the output should be
-      | // "1 2 Fizz 4 Buzz"
+      | public static string Count(int n){
+      |   // FizzBuzz from 1 all the way up to n.
+      |   // Example, if n = 5, then
+      |   // return "1 2 Fizz 4 Buzz"
+      | }
 
 
   h3 5.3 "Sliming"
-  p Create a new console project. Once again, we'll build the FizzBuzz application (with the new requirement). Once again, will we use use TDD. However this time we will "slime" every step of implementation.
-  p Sliming (fake it 'til you make it) is a tactic used as a means to force yourself to ensure high test-coverage. Usually, when we are "writing the minimal code needed, we tend to write "sensible" code (the implementation we actually want). However "sliming" propose we should really write the simplest possible code, no matter how dumb it is.
-  p Say the goal is to produce the function <code>F(x)=x*x</code>. Then say we write a test, that calls <code>F(2)</code>, and expects (asserts) a return value of <code>4</code>. If we are "sliming", then we write the simplest function we can possibly write to ensure the test is satisfied. So we write the following function:
+  p Once again, we'll build the FizzBuzz application (with the new <code>Count(int n)</code>requirement). Once again, will we use use TDD. However this time we will "slime" every step of implementation. Start by creating a new console project.
+  p Sliming (fake it 'til you make it) is a tactic used as a means to force yourself to ensure high test-coverage. Usually, when we are "writing the minimal code needed, we tend to write "sensible" code (the implementation we actually want). However "sliming" propose we indeed really should write the simplest possible code, no matter how dumb it is.
+  p Say the goal is to produce a function such that <code>F(x)=x*x</code>. So we start by writing a test, that calls <code>F(2)</code>, and expects (asserts) a return value of <code>4</code>. If we are "sliming", then we write the simplest function we can possibly write to ensure the test is satisfied. So we write the following function:
   pre
     code.language-csharp
       | int F(int x){
@@ -336,9 +353,10 @@ include partials/layout
       |     return 100;
       | }
   p Utterly stupid code, and as humans we know this is not even close to the final behaviour we want. However, by doing this process, we are forced to write more (or better) tests. We only stop sliming when it becomes harder than writing the implementation we actually want to write.
+  p Your job is again to implement another version of the FizzBuzzer. If the above concepts however seem unfamiliar to you. Consult the reading material before you proceed.
 
-  h3 Contemplation (TDD vs TAD)
-  p What are the positives and negatives of TDD? TAD? Write a few sentances (max half-a-page) about your thoughts on these concepts. When are they good to use? Less good? Was sliming helpful? Always? Who are tests for? Is testing useful for only one or many things?
+  h3 Contemplation (TAD, TDD and Sliming)
+  p What are the positives and negatives of TDD? TAD? Sliming? Write a few sentances (max half-a-page) about your thoughts on these concepts. When are they good to use? Less good? Was sliming helpful? Always? Never? Somwhat? Who are tests for? Is testing useful for only one or many things? What? Why? Does testing first improve design? If yes, in what way? If no, how come many claim that is the case?
 
 
 
