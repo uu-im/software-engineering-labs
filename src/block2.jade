@@ -168,7 +168,7 @@ include partials/layout
   p Start off by 
     a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") downloading this <code>Matrix</code> class
     |. Supposedly, it was written by a really lousy programmer. And consequently it contains a bunch of bugs. More specifically a bunch of logical errors.
-    
+
   p Create a new solution. Add in the <code>Matrix</code> class. And create a test project.
 
   p Your job is to eliminate all bugs in the <code>Matrix</code> class. You must do this by introducing test cases that will help you determine where the errors actually reside.
@@ -182,11 +182,30 @@ include partials/layout
 
 
   h2#exercise-3 Exercise 3 &mdash; Refactoring
-  p Now, it's time to forget about testing (for now) and instead focus on refactoring. The lousy programmer has been at it again. He or she has built a system for a movie rental shop handling customer orders. However, since the lousy programmer was focused on meeting the deadline the code is way more procedural than object oriented.
-  p The <code>Customer</code> class has a <code>Statement()</code> method, that returns a string of information on a given customers current rentals. However, as a requirement to print the statement as a HTML formatted string just came in, the lousy programmer realized the code is not at all prepared for change.
-  p Your job is now to refactor the system so that the new method can be implemented without introducing significant duplication.
+  p Now we're going to focus on refactoring. The process of rewriting existing code without changing it's functionality. Increasing readability and decreasing complexity.
+  p The lousy programmer has been at it again. He/she has built a system for a movie rental shop handling customer orders. However, since the lousy programmer was focused on meeting the deadline the code is way more procedural than object oriented. Truth be told, the code you'll be given in this exercise is actually a classic example by author <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
+  p First off, create a new <code>Console Application</code> in Visual Studio. Then download and copy in the contents of the following classes into your project.
+  ul
+    li
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Customer.cs") Customer.cs
+    li
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/DVD.cs") DVD.cs
+    li
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/DomainObject.cs") DomainObject.cs
+    li
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Movie.cs") Movie.cs
+    li
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Rental.cs") Rental.cs
+    li
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Program.cs") Program.cs
+      |  (main program file)
 
-  h3 Ideas on what to refactor
+
+  p The <code>Customer</code> class has a <code>Statement()</code> method, that returns a string of information on a given customers current rentals. However, as a requirement to print the statement as a HTML formatted string just came in, the lousy programmer realized the code is not at all prepared for change. Because of the code's procedural nature, meeting the new requirements will be painful.
+
+  p Your job is now to refactor the whole project. Aiming for high readability, and low complexity. Avoiding duplication and increasing flexibility. Stop only when you find no more ways of refactoring to the better!
+
+  h3 What to refactor?
   p A good place to start is to have a look at the <code>Statement()</code> method itself. It is way too long! Apart from that, think about the following points:
 
   ul
@@ -205,6 +224,10 @@ include partials/layout
       code instanceOfSomeClass.Method()
       |  But it's not OK to say: 
       code instanceOfSomeClass.instanceOfSomeOtherClass.Method()
+
+  p If you want a narrative that "talks you through" the refactoring process. It's highly recommended to check out 
+    a(href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html") Martin Fowler's step-by-step approach
+    |  to refactoring this particular system. The code is written in Java but you'll have no trouble translating it to C#.
 
 
 
