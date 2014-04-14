@@ -5,24 +5,29 @@ include partials/layout
     p Spring 2014
 
   .preamble
-    p In this block we'll focus on <em>testing</em> and <em>refactoring</em>. While there are many ways to test code we will focus on unit testing. In essance, unit testing means testing individual methods/functions in isolation. Asserting that some given input yield expected output.
-    p The first exercise will focus on building the same application three times, employing different testing strategies.
-    ol
-      li
-        a(href="http://stackoverflow.com/questions/7199313/what-are-the-pitfalls-of-test-after-development") Test-after development 
-        |, 
-      li  
-        a(href="http://www.extremeprogramming.org/rules/testfirst.html") Test-first development 
-        | (or more specifically 
-        a(href="http://en.wikipedia.org/wiki/Test-driven_development") Test-driven development
-        | ), and finally
-      li 
-        a(href="http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation") Exceptionally strict test-driven development
-        |  &mdash; often dubbed "sliming".
-    p After having familiarized ourselves with some different "schools" of testing we will focus on how we can use testing to locate bugs. Not only are tests an effective means for isolating the source of a bug, but also &mdash; when we're using tests to locate bugs, we're also "locking in" the bug. Having a test that targets a specific bug means it will be increasingly hard to accidentally reintroduce the same bug unnoticed.
-    p In the third exercise we'll look at <em>test coverage</em>, often times called <a href="http://en.wikipedia.org/wiki/Code_coverage">code coverage</a>. It intends to be a measure of how much of a code base that is tested. It's value as a measure is an <a href="http://martinfowler.com/bliki/TestCoverage.html">issue of debate</a>.
-    p In the fourth exercise we'll take a step back from testing and look at refactoring existing code. Using the classic example <a href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html">movie rental case</a> by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
-    p Lastly we'll look at how we can use tests to "drive" the process of designing a code base. <a href="http://stackoverflow.com/questions/7538744/is-test-driven-development-the-same-as-test-driven-design">Test-Driven Design</a> is essentially the same idea as Test-Driven Development. However adding the explicit claim that code design will improve through TDD.
+    p In this block we'll focus on <em>testing</em> and <em>refactoring</em>. While there are many ways to test code we will focus on <a href="http://en.wikipedia.org/wiki/Unit_testing">unit testing</a>. In essance, unit testing means testing individual functions in isolation. Asserting that some given input yield expected output.
+
+    p In regards to testing we'll look at a couple of different aspects of testing. Such as:
+    ul
+      li Testing as a means of making sure our code actually does what it's supposed to.
+      li Testing as a means of discovering, isolating and preventing unnoticed reoccurance of bugs.
+      li The concept of <em>test coverage</em>, often times called <a href="http://en.wikipedia.org/wiki/Code_coverage">code coverage</a>, as a means of measuring how much of a code base that is covered by tests. An issue <a href="http://martinfowler.com/bliki/TestCoverage.html">open for debate</a>.
+      li Three different "schools" of testing:
+        ul
+          li
+            a(href="http://stackoverflow.com/questions/7199313/what-are-the-pitfalls-of-test-after-development") Test-after development 
+            |, 
+          li  
+            a(href="http://www.extremeprogramming.org/rules/testfirst.html") Test-first development 
+            | (or more specifically 
+            a(href="http://en.wikipedia.org/wiki/Test-driven_development") Test-driven development
+            | ), and finally
+          li 
+            a(href="http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation") Exceptionally strict test-driven development
+            |  &mdash; often dubbed "sliming".
+
+    p Apart from testing, we'll also look at the art of refactoring existing code. Using the classic example <a href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html">movie rental case</a> by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
+
 
 
   h2 Study material
