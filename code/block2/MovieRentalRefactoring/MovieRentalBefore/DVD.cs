@@ -2,7 +2,7 @@
 
 namespace MovieRentalBefore
 {
-    class DVD : DomainObject
+    public class DVD : DomainObject
     {
         public Movie Movie { get; private set; }
         private string serialNo;
