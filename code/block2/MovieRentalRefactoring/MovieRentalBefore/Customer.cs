@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MovieRentalBefore
 {
-    class Customer : DomainObject
+    public class Customer : DomainObject
     {
         private ICollection<Rental> rentals = new List<Rental>();
 

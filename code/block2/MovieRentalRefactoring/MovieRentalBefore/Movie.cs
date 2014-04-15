@@ -2,7 +2,7 @@
 
 namespace MovieRentalBefore
 {
-    class Movie : DomainObject
+    public class Movie : DomainObject
     {
         public const int CHILDRENS = 2;
         public const int REGULAR = 0;

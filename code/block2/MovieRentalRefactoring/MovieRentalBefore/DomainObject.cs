@@ -2,7 +2,7 @@
 
 namespace MovieRentalBefore
 {
-    class DomainObject
+    public class DomainObject
     {
         public string Name { get; protected set; }
 

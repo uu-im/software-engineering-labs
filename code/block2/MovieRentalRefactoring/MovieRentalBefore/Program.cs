@@ -28,7 +28,7 @@ namespace MovieRentalBefore
             cust.AddRental(r2);
 
             // Print statement
-            Console.WriteLine(cust.Statement());
+            string foo = cust.Statement();
             Console.ReadKey();
         }
     }

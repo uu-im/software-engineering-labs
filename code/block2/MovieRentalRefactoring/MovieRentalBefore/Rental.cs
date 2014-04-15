@@ -2,7 +2,7 @@
 
 namespace MovieRentalBefore
 {
-    class Rental : DomainObject
+    public class Rental : DomainObject
     {
         public int DaysRented { get; private set; }
         public DVD DVD { get; private set; }
