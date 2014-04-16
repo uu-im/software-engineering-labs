@@ -144,15 +144,5 @@ namespace MatrixUtils
             this.x = x;
             this.y = y;
         }
-
-        public Point add(Point p)
-        {
-            return new Point(x + p.y, y + p.x);
-        }
-
-        public Point sub(Point p)
-        {
-            return new Point(x - p.y, y - p.x);
-        }
     }
 }
