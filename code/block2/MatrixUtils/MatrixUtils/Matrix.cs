@@ -47,21 +47,13 @@ namespace MatrixUtils
         /// </summary>
         /// <param name="p"></param>
         /// <param name="newElement"></param>
-        public void changeElement(Point p, double newElement)
+        public void ChangeElement(Point p, double newElement)
         {
             if (p.x > this.r || p.y > this.c) throw new Exception("Out of Range");
             m[p.x, p.y] = newElement;
         }
 
-        public void setRow(int row, int[] elements)
-        {
-            for (int i = 0; i < c; i++)
-            {
-                m[row, i] = elements[i];
-            }
-        }
-
-        public double getElement(Point p)
+        public double GetElement(Point p)
         {
             return m[p.x, p.y];
         }
@@ -73,7 +65,7 @@ namespace MatrixUtils
         /// </summary>
         /// <param name="m2"> Matrix to multiple with, THIS * m2</param>
         /// <returns></returns>
-        public Matrix multiply(Matrix m2)
+        public Matrix Multiply(Matrix m2)
         {
             if (!sameMagnitute(m2)) throw new Exception("Not same magnitude");
 
@@ -87,20 +79,42 @@ namespace MatrixUtils
                     double temp = 0;
                     for (int i = 0; i < this.c; i++)
                     {
-                        double a = this.getElement(new Point(j, i));
-                        double b = m2.getElement(new Point(i, k));
+                        double a = this.GetElement(new Point(j, i));
+                        double b = m2.GetElement(new Point(i, k));
 
                         temp += a * b;
 
                     }
-                    newMatrix.changeElement(new Point(j, k), temp);
+                    newMatrix.ChangeElement(new Point(j, k), temp);
 
                 }
             }
 
             return newMatrix;
-
         }
+
+        /// <summary>
+        /// Checks if the elements are equal in the matrixes.
+        /// </summary>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        public bool CheckEquality(Matrix m2)
+        {
+            if (!(r == m2.r || c == m2.c)) throw new Exception("Different range");
+            for (int i = 0; i < r; i++)
+            {
+                for (int j = 0; j > c; j++)
+                {
+                    if (m[i, j] != m2.GetElement(new Point(i, j)))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
         /// <summary>
         /// A*B != B*A
         /// </summary>
@@ -111,56 +125,7 @@ namespace MatrixUtils
             return this.c == m2.r;
 
         }
-
-        /// <summary>
-        /// Checks if the elements are equal in the matrixes.
-        /// </summary>
-        /// <param name="m2"></param>
-        /// <returns></returns>
-        public bool checkEquality(Matrix m2)
-        {
-            if (!(r == m2.r || c == m2.c)) throw new Exception("Different range");
-            for (int i = 0; i < r; i++)
-            {
-                for (int j = 0; j > c; j++)
-                {
-                    if (m[i, j] != m2.getElement(new Point(i, j)))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Get the invers of the matrix, the method is only supported for 2*2 matrix
-        /// Be aware of the rules for matrix and the rules for when the matrix is invertible
-        /// </summary>
-        /// <returns></returns>
-        public Matrix getInvers()
-        {
-            if (this.r != 2 || this.c != 2) throw new Exception("Size not supported");
-
-            Matrix newMatrix = new Matrix(2, 2);
-
-            double a = getElement(new Point(0, 0));
-            double b = getElement(new Point(0, 1));
-            double c = getElement(new Point(1, 0));
-            double d = getElement(new Point(1, 1));
-
-            double determinant = a * d - b * c;
-
-            newMatrix.changeElement(new Point(0, 0), (getElement(new Point(1, 1)) / determinant));
-            newMatrix.changeElement(new Point(0, 1), ((getElement(new Point(0, 1)) / determinant) / -1));
-            newMatrix.changeElement(new Point(1, 0), ((getElement(new Point(1, 0)) / determinant) / -1));
-            newMatrix.changeElement(new Point(1, 1), (getElement(new Point(0, 0)) / determinant));
-
-            return newMatrix;
-
-        }
     }
-
 
     public class Point
     {
@@ -171,16 +136,6 @@ namespace MatrixUtils
             if (x < 0 || y < 0) throw new Exception("Points below zero not allowed.");
             this.x = x;
             this.y = y;
-        }
-
-        public Point add(Point p)
-        {
-            return new Point(x + p.y, y + p.x);
-        }
-
-        public Point sub(Point p)
-        {
-            return new Point(x - p.y, y - p.x);
         }
     }
 }
