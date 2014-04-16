@@ -57,14 +57,6 @@ namespace RefactoredMatrix
             _elements[p.x, p.y] = newElement;
         }
 
-        public void setRow(int row, int[] elements)
-        {
-            for (int i = 0; i < Cols; i++)
-            {
-                _elements[row, i] = elements[i];
-            }
-        }
-
         public double GetElement(Point p)
         {
             return _elements[p.x, p.y];
@@ -143,16 +135,6 @@ namespace RefactoredMatrix
             if (row < 0 || col < 0) throw new Exception("Points below zero not allowed.");
             this.x = row;
             this.y = col;
-        }
-
-        public Point add(Point p)
-        {
-            return new Point(x + p.y, y + p.x);
-        }
-
-        public Point sub(Point p)
-        {
-            return new Point(x - p.y, y - p.x);
         }
     }
 }

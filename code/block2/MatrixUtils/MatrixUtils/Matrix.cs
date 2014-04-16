@@ -53,14 +53,6 @@ namespace MatrixUtils
             m[p.x, p.y] = newElement;
         }
 
-        public void setRow(int row, int[] elements)
-        {
-            for (int i = 0; i < c; i++)
-            {
-                m[row, i] = elements[i];
-            }
-        }
-
         public double GetElement(Point p)
         {
             return m[p.x, p.y];
