@@ -34,7 +34,7 @@ include partials/layout
 
 
   h2 Study material
-  p Please do familiarize yourself with the following study material <strong>before</strong> attempting to approach the corresponding lab exercises.
+  p Please do familiarize yourself with (as much as you find necessary of) the following study material before attempting to approach the corresponding lab exercises. Naturally, all of the study material is not mandatory. But in relation to the labs, you will benefit greatly from exploring it.
   h3 Testing
   ul
     li
@@ -223,9 +223,16 @@ include partials/layout
 
   p The <code>Customer</code> class has a <code>Statement()</code> method, that returns a string of information on a given customers current rentals. However, as a requirement to print the statement as a HTML formatted string just came in, the lousy programmer realized the code is not at all prepared for change. Because of the code's procedural nature, meeting the new requirements will be painful.
 
-  p Your job is now to refactor the whole project. Aiming for high readability, and low complexity. Avoiding duplication and increasing flexibility. Stop only when you find no more ways of refactoring to the better!
+  p Your job is now to...
+  ol
+    li Refactor the whole project. Aiming for high readability, and low complexity. Avoiding duplication and increasing flexibility. Stop only when you find no more ways of refactoring to the better!
+    li And then implement the <code>HtmlStatement</code> method.
 
-  p So, what to refactor? A good place to start is to have a look at the <code>Statement()</code> method itself. It is way too long! Apart from that, think about the following points:
+  p To let you refactor with confidence, make sure you 
+    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") download this class containing an integration test
+    |  for the <code>Statement</code> method. It also contains a test for the <code>HtmlStatement</code> method, however commented out. Make sure you uncomment that test when you begin working on the <code>HtmlStatement</code> method.
+
+  p So, what to refactor? A good place to start is to have a look at the <code>Statement()</code> method itself. It is way too long! Apart from that, think about the following points:t
 
   ul
     li
@@ -233,7 +240,7 @@ include partials/layout
       |  Can some behavior be extracted into a different method?
     li
       b Replacing case statements
-      |  Can we use inheritance instead of case statements?
+      |  Can we use inheritance instead of case staements?
     li
       b Creation methods
       |  Can we use creation methods to make instantiation safer?
