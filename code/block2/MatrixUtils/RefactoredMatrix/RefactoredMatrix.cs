@@ -51,7 +51,7 @@ namespace RefactoredMatrix
         /// </summary>
         /// <param name="p"></param>
         /// <param name="newElement"></param>
-        public void changeElement(Point p, double newElement)
+        public void ChangeElement(Point p, double newElement)
         {
             if (p.x > this.Rows || p.y > this.Cols) throw new Exception("Out of Range");
             _elements[p.x, p.y] = newElement;
@@ -69,7 +69,7 @@ namespace RefactoredMatrix
         /// </summary>
         /// <param name="m2"> Matrix to multiple with, THIS * m2</param>
         /// <returns></returns>
-        public Matrix multiply(Matrix m2)
+        public Matrix Multiply(Matrix m2)
         {
             if (!sameMagnitute(m2))
                 throw new Exception("Not same magnitude");
@@ -93,23 +93,13 @@ namespace RefactoredMatrix
 
             return new Matrix(newValues.ToArray(), Rows, m2.Cols); // the size is determinded by the rules!;
         }
-        /// <summary>
-        /// A*B != B*A
-        /// </summary>
-        /// <param name="m2"></param>
-        /// <returns></returns>
-        private bool sameMagnitute(Matrix m2)
-        {
-            return this.Cols == m2.Rows;
-
-        }
 
         /// <summary>
         /// Checks if the elements are equal in the matrixes.
         /// </summary>
         /// <param name="m2"></param>
         /// <returns></returns>
-        public bool checkEquality(Matrix m2)
+        public bool CheckEquality(Matrix m2)
         {
             // ERROR 2: Bad range eq. check
             if (Rows != m2.Rows || Cols != m2.Cols)
@@ -122,6 +112,16 @@ namespace RefactoredMatrix
                         return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// A*B != B*A
+        /// </summary>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        private bool sameMagnitute(Matrix m2)
+        {
+            return this.Cols == m2.Rows;
         }
     }
 

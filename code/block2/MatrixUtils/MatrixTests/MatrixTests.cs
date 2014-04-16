@@ -94,7 +94,7 @@ namespace MatrixTests
             Assert.AreEqual(1.0, actual);
 
             // Act
-            m.changeElement(position, 2.0);
+            m.ChangeElement(position, 2.0);
 
             // Assert
             actual = m.GetElement(position);
@@ -111,7 +111,7 @@ namespace MatrixTests
             Assert.AreEqual(7.0, actual);
 
             // Act
-            m.changeElement(pos, 2.0);
+            m.ChangeElement(pos, 2.0);
 
             // Assert
             actual = m.GetElement(pos);
@@ -126,7 +126,7 @@ namespace MatrixTests
             Matrix m1 = new Matrix(new double[1] { 1 }, 1, 1),
                    m2 = new Matrix(new double[1] { 1 }, 1, 1);
 
-            Assert.IsTrue(m1.checkEquality(m2));
+            Assert.IsTrue(m1.CheckEquality(m2));
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ namespace MatrixTests
             Matrix m1 = new Matrix(new double[1] { 1 }, 1, 1),
                    m2 = new Matrix(new double[1] { 0 }, 1, 1);
 
-            Assert.IsFalse(m1.checkEquality(m2));
+            Assert.IsFalse(m1.CheckEquality(m2));
         }
 
         [TestMethod]
@@ -144,7 +144,7 @@ namespace MatrixTests
             Matrix m1 = new Matrix(new double[12] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 }, 3, 4),
                    m2 = new Matrix(new double[12] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 }, 3, 4);
 
-            Assert.IsTrue(m1.checkEquality(m2));
+            Assert.IsTrue(m1.CheckEquality(m2));
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace MatrixTests
             Matrix m1 = new Matrix(new double[12] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 }, 3, 4),
                    m2 = new Matrix(new double[12] { 1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 }, 3, 4);
 
-            Assert.IsFalse(m1.checkEquality(m2));
+            Assert.IsFalse(m1.CheckEquality(m2));
         }
         #endregion
 
@@ -167,11 +167,11 @@ namespace MatrixTests
             Assert.AreEqual(m1.GetElement(new Point(0, 1)), 2);
             
             // Act
-            Matrix actual = m1.multiply(m2);
+            Matrix actual = m1.Multiply(m2);
 
             // Assert
             Matrix expected = new Matrix(new double[4] { 0, 1, 0, 3 }, 2, 2);
-            Assert.IsTrue(actual.checkEquality(expected));
+            Assert.IsTrue(actual.CheckEquality(expected));
         }
 
         [TestMethod]
@@ -182,11 +182,11 @@ namespace MatrixTests
                    m2 = new Matrix(new double[6] { 7,8,9,10,11,12 }, 3, 2);
 
             // Act
-            Matrix actual = m1.multiply(m2);
+            Matrix actual = m1.Multiply(m2);
 
             // Assert
             Matrix expected = new Matrix(new double[4] { 58, 64, 139, 154 }, 2, 2);
-            Assert.IsTrue(actual.checkEquality(expected));
+            Assert.IsTrue(actual.CheckEquality(expected));
         }
         #endregion
     }
