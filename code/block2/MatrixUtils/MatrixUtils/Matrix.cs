@@ -132,35 +132,7 @@ namespace MatrixUtils
             }
             return false;
         }
-
-        /// <summary>
-        /// Get the invers of the matrix, the method is only supported for 2*2 matrix
-        /// Be aware of the rules for matrix and the rules for when the matrix is invertible
-        /// </summary>
-        /// <returns></returns>
-        public Matrix getInvers()
-        {
-            if (this.r != 2 || this.c != 2) throw new Exception("Size not supported");
-
-            Matrix newMatrix = new Matrix(2, 2);
-
-            double a = getElement(new Point(0, 0));
-            double b = getElement(new Point(0, 1));
-            double c = getElement(new Point(1, 0));
-            double d = getElement(new Point(1, 1));
-
-            double determinant = a * d - b * c;
-
-            newMatrix.changeElement(new Point(0, 0), (getElement(new Point(1, 1)) / determinant));
-            newMatrix.changeElement(new Point(0, 1), ((getElement(new Point(0, 1)) / determinant) / -1));
-            newMatrix.changeElement(new Point(1, 0), ((getElement(new Point(1, 0)) / determinant) / -1));
-            newMatrix.changeElement(new Point(1, 1), (getElement(new Point(0, 0)) / determinant));
-
-            return newMatrix;
-
-        }
     }
-
 
     public class Point
     {

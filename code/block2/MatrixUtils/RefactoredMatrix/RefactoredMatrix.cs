@@ -131,33 +131,6 @@ namespace RefactoredMatrix
 
             return true;
         }
-
-        /// <summary>
-        /// Get the invers of the matrix, the method is only supported for 2*2 matrix
-        /// Be aware of the rules for matrix and the rules for when the matrix is invertible
-        /// </summary>
-        /// <returns></returns>
-        public Matrix getInvers()
-        {
-            if (this.Rows != 2 || this.Cols != 2) throw new Exception("Size not supported");
-
-            Matrix newMatrix = new Matrix(2, 2);
-
-            double a = GetElement(new Point(0, 0));
-            double b = GetElement(new Point(0, 1));
-            double c = GetElement(new Point(1, 0));
-            double d = GetElement(new Point(1, 1));
-
-            double determinant = a * d - b * c;
-
-            newMatrix.changeElement(new Point(0, 0), (GetElement(new Point(1, 1)) / determinant));
-            newMatrix.changeElement(new Point(0, 1), ((GetElement(new Point(0, 1)) / determinant) / -1));
-            newMatrix.changeElement(new Point(1, 0), ((GetElement(new Point(1, 0)) / determinant) / -1));
-            newMatrix.changeElement(new Point(1, 1), (GetElement(new Point(0, 0)) / determinant));
-
-            return newMatrix;
-
-        }
     }
 
 
