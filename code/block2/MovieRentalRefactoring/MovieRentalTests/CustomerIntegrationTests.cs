@@ -25,7 +25,7 @@ namespace MovieRentalTests
         {
             // Act
             //string actual = customer.HtmlStatement();
-            //string expected = "<h1>Rental Record for Sarah</h1><table><tr><th>Movie</th><th>Days Rented</th></tr><tr><td>The Matrix</td><td>2<td/></tr><tr><td>TRON: Legacy</tr> <td>3</td></tr></table><p>Amount owed is 5</p><p>You earned 2 frequent renter points</p>";
+            //string expected = "<h1>Rental Record for Sarah</h1><table><tr><th>Movie</th><th>Days Rented</th></tr><tr><td>MovieA</td><td>2</td></tr><tr><td>MovieB</td><td>3</td></tr></table><p>Amount owed is 5</p><p>You earned 2 frequent renter points</p>";
 
             // Assert
             //Assert.AreEqual(expected, actual);

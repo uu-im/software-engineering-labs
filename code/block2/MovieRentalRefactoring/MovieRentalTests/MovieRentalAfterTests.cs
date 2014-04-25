@@ -9,12 +9,12 @@ using MovieRentalRefactoringAfter;
 namespace MovieRentalTests
 {
     [TestClass]
-    class MovieRentalAfterTests
+    public class MovieRentalAfterTests
     {
         private Customer customer;
 
         [TestMethod]
-        public void Statement_OneCustomerWithTwoRentals_Statement()
+        public void After_Statement_OneCustomerWithTwoRentals_Statement()
         {
             // Act
             string actual = customer.Statement();
@@ -25,14 +25,14 @@ namespace MovieRentalTests
         }
 
         [TestMethod]
-        public void HtmlStatement_OneCustomerWithTwoRentals_HtmlStatement()
+        public void After_HtmlStatement_OneCustomerWithTwoRentals_HtmlStatement()
         {
             // Act
-            //string actual = customer.HtmlStatement();
-            //string expected = "<h1>Rental Record for Sarah</h1><table><tr><th>Movie</th><th>Days Rented</th></tr><tr><td>The Matrix</td><td>2<td/></tr><tr><td>TRON: Legacy</tr> <td>3</td></tr></table><p>Amount owed is 5</p><p>You earned 2 frequent renter points</p>";
+            string actual = customer.HtmlStatement();
+            string expected = "<h1>Rental Record for Sarah</h1><table><tr><th>Movie</th><th>Days Rented</th></tr><tr><td>MovieA</td><td>2</td></tr><tr><td>MovieB</td><td>3</td></tr></table><p>Amount owed is 5</p><p>You earned 2 frequent renter points</p>";
 
             // Assert
-            //Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestInitialize]
