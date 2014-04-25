@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRentalBefore", "MovieR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRentalTests", "MovieRentalTests\MovieRentalTests.csproj", "{88045FF7-E6CF-4829-AC39-4A89A81A4080}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRentalRefactoringAfter", "MovieRentalRefactoringAfter\MovieRentalRefactoringAfter.csproj", "{6D1F70DB-AA34-4DF7-8302-7827CD1D7E3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{88045FF7-E6CF-4829-AC39-4A89A81A4080}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88045FF7-E6CF-4829-AC39-4A89A81A4080}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88045FF7-E6CF-4829-AC39-4A89A81A4080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1F70DB-AA34-4DF7-8302-7827CD1D7E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1F70DB-AA34-4DF7-8302-7827CD1D7E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1F70DB-AA34-4DF7-8302-7827CD1D7E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1F70DB-AA34-4DF7-8302-7827CD1D7E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
