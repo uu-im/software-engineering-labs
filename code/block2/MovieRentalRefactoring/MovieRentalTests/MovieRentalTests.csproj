@@ -51,12 +51,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CustomerIntegrationTests.cs" />
+    <Compile Include="MovieRentalAfterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieRentalBefore\MovieRentalBefore.csproj">
       <Project>{99935102-9d8f-4530-806c-7faf8d02993b}</Project>
       <Name>MovieRentalBefore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieRentalRefactoringAfter\MovieRentalRefactoringAfter.csproj">
+      <Project>{6d1f70db-aa34-4df7-8302-7827cd1d7e3a}</Project>
+      <Name>MovieRentalRefactoringAfter</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
