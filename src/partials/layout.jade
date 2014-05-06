@@ -10,3 +10,12 @@ mixin layout(title)
     .container
       block
     script(src="../assets/js/prism.js")
+
+
+
+mixin handin(n, title)
+  h3 Exercise 
+    =n
+    |  &mdash;  
+    a(href="#exercise-#{n}")= title
+  block
