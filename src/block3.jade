@@ -226,8 +226,10 @@ include partials/layout
   p When building the chat system in block 1, little attention was paid to design principles and patterns of software design. In this assignment you are expected to systematically analyze your chat system and make changes to the design.
 
   p 
-    b Task
-    |  &mdash; Take at least <em>three patterns into consideration</em>, writing down your reflections. Implement all of which of the three you find appropriate, and keep a written log of the changes you make. <em>At least one</em> pattern has to be implemented.
+    b Task 1
+    |  &mdash; Refactor your chat system so that it uses <em>at least three patterns</em>. Keep a changelog.
+
+  p Below are some suggestions for patterns and principles...
 
   ul
     li
@@ -265,11 +267,7 @@ include partials/layout
     li
       b  Model View Controller pattern
       |  &mdash; Is managing the entire system overwhelming, could MVC keep it manageable.
-  
 
-  p Further, you should take this following principles into consideration:
-
-  ul
     li
       b  The single responsibility principle
       |  &mdash; Does every single class in the solution have a single responsibility?
@@ -282,11 +280,14 @@ include partials/layout
       b  Interface segregation principle
       |  &mdash; Are there interfaces in the code that could be logically separated into several smaller interfaces?
 
-  p Be sure you keep a copy of the original chat system. So that after solving this assignment you have two different designs of the chat system. During the re-design, keep a written log of the changes you make and the reason for them. An example of an entry in this log could be:
+    li etc...
 
-  blockquote
-    em May 1, 2013: New class named X. 
-    | The class X was introduced since the creation of objects of type Y didn't fit into the responsibility of any of the existing classes. Class X creates objects of the types Y in accordance with Larman's creator pattern.
+  p Remember to keep a copy of your original chat system!
+
+  p Rmember to keep a written log of the changes you make and the reason for them. An example of an entry in this log could be:
+
+  blockquote 
+    em May 1, 2013: Changed X. Because of Y. In accordance with pattern Z.
 
 
 
