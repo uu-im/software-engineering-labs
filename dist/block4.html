@@ -5,7 +5,7 @@
     public RoadVehicle() { }
     public RoadVehicle(double weight)
     {
-        if (weight < 0.5 || weight > 10.0)
+        if (0.5 > weight || weight > 10.0)
             throw new ArgumentException();
  
         Weight = weight;
@@ -16,7 +16,7 @@ class Automobile : RoadVehicle
 {
     public Automobile(double weight)
     {
-        if (0.2 < weight || weight > 13.0)
+        if (0.2 > weight || weight > 13.0)
             throw new ArgumentException();
         
         Weight = weight;
@@ -25,7 +25,7 @@ class Automobile : RoadVehicle
 [ContractInvariantMethod]
 private void ObjectInvariant()
 {
-    Contract.Invariant(Weight > 0.5 && Weight < 10.0);
+    Contract.Invariant(0.5 < Weight && Weight < 10.0);
 }</code></pre><p>Invariants in C# are added through creating a (void-returning) private method that is decorated with <em>[ContractInvariantMethod]</em>. The method must never be called from anywhere by the user code.</p><h4>Repeat for the Automobile class</h4><p>Do the same thing for the Automobile class but using the weight restrictions of the automobile.</p><h4>Remove the manual exception throws</h4><p>Since we're moving over to using invariants. Remember to <em>remove</em> the now unnecessary <em>ArgumentException</em> checks.</p><h4>Build the project</h4><p>If you've progressed correctly, build the project, and then wait a couple of minutes for the static checker to run. You'll notice a couple of "squigglies" show up -- indicating paths that will lead to erroneous states. What are the states and why do they happen? Discuss with a partner.</p><p>Eliminate the errors through (1) removing the parameter-free constructor in the base class, and (2) calling the base constructor with a parameter from the subclass's constructor. As follows:</p><pre><code class="language-csharp">class RoadVehicle
 {
     public double Weight { get; protected set; }
@@ -42,7 +42,7 @@ class Automobile : RoadVehicle
     public Automobile(double weight) : base(weight) 
     { }
     ...
-}</code></pre><p>The project should now be free of static errors, and we have increased the level of "correctness" in the code as it is now significantly difficult to create a subclass that breaks the invariant rules of the superclass.</p><p>Let's have a look at how code contracts can help us realize there are problems with our code. There is still a major problem with our code, and we will find it when we try instantiating an automobile with edge case weight. Put the following code in the main entry point of the application, run the program and take note of the exception that arise.</p><pre><code class="language-csharp">Automobile car = new Automobile(12.0);</code></pre><p>We should now realize that the conceptual problem with our code is that we're actually violating Liskov's substitution principle. Discuss with a partner why that is.</p><h3>Rethinking the automobile class</h3><p>Now that we've realized that an automobile cannot possible be a ground vehicle if the weight of the automobile is greater than the maximum allowed weight for anything that is a ground vehicle, let's rethink. Instead, rewrite the invariant of the automobile so that the invariant enforce:</p><pre><code class="language-csharp">Weight > 1 && Weight < 7.5</code></pre><h3>Pre- and post-conditions</h3><p>Now, we'll leave the invariants and talk about pre- and post-conditions. Let's introduce the concept of passengers to the automobile class. Implement the following method and it's required members:</p><pre><code class="language-csharp">/* Automobile */
+}</code></pre><p>The project should now be free of static errors, and we have increased the level of "correctness" in the code as it is now significantly difficult to create a subclass that breaks the invariant rules of the superclass.</p><p>Let's have a look at how code contracts can help us realize there are problems with our code. There is still a major problem with our code, and we will find it when we try instantiating an automobile with edge case weight. Put the following code in the main entry point of the application, run the program and take note of the exception that arise.</p><pre><code class="language-csharp">Automobile car = new Automobile(12.0);</code></pre><p>We should now realize that the conceptual problem with our code is that we're actually violating Liskov's substitution principle. Discuss with a partner why that is.</p><h3>Rethinking the automobile class</h3><p>Now that we've realized that an automobile cannot possible be a ground vehicle if the weight of the automobile is greater than the maximum allowed weight for anything that is a ground vehicle, let's rethink. Instead, rewrite the invariant of the automobile so that the invariant enforce:</p><pre><code class="language-csharp">1 < Weight && Weight < 7.5</code></pre><h3>Pre- and post-conditions</h3><p>Now, we'll leave the invariants and talk about pre- and post-conditions. Let's introduce the concept of passengers to the automobile class. Implement the following method and it's required members:</p><pre><code class="language-csharp">/* Automobile */
 public void SetPassengers(int n)
 {
   if (n > 5)
