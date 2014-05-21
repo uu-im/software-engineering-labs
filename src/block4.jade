@@ -48,7 +48,7 @@ include partials/layout
       |     public RoadVehicle() { }
       |     public RoadVehicle(double weight)
       |     {
-      |         if (weight < 0.5 || weight > 10.0)
+      |         if (0.5 > weight || weight > 10.0)
       |             throw new ArgumentException();
       | 
       |         Weight = weight;
@@ -59,7 +59,7 @@ include partials/layout
       | {
       |     public Automobile(double weight)
       |     {
-      |         if (0.2 < weight || weight > 13.0)
+      |         if (0.2 > weight || weight > 13.0)
       |             throw new ArgumentException();
       |         
       |         Weight = weight;
@@ -83,7 +83,7 @@ include partials/layout
       | [ContractInvariantMethod]
       | private void ObjectInvariant()
       | {
-      |     Contract.Invariant(Weight > 0.5 && Weight < 10.0);
+      |     Contract.Invariant(0.5 < Weight && Weight < 10.0);
       | }
 
   p Invariants in C# are added through creating a (void-returning) private method that is decorated with <em>[ContractInvariantMethod]</em>. The method must never be called from anywhere by the user code.
@@ -134,7 +134,7 @@ include partials/layout
   p Now that we've realized that an automobile cannot possible be a ground vehicle if the weight of the automobile is greater than the maximum allowed weight for anything that is a ground vehicle, let's rethink. Instead, rewrite the invariant of the automobile so that the invariant enforce:
 
   pre
-    code.language-csharp Weight > 1 && Weight < 7.5
+    code.language-csharp 1 < Weight && Weight < 7.5
 
 
 
