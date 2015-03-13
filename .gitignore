@@ -1,6 +1,8 @@
 ## Ignore OS-files
 .DS_Store
 
+# Ignore temp build files
+www
 
 ## Ignore latex build files
 *.aux
