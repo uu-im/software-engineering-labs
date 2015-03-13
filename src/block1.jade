@@ -1,3 +1,71 @@
+mixin i-folder
+  i.fa.fa-folder-open-o  
+    if block
+      block
+
+mixin i-code
+  i.fa.fa-file-code-o  
+    if block
+      block
+
+mixin i-text
+  i.fa.fa-file-text-o  
+    if block
+      block
+
+mixin i-img
+  i.fa.fa-file-image-o   
+    if block
+      block
+
+mixin i-zip
+  i.fa.fa-file-zip-o
+    if block
+      block
+
+mixin exercises(n)
+  ol.exercise-summary
+    +i-zip  
+      code Block_#{n}.zip
+    li
+      ol
+        if block
+          block
+
+mixin exercise(n)
+  li
+    +i-folder   
+      code Exercise_#{n}
+    ol
+      if block
+        block
+
+mixin assignment
+  li
+    if block
+      block
+
+mixin vs-solution(name)
+  +i-folder
+    code=name
+    |  (Visual Studio solution)
+  if block
+    ul
+      block
+
+mixin vs-file(name)
+  li
+    +i-code
+      code
+        if block
+          block
+
+mixin file-img(name)
+  +i-code
+    code=name
+
+
+
 include partials/layout
 +layout("Block 1")
   header
@@ -10,38 +78,30 @@ include partials/layout
 
 
   h2 Deliverables
-  p This is a summary of the deliverables for this block.
+  p Please follow the below folder/file structure for the handin of this block.
 
+  +exercises(1)
+    +exercise(1)
+      +assignment
+        +vs-solution("TicketMachines") 
+          //+vs-file [...]
+          //+vs-file ITicketMachine.cs
+          //+vs-file TicketMachine.cs
+          //+vs-file DonationMachine.cs
+          //+vs-file ParkingMachine.cs
+      +assignment
+        +i-text
+          code Contemplation.txt
 
-  h3 Exercise 1 &mdash; 
-    a(href="#exercise-1") Interfaces
-  p One Visual Studio solution and one text document.
-  ol
-    li TicketMachines (<em>Visual Studio</em> solution, containing the following files:)
-      ul
-        li
-          code ITicketMachine.cs
-        li
-          code TicketMachine.cs
-        li
-          code DonationMachine.cs
-        li
-          code ParkingMachine.cs
-    li Contemplation (text document in .txt format)
+    +exercise(2)
+      +assignment
+        +vs-solution("VisualTicketMachines")
 
-  h3 Exercise 2 &mdash; 
-    a(href="#exercise-2") GUI Programming
-  p One Visual Studio solution.
-  ol
-    li Chat System (<em>Visual Studio</em> solution)
-
-  h3 Exercise 3 &mdash; 
-    a(href="#exercise-3") Iterator
-  p One Visual Studio solution and one diagram.
-  ol
-    li PhoneBook (<em>Visual Studio</em> solution)
-    li The iterator diagram.
-
+    +exercise(3)
+      +assignment
+        +vs-solution("PhoneBook")
+      +assignment
+        +file-img("IteratorDiagram.png")
 
 
 

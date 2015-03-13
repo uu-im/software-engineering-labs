@@ -75,3 +75,14 @@ li > code{
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: ease-in-out;
 }
+
+
+
+.exercise-summary,
+.exercise-summary ol,
+.exercise-summary ul{
+  list-style-type: none;
+}
+.exercise-summary{
+  padding-left: 0;
+}
