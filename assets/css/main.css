@@ -55,3 +55,23 @@ li > code{
   font-size:  1.2em;
   color:      #fff;
 }
+
+
+
+@-webkit-keyframes flash {
+  0% {
+    background-color: rgba(200,150,0,.25);
+    background-color: rgba(236,87,81,.25);
+    opacity:1;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.flash{
+  -webkit-animation-name: flash;
+  -webkit-animation-duration: 800ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+}
