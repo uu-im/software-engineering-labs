@@ -15,29 +15,12 @@ namespace Encryptor
 
     public static void Start()
     {
-      while(true)
-      {
-        ILanguage language = LanguageSelector.Start(languages);
-        if(language != null)
-        {
-          while(true)
-          {
-            LanguageStrategy strategy = LanguageStrategySelector.Start(language);
-            if(strategy != null)
-            {
-              StrategyEvaluator.Start(strategy);
-            }
-            else
-            {
-              break;
-            }
-          }
-        }
-        else
-        {
-          break;
-        }
-      }
+      ILanguage language;
+      LanguageStrategy strategy;
+
+      while((language = LanguageSelector.Start(languages)) != null)
+        while((strategy = LanguageStrategySelector.Start(language)) != null)
+          while(StrategyEvaluator.Start(strategy));
     }
   }
 
@@ -47,7 +30,6 @@ namespace Encryptor
 
     public static LanguageStrategy Start(ILanguage lang)
     {
-      if(lang == null) return null;
       language = lang;
       return print();
     }
@@ -132,22 +114,22 @@ namespace Encryptor
   {
     static LanguageStrategy strategy;
 
-    public static void Start(LanguageStrategy strat)
+    public static bool Start(LanguageStrategy strat)
     {
       strategy = strat;
-      print();
+      return print();
     }
 
-    private static void print()
+    private static bool print()
     {
       Console.Clear();
       Console.WriteLine("LANGUAGE: " + strategy.GetLanguageName());
       Console.WriteLine("ACTION:   " + strategy.GetTranslationType());
       Console.WriteLine("\r\nEnter a string, then press enter.\r\n");
-      read();
+      return read();
     }
 
-    private static void read()
+    private static bool read()
     {
       Console.Write("INPUT  : ");
 
@@ -157,17 +139,14 @@ namespace Encryptor
       Console.WriteLine("OUTPUT : " + output);
       Console.WriteLine();
 
-      evaluate();
+      return evaluate();
     }
 
-    private static void evaluate()
+    private static bool evaluate()
     {
       Console.WriteLine("Press any key to make another translation, esc to go back");
       var key = Console.ReadKey();
-      if(key.Key == ConsoleKey.Escape)
-        return;
-      else
-        print();
+      return key.Key != ConsoleKey.Escape;
     }
   }
 
