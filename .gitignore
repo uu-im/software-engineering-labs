@@ -4,6 +4,8 @@
 # Ignore temp build files
 www
 
+*.userprefs
+
 ## Ignore latex build files
 *.aux
 *.fdb_latexmk
