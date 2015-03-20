@@ -165,65 +165,146 @@ namespace Encryptor
       if(langs.Count < 1)
         throw new ArgumentException("No languages given");
 
-      languages = langs;
-      selectedLanguage = langs[0];
+      Alternative alt = AlternativeSelector.Start(
+        Alternative.CreateMany(langs),
+        new List<string>(){
+          "WELCOME TO THE ENCRYPTOR",
+          "Select language.",
+          "Arrow keys to navigate, enter to accept, esc to quit."});
 
+      return (ILanguage)(alt.GetObject());
+    }
+  }
+
+
+
+
+
+  class AlternativeSelector
+  {
+    static IList<Alternative> alternatives;
+    static int selectedIndex = 0;
+    static IList<string> preStrings;
+    static IList<string> postStrings;
+
+    public static Alternative Start(IList<Alternative> alts, IList<string> pre, IList<string> post)
+    {
+      alternatives  = alts;
+      selectedIndex = 0;
+      preStrings    = pre;
+      postStrings   = post;
       return print();
     }
 
-    private static ILanguage print()
+    public static Alternative Start(IList<Alternative> alts, IList<string> pre)
+    {
+      return Start(alts, pre, new List<string>());
+    }
+
+    private static Alternative print()
     {
       Console.Clear();
-      Console.WriteLine("WELCOME TO THE ENCRYPTOR");
-      Console.WriteLine("Select encryption language");
-      Console.WriteLine("Arrow keys to navigate, enter to accept, esc to quit.");
-      foreach(ILanguage l in languages)
-      {
-        if(l == selectedLanguage)
-        Console.WriteLine("(*) " + l.GetName());
-        else
-        Console.WriteLine("( ) " + l.GetName());
-      }
+      printPreStrings();
+      printAlternatives();
+      printPostStrings();
       return read();
     }
 
-    private static ILanguage read()
+    private static Alternative read()
     {
       var key = Console.ReadKey();
       switch(key.Key)
       {
         case(ConsoleKey.DownArrow):
-          offset++;
-          break;
+        selectedIndex++;
+        break;
 
         case(ConsoleKey.UpArrow):
-          offset--;
-          break;
+        selectedIndex--;
+        break;
 
         case(ConsoleKey.Enter):
-          return choose();
+        return choose();
 
         case(ConsoleKey.Escape):
-          return null;
+        return null;
       }
       return evaluate();
     }
 
-    private static ILanguage evaluate()
+    private static Alternative evaluate()
     {
-      if(offset < 0)
-        offset = languages.Count - 1;
-      else if(offset >= languages.Count)
-        offset = 0;
-
-      selectedLanguage = languages[offset];
+      if(selectedIndex < 0)
+        selectedIndex = alternatives.Count - 1;
+      else if(selectedIndex >= alternatives.Count)
+        selectedIndex = 0;
 
       return print();
     }
 
-    private static ILanguage choose()
+    private static Alternative choose()
     {
-      return languages[offset];
+      return alternatives[selectedIndex];
+    }
+
+    private static void printPreStrings()
+    {
+      foreach(string s in preStrings)
+      Console.WriteLine(s);
+    }
+
+    private static void printPostStrings()
+    {
+      foreach(string s in postStrings)
+      Console.WriteLine(s);
+
+    }
+
+    private static void printAlternatives()
+    {
+      Console.WriteLine("Arrow keys to navigate, enter to accept, esc to quit.");
+      for(int i=0; i<alternatives.Count; i++)
+      {
+        if(i == selectedIndex)
+          Console.WriteLine("(*) " + alternatives[i].GetName());
+        else
+          Console.WriteLine("( ) " + alternatives[i].GetName());
+      }
+    }
+  }
+
+
+  class Alternative
+  {
+    string title;
+    object obj;
+
+    private Alternative(string title, object obj)
+    {
+      this.title = title;
+      this.obj   = obj;
+    }
+
+    public string GetName()
+    {
+      return title;
+    }
+
+    public object GetObject()
+    {
+      return obj;
+    }
+
+    public static IList<Alternative> CreateMany(IList<ILanguage> langs)
+    {
+      return langs.Select(l => new Alternative(l.GetName(), l))
+        .ToList<Alternative>();
+    }
+
+    public static IList<Alternative> CreateMany(IList<LanguageStrategy> strats)
+    {
+      return strats.Select(s => new Alternative(s.GetTranslationType(), s))
+        .ToList<Alternative>();
     }
   }
 }
