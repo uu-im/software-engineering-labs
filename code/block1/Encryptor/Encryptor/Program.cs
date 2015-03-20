@@ -6,7 +6,7 @@ namespace Encryptor
   {
     public static void Main()
     {
-      Translator.AddLanguage(new RobberLanguage());
+      Translator.AddLanguage(new CaesarCipher(2));
       Translator.AddLanguage(new RobberLanguage());
       Translator.Start();
     }
