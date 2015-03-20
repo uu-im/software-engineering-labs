@@ -293,9 +293,9 @@ namespace Encryptor
       for(int i=0; i<alternatives.Count; i++)
       {
         if(i == selectedIndex)
-          Views.Print("(x) " + alternatives[i].GetName());
+          Views.Print("--> " + alternatives[i].GetName() + " <--");
         else
-          Views.Print("( ) " + alternatives[i].GetName());
+          Views.Print(alternatives[i].GetName());
       }
     }
   }
