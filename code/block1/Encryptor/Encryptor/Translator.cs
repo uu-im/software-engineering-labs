@@ -51,8 +51,7 @@ namespace Encryptor
     private static IList<string> preStrings(ILanguage lang)
     {
       return new List<string>(){
-        "--> " + lang.GetName() + "", "",
-        "Select translation strategy..."
+        lang.GetName() + "", ""
       };
     }
   }
@@ -114,28 +113,31 @@ namespace Encryptor
     {
       Console.Clear();
       Views.PrintLogo();
-      Console.WriteLine("--> " + strategy.GetLanguageName());
-      Console.WriteLine("--> " + strategy.GetTranslationType());
-      Console.WriteLine("\r\nEnter string, then press enter.\r\n");
+      Views.Print(strategy.GetLanguageName());
+      Views.Print(strategy.GetTranslationType() + "\r\n");
+      Views.Print("Enter string, then press enter.\r\n");
       return read();
     }
 
     private static bool read()
     {
-      Console.Write("INPUT  : ");
-
       string input = Console.ReadLine();
       string output = strategy.Translate(input);
-
-      Console.WriteLine("OUTPUT : " + output);
-      Console.WriteLine();
+      
+      Views.Print("-----------------------------");
+      Views.Print("IN:");
+      Views.Print(input);
+      Views.Print();
+      Views.Print("OUT:");
+      Views.Print(output);
+      Views.Print("-----------------------------\r\n");
 
       return evaluate();
     }
 
     private static bool evaluate()
     {
-      Console.WriteLine("Press any key to make another translation, esc to go back");
+      Views.Print("Press any key to make another translation, esc to go back");
       var key = Console.ReadKey();
       return key.Key != ConsoleKey.Escape;
     }
@@ -157,8 +159,7 @@ namespace Encryptor
         throw new ArgumentException("No languages given");
 
       Alternative alt = AlternativeSelector.Start(
-        Alternative.CreateMany(langs),
-        new List<string>(){"Select language..."});
+        Alternative.CreateMany(langs));
 
       return (ILanguage)(alt.GetObject());
     }
@@ -169,11 +170,30 @@ namespace Encryptor
   {
     public static void PrintLogo()
     {
-      Console.WriteLine("=============================");
-      Console.WriteLine("*                           *");
-      Console.WriteLine("  E N C R Y P T O R I Z E R  ");
-      Console.WriteLine("*                           *");
-      Console.WriteLine("=============================\r\n");
+      Views.Print("\r\n\r\n");
+      Views.Print("=============================");
+      Views.Print("*                           *");
+      Views.Print("  E N C R Y P T O R I Z E R  ");
+      Views.Print("*                           *");
+      Views.Print("=============================\r\n");
+    }
+
+    public static void Print(string line)
+    {
+      int offset = (Console.WindowWidth - line.Length) / 2;
+      string spaces = String.Join(" ", new string[offset]);
+      Console.WriteLine(spaces + line);
+    }
+
+    public static void Print(IList<string> lines)
+    {
+      foreach(string s in lines)
+        Print(s);
+    }
+
+    public static void Print()
+    {
+      Print("");
     }
   }
 
@@ -199,6 +219,11 @@ namespace Encryptor
     public static Alternative Start(IList<Alternative> alts, IList<string> pre)
     {
       return Start(alts, pre, new List<string>());
+    }
+
+    public static Alternative Start(IList<Alternative> alts)
+    {
+      return Start(alts, new List<string>(), new List<string>());
     }
 
     private static Alternative print()
@@ -251,25 +276,26 @@ namespace Encryptor
     {
       Views.PrintLogo();
       foreach(string s in preStrings)
-        Console.WriteLine(s);
-      Console.WriteLine();
+        Views.Print(s);
     }
 
     private static void printPostStrings()
     {
       foreach(string s in postStrings)
-        Console.WriteLine(s);
-      Console.WriteLine("\r\nUse Arrow Keys, Esc and Enter.");
+        Views.Print(s);
+      Views.Print();
     }
 
     private static void printAlternatives()
     {
+      Views.Print("Use Arrow Keys, Esc and Enter.");
+      Views.Print();
       for(int i=0; i<alternatives.Count; i++)
       {
         if(i == selectedIndex)
-          Console.WriteLine("(x) " + alternatives[i].GetName());
+          Views.Print("(x) " + alternatives[i].GetName());
         else
-          Console.WriteLine("( ) " + alternatives[i].GetName());
+          Views.Print("( ) " + alternatives[i].GetName());
       }
     }
   }
