@@ -51,8 +51,8 @@ namespace Encryptor
     private static IList<string> preStrings(ILanguage lang)
     {
       return new List<string>(){
-        ("LANGUAGE: " + lang.GetName() + "\r\n"),
-        "Select translation strategy."
+        "--> " + lang.GetName() + "", "",
+        "Select translation strategy..."
       };
     }
   }
@@ -113,9 +113,10 @@ namespace Encryptor
     private static bool print()
     {
       Console.Clear();
-      Console.WriteLine("LANGUAGE: " + strategy.GetLanguageName());
-      Console.WriteLine("ACTION:   " + strategy.GetTranslationType());
-      Console.WriteLine("\r\nEnter a string, then press enter.\r\n");
+      Views.PrintLogo();
+      Console.WriteLine("--> " + strategy.GetLanguageName());
+      Console.WriteLine("--> " + strategy.GetTranslationType());
+      Console.WriteLine("\r\nEnter string, then press enter.\r\n");
       return read();
     }
 
@@ -157,14 +158,24 @@ namespace Encryptor
 
       Alternative alt = AlternativeSelector.Start(
         Alternative.CreateMany(langs),
-        new List<string>(){
-          "WELCOME TO THE ENCRYPTOR",
-          "Select language."});
+        new List<string>(){"Select language..."});
 
       return (ILanguage)(alt.GetObject());
     }
   }
 
+
+  class Views
+  {
+    public static void PrintLogo()
+    {
+      Console.WriteLine("=============================");
+      Console.WriteLine("*                           *");
+      Console.WriteLine("  E N C R Y P T O R I Z E R  ");
+      Console.WriteLine("*                           *");
+      Console.WriteLine("=============================\r\n");
+    }
+  }
 
 
 
@@ -238,24 +249,25 @@ namespace Encryptor
 
     private static void printPreStrings()
     {
+      Views.PrintLogo();
       foreach(string s in preStrings)
-      Console.WriteLine(s);
+        Console.WriteLine(s);
+      Console.WriteLine();
     }
 
     private static void printPostStrings()
     {
       foreach(string s in postStrings)
-      Console.WriteLine(s);
-
+        Console.WriteLine(s);
+      Console.WriteLine("\r\nUse Arrow Keys, Esc and Enter.");
     }
 
     private static void printAlternatives()
     {
-      Console.WriteLine("Arrow keys to navigate, enter to accept, esc to quit.\r\n");
       for(int i=0; i<alternatives.Count; i++)
       {
         if(i == selectedIndex)
-          Console.WriteLine("(*) " + alternatives[i].GetName());
+          Console.WriteLine("(x) " + alternatives[i].GetName());
         else
           Console.WriteLine("( ) " + alternatives[i].GetName());
       }
