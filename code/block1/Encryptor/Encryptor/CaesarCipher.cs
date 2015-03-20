@@ -54,7 +54,7 @@ namespace Encryptor
 
     public string GetName()
     {
-      return "Caesar Cipher x" + shift;
+      return "Caesar Cipher " + shift + " step(s)";
     }
 
     private static bool isWithinAlphabet(char c)
