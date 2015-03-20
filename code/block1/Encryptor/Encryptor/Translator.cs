@@ -26,44 +26,34 @@ namespace Encryptor
 
   class LanguageStrategySelector
   {
-    static ILanguage language;
-
     public static LanguageStrategy Start(ILanguage lang)
     {
-      language = lang;
-      return print();
+      if(lang == null)
+        throw new ArgumentException("No language given");
+
+      Alternative alt = AlternativeSelector.Start(
+        alternativeList(lang),
+        preStrings(lang));
+
+      return (LanguageStrategy)(alt.GetObject());
     }
 
-    private static LanguageStrategy print()
+    private static IList<Alternative> alternativeList(ILanguage lang)
     {
-      Console.Clear();
-      Console.WriteLine("LANGUAGE: " + language.GetName() + "\r\n");
-      Console.WriteLine("[  1  ]  Encrypt");
-      Console.WriteLine("[  2  ]  Decrypt");
-      Console.WriteLine("[ Esc ]  Go back");
-      Console.WriteLine("\r\nSelect option by pressing appropriate key: "); 
-      return read();
+      return Alternative.CreateMany(
+        new List<LanguageStrategy>(){
+          new LanguageEncodeStrategy(lang),
+          new LanguageDecodeStrategy(lang),
+        }
+      );
     }
 
-    private static LanguageStrategy read()
+    private static IList<string> preStrings(ILanguage lang)
     {
-      var key = Console.ReadKey();
-      switch(key.Key)
-      {
-        case(ConsoleKey.D1):
-          return new LanguageEncodeStrategy(language);
-        break;
-
-        case(ConsoleKey.D2):
-          return new LanguageDecodeStrategy(language);
-        break;
-
-        case(ConsoleKey.Escape):
-          return null;
-
-        default:
-          return print();
-      }
+      return new List<string>(){
+        ("LANGUAGE: " + lang.GetName() + "\r\n"),
+        "Select translation strategy."
+      };
     }
   }
 
@@ -169,8 +159,7 @@ namespace Encryptor
         Alternative.CreateMany(langs),
         new List<string>(){
           "WELCOME TO THE ENCRYPTOR",
-          "Select language.",
-          "Arrow keys to navigate, enter to accept, esc to quit."});
+          "Select language."});
 
       return (ILanguage)(alt.GetObject());
     }
@@ -227,7 +216,7 @@ namespace Encryptor
         return choose();
 
         case(ConsoleKey.Escape):
-        return null;
+        return new NullAlternative();
       }
       return evaluate();
     }
@@ -262,7 +251,7 @@ namespace Encryptor
 
     private static void printAlternatives()
     {
-      Console.WriteLine("Arrow keys to navigate, enter to accept, esc to quit.");
+      Console.WriteLine("Arrow keys to navigate, enter to accept, esc to quit.\r\n");
       for(int i=0; i<alternatives.Count; i++)
       {
         if(i == selectedIndex)
@@ -279,18 +268,18 @@ namespace Encryptor
     string title;
     object obj;
 
-    private Alternative(string title, object obj)
+    protected Alternative(string title, object obj)
     {
       this.title = title;
       this.obj   = obj;
     }
 
-    public string GetName()
+    public virtual string GetName()
     {
       return title;
     }
 
-    public object GetObject()
+    public virtual object GetObject()
     {
       return obj;
     }
@@ -306,5 +295,10 @@ namespace Encryptor
       return strats.Select(s => new Alternative(s.GetTranslationType(), s))
         .ToList<Alternative>();
     }
+  }
+
+  class NullAlternative : Alternative
+  {
+    public NullAlternative() : base("", null){}
   }
 }
