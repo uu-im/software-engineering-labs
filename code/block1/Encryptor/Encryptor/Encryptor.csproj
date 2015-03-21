@@ -39,6 +39,7 @@
     <Compile Include="RobberLanguage.cs" />
     <Compile Include="CaesarCipher.cs" />
     <Compile Include="LeetLanguage.cs" />
+    <Compile Include="EncryptoStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
