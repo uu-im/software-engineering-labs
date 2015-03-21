@@ -20,7 +20,7 @@ namespace Encryptor
 
     static void two()
     {
-      ILanguage lang = new CaesarCipher(2);
+      ILanguage lang = new ReverseLang();
       EncryptoStream ls = new EncryptoStream(lang);
       ls.Start();
     }

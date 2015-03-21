@@ -9,7 +9,8 @@ namespace Encryptor
     ILanguage language;
     ConsoleKeyInfo lastKey;
     string input = "";
-    string output;
+    string encrypted;
+    string decrypted;
 
     public EncryptoStream(ILanguage lang)
     {
@@ -19,8 +20,6 @@ namespace Encryptor
     public void Start()
     {
       Console.Clear();
-      Console.Clear();
-      Console.WriteLine(language.GetName() + "\r\n");
       Console.WriteLine("Simply start typing... esc to quit.");
       read();
     }
@@ -39,26 +38,36 @@ namespace Encryptor
         return;
 
         case ConsoleKey.Backspace:
-        input = input.Substring(0, input.Length - 1);
+        if(input.Length > 0)
+          input = input.Substring(0, input.Length - 1);
         break;
 
         default:
-        char c = lastKey.KeyChar;
-        input += c;
+        input += (char)lastKey.KeyChar;
         break;
       }
-      output = language.Encrypt(input);
+
+      input = input
+        .Replace("\n",   "")
+        .Replace("\r",   "")
+        .Replace("\r\n", "");
+
+      encrypted = language.Encrypt(input);
+      decrypted = language.Decrypt(encrypted);
+
       print();
     }
 
     void print()
     {
       Console.Clear();
-      Console.WriteLine(language.GetName() + "\r\n");
-      Console.WriteLine("======== P L A I N =========");
+      Console.WriteLine("Algorithm: " + language.GetName() + "\r\n");
+      Console.WriteLine("P L A I N");
       Console.WriteLine(input + "\r\n");
-      Console.WriteLine("==== E N C R Y P T E D =====");
-      Console.WriteLine(output);
+      Console.WriteLine("E N C R Y P T E D");
+      Console.WriteLine(encrypted + "\r\n");
+      Console.WriteLine("D E C R Y P T E D");
+      Console.WriteLine(decrypted + "\r\n");
       read();
     }
   }

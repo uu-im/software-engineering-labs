@@ -40,6 +40,7 @@
     <Compile Include="Languages/RobberLanguage.cs" />
     <Compile Include="Languages/CaesarCipher.cs" />
     <Compile Include="Languages/LeetLanguage.cs" />
+    <Compile Include="Languages/ReverseLang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
