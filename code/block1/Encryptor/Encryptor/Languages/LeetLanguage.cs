@@ -10,11 +10,11 @@ namespace Encryptor
     {
       new KeyValuePair<char,char>('a','4'),
       new KeyValuePair<char,char>('b','6'),
-      new KeyValuePair<char,char>('d','0'),
       new KeyValuePair<char,char>('e','3'),
       new KeyValuePair<char,char>('g','9'),
       new KeyValuePair<char,char>('i','!'),
       new KeyValuePair<char,char>('l','1'),
+      new KeyValuePair<char,char>('o','0'),
       new KeyValuePair<char,char>('t','7')
     };
 
