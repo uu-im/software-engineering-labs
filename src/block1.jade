@@ -38,7 +38,7 @@ include partials/layout
 
 
 
-  +assignment(0, "Interfaces")
+  +assignment(1, "Interfaces")
     p The purpose of this exercise is to get up to speed, familiarize ourselves with C#, and explore the concept of programming towards interfaces.
 
     p Consider the following scenario. You are running a company that creates encryption algorithms. All algorithms are two-way. In other words, they can encrypt strings as well as decrypt strings.
@@ -127,459 +127,102 @@ include partials/layout
       | Hello world => dlrow olleH
       | sssdrawkcaB => Backwardsss
 
-  p Notice that on the first line in the example program we're declaring the variable <code>algo</code> to be of type <code>IAlgorithm</code> not of type <code>ReversalAlgorithm</code>. This is the power of interfaces. Just like inheritance allows us to declare the base type and then instantiate any of the super types, interfaces allow us to declare the interface and then instantiate any one class that implements that interface.
+    p Notice that on the first line in the example program we're declaring the variable <code>algo</code> to be of type <code>IAlgorithm</code> not of type <code>ReversalAlgorithm</code>. This is the power of interfaces. Just like inheritance allows us to declare the base type and then instantiate any of the super types, interfaces allow us to declare the interface and then instantiate any one class that implements that interface.
 
-  p This means that we can write programs towards the interfaces without knowing what kind of classes and implementations will show up in the future. As an example. Download the example class in the link below, add it to your project and then rewrite your main program as below.
+    p This means that we can write programs towards the interfaces without knowing what kind of classes and implementations will show up in the future. As an example. Download the example class in the link below, add it to your project and then rewrite your main program as below.
 
-  p
-    a(href="../code/block1/Encryptor/Encryptor/EncryptoStream.cs")
-      +i-text EncryptoStream.cs
-
-  pre
-    code.language-csharp
-      | IAlgorithm algorithm = new ReversalAlgorithm();
-      | 
-      | EncryptoStream stream = new EncryptoStream(algorithm);
-      | 
-      | stream.Start();
-
-  p You should now have a program that allows you to interactively encrypt and decrypt strings using your algorithm, and if you type in "Hello world" your terminal screen should look as follows.
-
-  pre.terminal
-    | The Reversal Algorithm
-    | 
-    | > Hello world
-    | 
-    | ENCRYPTED: dlrow olleH
-    | 
-    | DECRYPTED: Hello world
-
-
-  p Let me tell you one final piece before I'll leave you to implementing the rest of the algorithms. Remember that interfaces only specifies the minimal requirements of a class. Interfaces do pose set any further restrictions on the class. This means that each class can do more than just these methods. This will be necessary since some of the algorithms are not as static as the reversal algorithm. The Caesar cipher, for example, requires that you give it a number that represents the number of shifts you want to shift a word with.
-
-  p You're now ready to implement the rest of the algorithms. The specifications follow below.
-
-  table.table-border.cipher-specification
-    tr
-      th(colspan="2") Caesar Cipher
-    tr
-      td Name
-      td n-step Caesar Cipher
-    tr
-      td Description
-      td Replaces each alphabetical character with an alphabetical character n steps further in the alphabet. The number of steps must be able to be assigned by the code that use the class, through for example the constructor.
-    tr
-      td Example input
-      td
-        code "Abcxyz"
-    tr
-      td Example output (n=1)
-      td
-        code "Bcdyza"
-
-
-  table.table-border.cipher-specification
-    tr
-      th(colspan="2") 1337 Lang
-    tr
-      td Name
-      td Language of the 1337's
-    tr
-      td Description
-      td Replaces specific characters with numbers. Forces all strings to be lower case before encryption or decryption.
-    tr
-      td Charater replacement scheme
-      td
-        code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
-    tr
-      td Example input
-      td
-        code "Abcxyz"
-    tr
-      td Example output (n=1)
-      td
-        code "Bcdyza"
-
-
-  table.table-border.cipher-specification
-    tr
-      th(colspan="2") Multicipher
-    tr
-      td Name
-      td Generic multicipher
-    tr
-      td Description
-      td Any number of <code>IAlgorithm</code> objects can be added to an instance of the <code>Multicipher</code> class at runtime. When encrypting, the algorithm runs each sub-algorithm on the input one after one. When decrypting it runs the algorithms one after one in the reverse order, but decrypting this time.
-    tr
-      td Charater replacement scheme
-      td
-        code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
-    tr
-      td Example input
-      td
-        code "Abcxyz"
-    tr
-      td Example output (assuming given both CaesarCipher(1) and 1337 Lang in that order)
-      td
-        code "6c0yz4"
-
-
-
-
-
-
-
-
-  +assignment(1, "Interfaces")
-    p The purpose of this first exercise is simply to get up to speed. Familiarize ourselves with the C# language, Visual studio environment and refresh our knowledge in object oriented programming.
-
-    p We're building ticket machines to illustrate the power of programming towards interfaces rather than towards implementations. We'll start off with a very simple ticket machine, and later move on to more complex ones.
-
-    h3 Simple Ticket Machine
-    p In this exercise we’re building a very simple ticket machine. You can think of the ticket machine as an automated ticket machine at the cinemas. You insert money, press ok, and get a ticket.
-
-
-    h4 An interface for the ticket machine
-    p Naturally we'll build thins ticket machine as a class. The class will be called <code>TicketMachine</code> and it will contain a number of public methods. Let's describe the class using a <em>C# interface</em>.
+    p
+      a(href="../code/block1/Encryptor/Encryptor/EncryptoStream.cs")
+        +i-text EncryptoStream.cs
 
     pre
       code.language-csharp
-        | interface ITicketMachine {
-        |   string InsertMoney(int amount);
-        |   string ShowPrice();
-        |   string ShowBalance();
-        |   string RefundMoney();
-        |   string PrintTicket();
-        | }
-
-
-    p.step Open up <em>Visual Studio</em> and create a new <em>C#</em> solution. Make sure you choose <em>C#</em> as the language, and not <em>Visual Basic</em> or any other language.
-    p.step Add a new interface file to your project. Call it <code>ITicketMachine</code> and save it as <code>ITicketMachine.cs</code>.
-    p.step Make sure your interface looks like the code example above.
-
-
-
-
-    h4 Implementing the interface
-    p Let’s create the actual class. The ticket machine that will implement the interace.
-    p.step Create a new class called <code>TicketMachine.cs</code> and tell it to implement the interface we just created. Like so:
-    pre
-      code.language-csharp
-        | class TicketMachine : ITicketMachine
-        | {
-        | }
-
-    p.step Build the project (by pressing <code>F5</code>) and contemplate why it won't build.
-
-    p To make sure the application will build. Let's actually implement the members of the interface in the concrete ticket machine class.
-
-
-    p.step Open the concrete ticket machine class and right-click the name of the interface in the class definition. Then select <code>Implement Interface &gt; Implement Interface</code>. Or simply implement all of the members of the interface manually.
-
-    pre
-      code.language-csharp
-        | class TicketMachine : ITicketMachine
-        | {
-        |   public string InsertMoney(int amount){
-        |     throw new NotImplementedException();
-        |   }
-        |   public string ShowBalance(){
-        |     throw new NotImplementedException();
-        |   }
-        |   public string ShowPrice(){
-        |     throw new NotImplementedException();
-        |   }
-        |   public string RefundMoney(){
-        |     throw new NotImplementedException();
-        |   }
-        |   public string PrintTicket(){
-        |     throw new NotImplementedException();
-        |   }
-        | }
-
-    p Superb! Now we, at least, have an application that builds.
-
-
-    h4 Command line interface
-    p So, now we have the "shell" for a class that will act as the ticket machine. But we need a way to interact with the ticket machine. I.e. we need a class that will use the ticket machine class.
-
-    p For the sake of simplicity you've been provided with a command line interface (CLI) class that you can 
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/block1/code/TicketMachine/TicketMachine/TicketMachineInteractor.cs") download here
-      |.
-
-    p In your main <code>Program.cs</code> class you can then interact with the <code>TicketMachineInteractor</code> like so:
-
-    pre
-      code.language-csharp
-        | class Program{
-        |   public static void Main(){
-        |     // Instantiate a ticket machine
-        |     ITicketMachine tm = new TicketMachine();
+        | IAlgorithm algorithm = new ReversalAlgorithm();
         | 
-        |     // Instantiate an interactor, and pass in the ticket machine
-        |     TicketMachineInteractor interactor = new TicketMachineInteractor(tm);
+        | EncryptoStream stream = new EncryptoStream(algorithm);
         | 
-        |     // Start the interactor
-        |     interactor.Start();
-        |   }
-        | }
+        | stream.Start();
 
-
-    p Ok, let’s now create a CLI so that we can interact with our TicketMachine class. You should already have a file called Program.cs. Copy and paste the following code into this file. Have a look at the contents of this code and discuss it with a lab partner.
-
-    p.step Try running your application!
-    p The output should be similar to this:
+    p You should now have a program that allows you to interactively encrypt and decrypt strings using your algorithm, and if you type in "Hello world" your terminal screen should look as follows.
 
     pre.terminal
-      | (q) Quit
-      | (i) Insert money
-      | (b) Show balance
-      | (p) Show price
-      | (r) Refund money
-      | (t) Print ticket
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;
-    p If you, when running your application, do make one of the choices above -- of course a <code>NotImplementedException</code> will be thrown because that's all our concerete Ticket Machine does for now.
+      | The Reversal Algorithm
+      | 
+      | > Hello world
+      | 
+      | ENCRYPTED: dlrow olleH
+      | 
+      | DECRYPTED: Hello world
 
 
+    p Let me tell you one final piece before I'll leave you to implementing the rest of the algorithms. Remember that interfaces only specifies the minimal requirements of a class. Interfaces do pose set any further restrictions on the class. This means that each class can do more than just these methods. This will be necessary since some of the algorithms are not as static as the reversal algorithm. The Caesar cipher, for example, requires that you give it a number that represents the number of shifts you want to shift a word with.
 
-    h4 Ticket Machine ticket costs
-    p Before we get into implementing the body of each method in the concrete ticket machine class -- let's declare a constructor. The constructor will take an integer as an argument. The integer represents the price of a single ticket. Consequently, our constructor needs to save the value passed in, as an instance variable so that we can use it later on. We need it to  Let's do it:
-    p.step Implement a constructor in the ticket machine class, that takes an integer as an argument, and saves that value to an instance variable.
-    pre
-      code.language-csharp
-        | class TicketMachine : ITicketMachine{
-        |   private int price;
-        | 
-        |   public TicketMachine (int ticketCost){
-        |     this.price = ticketCost;
-        |   }
-        | }
+    p You're now ready to implement the rest of the algorithms. The specifications follow below.
 
-
-    h4 Full implementation
-    p Now it's time to actually implement the members of the concrete ticket machine class. Below you'll find a runtime example of what a session with the ticket machine could look like.
-    pre.terminal
-      | Choose action (h for help)
-      | &gt;   i
-      | &gt;&gt;&gt; Enter the amount you wish to insert (SEK):
-      | &gt;   50
-      | &gt;&gt;&gt; Inserted 50 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   t
-      | &gt;&gt;&gt; Insufficient funds.. Missing 150 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   p
-      | &gt;&gt;&gt; The price of one ticket is 200 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   i
-      | &gt;&gt;&gt; Enter the amount you wish to insert (SEK):
-      | &gt;   175
-      | &gt;&gt;&gt; Inserted 175 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   t
-      | &gt;&gt;&gt; Printing ticket....
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   b
-      | &gt;&gt;&gt; Your balance is currently: 25 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   i
-      | &gt;&gt;&gt; Enter the amount you wish to insert (SEK):
-      | &gt;   75
-      | &gt;&gt;&gt; Inserted 75 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;   r
-      | &gt;&gt;&gt; Refunding 100 kr
-      | ==============================================
-      | Choose action (h for help)
-      | &gt;
-    p If you find the runtime example above too confusing -- there's some comments below explaining what each method should do. Please note: all the methods return strings that will be printed by the interactor.
-
-    pre
-      code.language-csharp
-        | public string InsertMoney(int amount){
-        |   // update the current balance as defined by amount
-        |   // only if amount is greater than 0
-        |   // return string that explains what happened
-        | }
-        | public string ShowBalance(){
-        |   // return a string that describes the current balance
-        | }
-        | public string ShowPrice(){
-        |   // return a string that describes the price of a ticket
-        | }
-        | public string PrintTicket(){
-        |   // if balance is enough
-        |   //    reduce balance accordingly, and
-        |   //    return string describing ticket
-        |   // if balance is not enough
-        |   //    return error message and amount missing
-        | }
-        | public string RefundMoney(){
-        |   // print the amount of money refunded
-        |   // reset the current amount and print it
-        | }
-    p Consequently the last task of this exercise is to...
-    p.step Implement the intended functionality of all the <code>ITicketMachine</code> members in the concrete <code>TicketMachine</code>.
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") Caesar Cipher
+      tr
+        td Name
+        td n-step Caesar Cipher
+      tr
+        td Description
+        td Replaces each alphabetical character with an alphabetical character n steps further in the alphabet. The number of steps must be able to be assigned by the code that use the class, through for example the constructor.
+      tr
+        td Example input
+        td
+          code "Abcxyz"
+      tr
+        td Example output (n=1)
+        td
+          code "Bcdyza"
 
 
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") 1337 Lang
+      tr
+        td Name
+        td Language of the 1337's
+      tr
+        td Description
+        td Replaces specific characters with numbers. Forces all strings to be lower case before encryption or decryption.
+      tr
+        td Charater replacement scheme
+        td
+          code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
+      tr
+        td Example input
+        td
+          code "Abcxyz"
+      tr
+        td Example output (n=1)
+        td
+          code "Bcdyza"
 
 
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") Multicipher
+      tr
+        td Name
+        td Generic multicipher
+      tr
+        td Description
+        td Any number of <code>IAlgorithm</code> objects can be added to an instance of the <code>Multicipher</code> class at runtime. When encrypting, the algorithm runs each sub-algorithm on the input one after one. When decrypting it runs the algorithms one after one in the reverse order, but decrypting this time.
+      tr
+        td Charater replacement scheme
+        td
+          code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
+      tr
+        td Example input
+        td
+          code "Abcxyz"
+      tr
+        td Example output (assuming given both CaesarCipher(1) and 1337 Lang in that order)
+        td
+          code "6c0yz4"
 
-
-
-    h3 Contemplation
-    p So your ticket machine is fully functional. Yay, celebrate! However, let’s now look at how much abstraction we've achieved with our current implementation of the ticket machine. Does our ticket machine allow different prices, or other payment schemes?
-
-    p Naturally we can change the ticket price at <strong>compile time</strong>:
-    pre
-      code.language-csharp
-        | public static void Main ()
-        | { 
-        |   ITicketMachine cheap = new TicketMachine (1020);
-        |   ITicketMachine expensive = new TicketMachine(40500);
-        | ...
-    p And naturally we can of course alter the price at <strong>runtime</strong>, by for example allowing the user to specifiy the price of a ticket:
-    pre
-      code.language-csharp
-        | public static void Main ()
-        | { 
-        |   Console.Write("Specify how much a ticket is in SEK and press enter");
-        |   int price = Int32.Parse(Console.ReadLine());
-        |   ITicketMachine tm = new TicketMachine (price);
-        | ...
-    p But there's one thing we haven't really talked about yet. The power of programming towards interfaces. Our ticket machine is actually way more abstract than one might first imagine. Take note of the fact that the <code>TicketMachineInteractor</code> class does <strong>not</strong> accept a <code>TicketMachine</code>, but rather an <code>ITicketMachine</code>. This means that it accepts an instance of any class as long as the given class implements the <code>ITicketMachine</code> interface.
-
-
-
-
-
-
-
-
-
-
-
-
-
-    h3 Donation Machine
-    p Let's build a new ticket machine that also implements the <code>ITicketMachine</code> interface, but exhibits different behaviour.
-    p.step Create the file <code>DonationMachine.cs</code>} and let it contain the class definition that implements the interface <code>ITicketMachine</code>.
-    p.step Implement the body of the members, according to the specification below.
-    p The pseudo-code below explains what the donation machine does.
-    pre
-      code.language-csharp
-        | public class DonationMachine : ITicketMachine{
-        |   public string InsertMoney(int amount){
-        |     // update the current balance as defined by amount
-        |     // only if amount is greater than 0
-        |     // return string that explains what happened
-        |   }
-        |   public string ShowBalance (){
-        |     // return a string that describes the current balance
-        |   }
-        |   public string ShowPrice (){
-        |     // return a string that describes the minimum donation
-        |   }
-        |   public string PrintTicket (){
-        |     // if balance is greater than minimum donation
-        |     //    commit donation by
-        |     //      - update total balance with current balance
-        |     //      - reset current balance
-        |     //      - print total balance
-        |     // else
-        |     //    return error message and amount missing
-        |   }
-        |   public string RefundMoney (){
-        |     // print the amount of money refunded
-        |     // reset the current balance
-        |   }
-        | }
-    p Now we can see why programming towards interfaces is such a powerful idea. Instantiate and send a <code>DonationMachine</code> to the <code>TicketMachineInteractor</code> instead.
-    pre
-      code.language-csharp
-        | class Program{
-        |   public static void Main(){
-        |     ITicketMachine tm = new DonationMachine(10);
-        |     TicketMachineInteractor interactor = new TicketMachineInteractor(tm);
-        |     interactor.Start();
-        |   }
-        | }
-    p.step Run the application! And consider how we didn't have to make any modifications to the <code>TicketMachineInteractor</code> class.
-    p Because the <code>TicketMachineInteractor</code> class is prpgrammed towards an interface rather than an implementation -- it is fully functional with whatever implementation we choose to build, so long as the implementation implements the <code>ITicketMachine</code> interface.
-
-
-
-
-
-
-
-
-
-
-
-
-    h3 Parking Machine
-    p While we're at it, let's create another machine. A regular 'ol Swedish parking machine.
-
-    p.step Create a new class called <code>ParkingMachine</code> and let it implement the <code>ITicketMachine</code> interface. It's implementation should follow the specification below.
-    ul
-      li The price is the value of 10 minutes of parking.
-      li The price should (as in the other machines) be set via the constructor.
-      li When the user asks for a ticket the ticket must show how many minutes of parking the user receives.
-      li Parking time can only be in full multiplications of 10 minutes, the rest the user will receive as change.
-      li So, if the price of a ticket is 5 SEK, and the user inserts 13 SEK, the parking time would be 20 minutes, and the change 3 SEK.
-
-
-
-
-
-
-
-
-
-
-    h3 Contemplation
-    p Consider again the power of interfaces. While the Ticket machine examples might feel slightly contrived. Take a minute to consider the implications of creating a class like the one below, that inherits from the <code>ITicketMachine</code> interface. Any other class expecting an <code>ITicketMachine</code> can interchangebly use this class.
-
-    pre
-      code.language-csharp
-        | public class ExternalTicketMachine : ITicketMachine
-        | { 
-        |   private int price, balance;
-        | 
-        |   public ExternalTicketMachine ()
-        |   {
-        |     this.price = // make a web request to get the price of a ticket
-        |     this.balance = 0;
-        |   }
-        |   public string InsertMoney(int amount){
-        |     // increase current balance locally
-        |   }
-        |   public string ShowBalance(){
-        |     // return current balance locally
-        |   }
-        |   public string ShowPrice(){
-        |     // make a web request to get the price of a ticket
-        |   }
-        |   public string PrintTicket(){
-        |     // make a web request to an external service
-        |     // sending some user details and the current balance
-        |     // returning the ticket recieved by the web request call
-        |   }
-        |   public string RefundMoney(){
-        |     // refund money locally
-        |   }
-        | }
-    p.step Write a few sentances (max half a page) about your thoughts on the power of programming towards interfaces. What does it mean to program to an interface rather than an implementation? Is it useful? Why? What are the implications? Many claim we are more ready to cope with change when programming towards interfaces rather than implementations. Is it true? Is it not? Why and how?
 
 
 
