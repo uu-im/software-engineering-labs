@@ -101,3 +101,17 @@ table td,
 table th{
   padding:       3px 6px;
 }
+
+
+.cipher-specification{
+  font-size:      .9em;
+  width:          100%;
+  margin-bottom:  1.5em;
+}
+.cipher-specification tr td{
+  vertical-align: top;
+}
+.cipher-specification tr td:first-child{
+  text-align: right;
+  width: 33%;
+}

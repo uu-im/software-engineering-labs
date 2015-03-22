@@ -61,7 +61,7 @@ include partials/layout
 
     p The following is the specification for the first algorithm.
 
-    table.table-border
+    table.table-border.cipher-specification
       tr
         th(colspan="2") Reversal algorithm
       tr
@@ -70,6 +70,14 @@ include partials/layout
       tr
         td Description
         td Reverses the input string character by character.
+      tr
+        td Example input
+        td
+          code "Abc xyz"
+      tr
+        td Example output
+        td
+          code "zyx cbA"
 
     p Let's implement this algorithm. Create a new visual studio C# console project. Add a new interface file and copy in the <code>IAlgorithm</code> interface. Create a new class and copy in the following code.
 
@@ -145,6 +153,77 @@ include partials/layout
     | ENCRYPTED: dlrow olleH
     | 
     | DECRYPTED: Hello world
+
+
+  p Let me tell you one final piece before I'll leave you to implementing the rest of the algorithms. Remember that interfaces only specifies the minimal requirements of a class. Interfaces do pose set any further restrictions on the class. This means that each class can do more than just these methods. This will be necessary since some of the algorithms are not as static as the reversal algorithm. The Caesar cipher, for example, requires that you give it a number that represents the number of shifts you want to shift a word with.
+
+  p You're now ready to implement the rest of the algorithms. The specifications follow below.
+
+  table.table-border.cipher-specification
+    tr
+      th(colspan="2") Caesar Cipher
+    tr
+      td Name
+      td n-step Caesar Cipher
+    tr
+      td Description
+      td Replaces each alphabetical character with an alphabetical character n steps further in the alphabet. The number of steps must be able to be assigned by the code that use the class, through for example the constructor.
+    tr
+      td Example input
+      td
+        code "Abcxyz"
+    tr
+      td Example output (n=1)
+      td
+        code "Bcdyza"
+
+
+  table.table-border.cipher-specification
+    tr
+      th(colspan="2") 1337 Lang
+    tr
+      td Name
+      td Language of the 1337's
+    tr
+      td Description
+      td Replaces specific characters with numbers. Forces all strings to be lower case before encryption or decryption.
+    tr
+      td Charater replacement scheme
+      td
+        code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
+    tr
+      td Example input
+      td
+        code "Abcxyz"
+    tr
+      td Example output (n=1)
+      td
+        code "Bcdyza"
+
+
+  table.table-border.cipher-specification
+    tr
+      th(colspan="2") Multicipher
+    tr
+      td Name
+      td Generic multicipher
+    tr
+      td Description
+      td Any number of <code>IAlgorithm</code> objects can be added to an instance of the <code>Multicipher</code> class at runtime. When encrypting, the algorithm runs each sub-algorithm on the input one after one. When decrypting it runs the algorithms one after one in the reverse order, but decrypting this time.
+    tr
+      td Charater replacement scheme
+      td
+        code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
+    tr
+      td Example input
+      td
+        code "Abcxyz"
+    tr
+      td Example output (assuming given both CaesarCipher(1) and 1337 Lang in that order)
+      td
+        code "6c0yz4"
+
+
 
 
 
