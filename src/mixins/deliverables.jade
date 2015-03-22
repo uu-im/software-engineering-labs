@@ -66,9 +66,9 @@ mixin file-img(name)
 
 
 
-mixin assignment(num, name)
+mixin exercise(bignum, num, name)
   h2
-    a.hideable(data-target="e#{num}") Exercise #{num} &mdash;
+    a.hideable(data-target="e#{num}") #{bignum}.#{num} 
       != name
   div(id="e#{num}")
     if block
