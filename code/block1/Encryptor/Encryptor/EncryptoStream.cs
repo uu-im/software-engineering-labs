@@ -61,13 +61,10 @@ namespace Encryptor
     void print()
     {
       Console.Clear();
-      Console.WriteLine("Algorithm: " + language.GetName() + "\r\n");
-      Console.WriteLine("P L A I N");
-      Console.WriteLine(input + "\r\n");
-      Console.WriteLine("E N C R Y P T E D");
-      Console.WriteLine(encrypted + "\r\n");
-      Console.WriteLine("D E C R Y P T E D");
-      Console.WriteLine(decrypted + "\r\n");
+      Console.WriteLine(language.GetName() + "\r\n");
+      Console.WriteLine("> " + input + "\r\n");
+      Console.WriteLine("ENCRYPTED: " + encrypted + "\r\n");
+      Console.WriteLine("DECRYPTED: " + decrypted);
       read();
     }
   }
