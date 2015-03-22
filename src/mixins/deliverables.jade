@@ -65,3 +65,11 @@ mixin file-img(name)
     code=name
 
 
+
+mixin assignment(num, name)
+  h2
+    a.hideable(data-target="e#{num}") Exercise #{num} &mdash;
+      != name
+  div(id="e#{num}")
+    if block
+      block

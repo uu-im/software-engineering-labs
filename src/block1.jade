@@ -37,10 +37,7 @@ include partials/layout
         +file-img("IteratorDiagram.png")
 
 
-  h2
-    a.hideable(data-target="e1") Exercise 1 &mdash; Interfaces
-
-  #e1
+  +assignment(1, "Interfaces")
     p The purpose of this first exercise is simply to get up to speed. Familiarize ourselves with the C# language, Visual studio environment and refresh our knowledge in object oriented programming.
 
     p We're building ticket machines to illustrate the power of programming towards interfaces rather than towards implementations. We'll start off with a very simple ticket machine, and later move on to more complex ones.
@@ -405,10 +402,7 @@ include partials/layout
 
 
 
-  h2#exercise-2
-    a.hideable(data-target="e2") Exercise 2 &mdash; GUI Programming &amp; Event Handling
-  
-  #e2
+  +assignment(2, "GUI Programming &amp; Event Handling")
     p In this assignment we're going to create a GUI for the machines that we built in exercise 1.
 
 
@@ -419,10 +413,7 @@ include partials/layout
 
 
 
-  h2#exercise-3
-    a.hideable(data-target="e3") Exercise 3 &mdash; Iterator
-
-  #e3
+  +assignment(3, "Iterator")
     p In this exercise we'll explore the iterator pattern using the phone book example from the lectures.
     ol
       li Create a new <code>C#</code> project, and implement the phone book examples from the notes. But refactor the find method to throw an exception instead of returning <code>-1</code>.
