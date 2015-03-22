@@ -8,14 +8,10 @@ namespace Encryptor
   {
     public string Encrypt(string input)
     {
-      var chars = input
-        .ToCharArray()
-        .OfType<char>()
-        .ToList();
-
-      chars.Reverse();
-
-      return new String(chars.ToArray());
+      string reversed = "";
+      for(int i=input.Length-1; i>=0; i--)
+        reversed += input[i];
+      return reversed;
     }
 
     public string Decrypt(string input)
