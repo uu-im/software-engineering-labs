@@ -23,7 +23,7 @@ mixin i-zip
     if block
       block
 
-mixin exercises(n)
+mixin toc-exercises(n)
   ol.exercise-summary
     +i-zip  
       code Block_#{n}.zip
@@ -32,7 +32,7 @@ mixin exercises(n)
         if block
           block
 
-mixin exercise(n)
+mixin toc-exercise(n)
   li
     +i-folder   
       code Exercise_#{n}
@@ -40,7 +40,7 @@ mixin exercise(n)
       if block
         block
 
-mixin assignment
+mixin toc-assignment
   li
     if block
       block
@@ -63,4 +63,5 @@ mixin vs-file(name)
 mixin file-img(name)
   +i-code
     code=name
+
 
