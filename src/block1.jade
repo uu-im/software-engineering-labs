@@ -29,9 +29,11 @@ include partials/layout
 
     +toc-exercise(3)
       +toc-assignment
-        +vs-solution("PhoneBook")
+        +file-img("IteratorDiagram.[png|jpg|gif|pdf]")
+
+    +toc-exercise(4)
       +toc-assignment
-        +file-img("IteratorDiagram.png")
+        +vs-solution("PhoneBook")
 
 
 
@@ -246,11 +248,16 @@ include partials/layout
 
 
 
-  +exercise(1, 3, "Iterator")
-    p In this exercise we'll explore the iterator pattern using the phone book example from the lectures.
-    ol
-      li Create a new <code>C#</code> project, and implement the phone book examples from the notes. But refactor the find method to throw an exception instead of returning <code>-1</code>.
-      li Draw a class diagram for the iterator, without using diagram generation in <code>Visual Studio</code>.
-      li Implement the <code>iterator pattern</code> for the phone book, populate the phone book and iterate over it, printing its contents.
+  +exercise(1, 3, "Iterator dagram")
+    p Using the phone book example from the lectures, draw a class diagram for the iterator pattern. Do not use diagram generation in <code>Visual Studio</code>.
+
+
+
+
+  +exercise(1, 4, "Iterator implementation")
+    p Create a new <code>C#</code> project, and implement the phone book examples from the lectures.
+    p Refactor the <code>Find</code> method to throw an exception instead of returning <code>-1</code>.
+    p Implement the <code>iterator pattern</code> for the phone book, populate the phone book and iterate over it, printing its contents.
+
 
 
