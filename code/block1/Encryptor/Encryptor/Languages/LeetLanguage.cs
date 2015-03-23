@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Encryptor
 {
-  class LeetLanguage : ILanguage
+  public class LeetLanguage : ILanguage
   {
     static IList<KeyValuePair<char,char>> shifts = new List<KeyValuePair<char,char>>()
     {

@@ -2,7 +2,7 @@ using System;
 
 namespace Encryptor
 {
-  interface ILanguage
+  public interface ILanguage
   {
     string Encrypt(string input);
     string Decrypt(string decrypt);

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Encryptor
 {
-  class RobberLanguage : ILanguage
+  public class RobberLanguage : ILanguage
   {
     IList<char> vowels = new List<char>(){
       'a', 'o', 'u', 'e', 'i', 'y'
