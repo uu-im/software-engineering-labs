@@ -1,0 +1,75 @@
+mixin i-folder
+  i.fa.fa-folder-open-o  
+    if block
+      block
+
+mixin i-code
+  i.fa.fa-file-code-o  
+    if block
+      block
+
+mixin i-text
+  i.fa.fa-file-text-o  
+    if block
+      block
+
+mixin i-img
+  i.fa.fa-file-image-o   
+    if block
+      block
+
+mixin i-zip
+  i.fa.fa-file-zip-o
+    if block
+      block
+
+mixin toc-exercises(n)
+  ol.exercise-summary
+    +i-zip  
+      code Block_#{n}.zip
+    li
+      ol
+        if block
+          block
+
+mixin toc-exercise(n)
+  li
+    +i-folder   
+      code Exercise_#{n}
+    ol
+      if block
+        block
+
+mixin toc-assignment
+  li
+    if block
+      block
+
+mixin vs-solution(name)
+  +i-folder
+    code=name
+    |  (Visual Studio solution)
+  if block
+    ul
+      block
+
+mixin vs-file(name)
+  li
+    +i-code
+      code
+        if block
+          block
+
+mixin file-img(name)
+  +i-img
+    code=name
+
+
+
+mixin exercise(bignum, num, name)
+  h2
+    a.hideable(data-target="e#{num}") #{bignum}.#{num} 
+      != name
+  div(id="e#{num}")
+    if block
+      block

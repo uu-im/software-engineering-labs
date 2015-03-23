@@ -3,12 +3,20 @@ var gulp = require('gulp'),
 
 
 gulp.task('default', function(){
-  gulp.watch('src/*.jade', function(e){
-    console.log("Running jade on:  " + e.path);
-    gulp.src(e.path)
+  var watchfiles = ['src/**/*.*', 'assets/**/*.*']
+  gulp.watch(watchfiles, function(e){
+    console.log('Changed: ' + e.path);
+    gulp.src('./src/*.jade')
       .pipe(jade().on('error', function(error){
         console.log('Jade error: ', error);
       }))
-      .pipe(gulp.dest('./dist'));
+      .pipe(gulp.dest('./www'));
   });
+});
+
+
+gulp.task('build', function(){
+  gulp.src('./src/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('./dist'));
 });
