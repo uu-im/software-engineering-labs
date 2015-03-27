@@ -127,3 +127,18 @@ table th{
   text-align: right;
   width: 33%;
 }
+
+
+
+ul.no-bullet{
+  list-style-type: none;
+}
+
+
+
+
+/* font awesome */
+.fa code a{
+  padding-left: 3px;
+}
+

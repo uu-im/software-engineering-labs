@@ -1,6 +1,12 @@
 include mixins/deliverables
 include partials/layout
 
+mixin refactoring-exercise-file(name)
+  +vs-file
+    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/#{name}.cs") #{name}.cs
+
+
+
 +layout("Block 2")
   header
     h1 Software Engineering &mdash; Lab 2
@@ -73,61 +79,28 @@ include partials/layout
 
 
   h2#exercise-2 Exercise 2 &mdash; Refactoring
-  p Now we're going to focus on refactoring. The process of rewriting existing code without changing it's functionality. Increasing readability and decreasing complexity.
-  p The lousy programmer has been at it again. He/she has built a system for a movie rental shop handling customer orders. However, since the lousy programmer was focused on meeting the deadline the code is way more procedural than object oriented. Truth be told, the code you'll be given in this exercise is actually a classic example by author <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
-  p First off, create a new <code>Console Application</code> in Visual Studio. Then download and copy in the contents of the following classes into your project.
-  ul
-    li
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Customer.cs") Customer.cs
-    li
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/DVD.cs") DVD.cs
-    li
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/DomainObject.cs") DomainObject.cs
-    li
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Movie.cs") Movie.cs
-    li
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Rental.cs") Rental.cs
-    li
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/Program.cs") Program.cs
-      |  (main program file)
+  p The purpose of this exercise is to practice the art of refactoring in controlled steps. Using tests to ensure correctnessa at each change. This exercise is designed by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>, the author of the book <a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>.
 
-
-  p The <code>Customer</code> class has a <code>Statement()</code> method, that returns a string of information on a given customers current rentals. However, as a requirement to print the statement as a HTML formatted string just came in, the lousy programmer realized the code is not at all prepared for change. Because of the code's procedural nature, meeting the new requirements will be painful.
-
-  p Your job is now to...
   ol
-    li Refactor the whole project. Aiming for high readability, and low complexity. Avoiding duplication and increasing flexibility. Stop only when you find no more ways of refactoring to the better!
-    li And then implement the <code>HtmlStatement</code> method.
+    li Create a new Console Application and introduce the code of the following classes into your project.
+      ul.no-bullet
+        +refactoring-exercise-file("Customer")
+        +refactoring-exercise-file("DVD")
+        +refactoring-exercise-file("DomainObject")
+        +refactoring-exercise-file("Movie")
+        +refactoring-exercise-file("Rental")
+        +refactoring-exercise-file("Program")
 
-  p To let you refactor with confidence, make sure you 
-    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") download this class containing an integration test
-    |  for the <code>Statement</code> method. It also contains a test for the <code>HtmlStatement</code> method, however commented out. Make sure you uncomment that test when you begin working on the <code>HtmlStatement</code> method.
+    li Introduce the following integration tests to your project. Run the integration tests. One should pass and one should fail. Ensure that this is the case before continuing further.
+      ul.no-bullet
+        +vs-file
+          a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") CustomerIntegrationTests.cs
 
-  p So, what to refactor? A good place to start is to have a look at the <code>Statement()</code> method itself. It is way too long! Apart from that, think about the following points:t
+    li Follow the instructions given in the following document step by step. Remember to run the integration tests between changes to ensure that you are not altering the behavior of the program.
+      ul
+        +file-text
+          a(href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html") Instructions.html
 
-  ul
-    li
-      b Method extraction
-      |  Can some behavior be extracted into a different method?
-    li
-      b Replacing case statements
-      |  Can we use inheritance instead of case staements?
-    li
-      b Creation methods
-      |  Can we use creation methods to make instantiation safer?
-    li
-      b Moving behavior
-      |  Should a given behavior really be defined on another class? A rule-of-thumb is to consider the Law of Demeter, which say that a class should <em>only</em> talk to its closest neighbors. Meaning, it's OK to say: 
-      code instanceOfSomeClass.Method()
-      |  But it's not OK to say: 
-      code instanceOfSomeClass.instanceOfSomeOtherClass.Method()
-
-  p If you want a narrative that "talks you through" the refactoring process. It's highly recommended to check out 
-    a(href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html") Martin Fowler's step-by-step approach
-    |  to refactoring this particular system. The code is written in Java but you'll have no trouble translating it to C#.
-
-  h3 Contemplation
-  p Write a few sentances (max half-a-page) about your on the design improvements if your code. Which techniques did you use? Which ones not? Why? When are they suitable? etc.
 
 
 
