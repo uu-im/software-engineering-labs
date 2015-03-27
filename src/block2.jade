@@ -1,35 +1,14 @@
+include mixins/deliverables
 include partials/layout
+
 +layout("Block 2")
   header
     h1 Software Engineering &mdash; Lab 2
 
   .preamble
-    p In this block we'll focus on <em>testing</em> and <em>refactoring</em>. While there are many ways to test code we will focus on <a href="http://en.wikipedia.org/wiki/Unit_testing">unit testing</a>. In essance, unit testing means testing individual functions in isolation. Asserting that some given input yield expected output.
+    p In this block we'll focus on <em>testing</em> (more precisely <a href="http://en.wikipedia.org/wiki/Unit_testing">unit testing</a>) and <em>refactoring</em>. In essance, unit testing is the art testing individual methods in isolation. Testing in a broader sense mostly refer to the art of <a href="http://en.wikipedia.org/wiki/Software_verification_and_validation">verification</a>.
 
-    p In regards to testing we'll look at a couple of different aspects of testing. Such as:
-    ul
-      li Testing as a means of making sure our code actually does what it's supposed to.
-      li Testing as a means of discovering, isolating and preventing unnoticed reoccurance of bugs.
-      li The concept of <em>test coverage</em>, often times called <a href="http://en.wikipedia.org/wiki/Code_coverage">code coverage</a>, as a means of measuring how much of a code base that is covered by tests. An issue <a href="http://martinfowler.com/bliki/TestCoverage.html">open for debate</a>.
-      li Three different "schools" of testing:
-        ul
-          li
-            a(href="http://stackoverflow.com/questions/7199313/what-are-the-pitfalls-of-test-after-development") Test-after development 
-            |, 
-          li  
-            a(href="http://www.extremeprogramming.org/rules/testfirst.html") Test-first development 
-            | (or more specifically 
-            a(href="http://en.wikipedia.org/wiki/Test-driven_development") Test-driven development
-            | ), and finally
-          li 
-            a(href="http://stackoverflow.com/questions/7690238/test-driven-development-initial-implementation") Exceptionally strict test-driven development
-            |  &mdash; often dubbed "sliming".
-
-    p Apart from testing, we'll also look at the art of refactoring existing code. Using the classic example <a href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html">movie rental case</a> by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>.
-
-    p
-      em <strong>Important:</strong> The optional exercise in this block is really optional. There is no requirement to complete at least one optional exercise in this block.
-
+    
 
 
   h2 Study material
