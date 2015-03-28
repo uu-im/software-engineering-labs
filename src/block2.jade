@@ -61,21 +61,24 @@ mixin refactoring-exercise-file(name)
         code Unit Test Project
         |  and name it 
         code MathLibraryTests
-      li Create a new class in your <code>MathLibrary</code> project. Name it <code>MathLib.cs</code>.
-      li Copy the contents of the  
-        a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/MathLibrary/MathLib.cs") <code>MathLib</code> example class
-        |  and paste it into your class file.
+      li Create a new class in your <code>MathLibrary</code> project. Name it <code>MathLib.cs</code>. Add the contents of the scaffold below.
+      li Add the contents of the scaffold below.
+        ul.no-bullet
+          +vs-file
+            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/MathLibrary/MathLib.cs") MathLib.cs
       li Create a new class in your <code>MathLibraryTests</code> project. Name it <code>MathLibTests</code>.
-      li Copy the contents of the 
-        a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/TestProject/MathLibraryTests.cs") <code>MathLibTests</code> example class
-        |  and paste it into your class file.
-      li Add a reference (via <code>Solution Explorer</code>) to the <code>MathLibrary</code> project in the <code>MathLibraryTests</code> project. We do this because the test project is going to test classes in the <code>MathLibrary</code> project.
+      li Create a (or rename the default) class in your test project and name it <code>MathLibTests.cs</code>
+      li Add the contents of the scaffold below.
+        ul.no-bullet
+          +vs-file
+            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/TestProject/MathLibraryTests.cs") MathLibTests.cs
+      li Add a reference (via <code>Solution Explorer</code>) to the <code>MathLibrary</code> project in the <code>MathLibraryTests</code> project. We do this because the test project is going to test classes in the <code>MathLibrary</code> project, and thus need access to the classes.
 
     p <code>MathLib</code> contains a number of public static functions that perform math related operations. Not all methods are implemented. You must complete these implementations.
 
     p <code>MathLibTests</code> contains a number of unit tests that aim to verify the functionality of all public methods in the <code>MathLib</code> class. Not all tests are implemented. You must complete these implementations.
 
-    p You decide whether you wish to write each test before each implementation or vice versa. Do not add or remove any methods.
+    p You decide whether you wish to write each test before each implementation or vice versa. Do not add or remove any methods. Make sure your handin contains both your implementation and your tests.
 
 
 
