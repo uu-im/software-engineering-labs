@@ -45,6 +45,44 @@ li > code{
 }
 
 
+img{
+  max-width: 100%;
+}
+img.img-md{
+  max-height: 250px;
+}
+img.img-sm{
+  max-height: 180px;
+}
+
+
+figure{
+  text-align: center;
+  background: #eee;
+  padding:    12px;
+  margin:     0;
+}
+figure span{
+  clear:      both;
+  display:    block;
+  font-size:  .8em;
+  margin-top: 8px;
+}
+
+@media(min-width: 920px){
+  figure.figure-right{
+    float:  right;
+    margin: 0 0 12px 12px;
+    background: transparent;
+    padding:    0;
+  }
+}
+
+
+pre{
+  clear: both;
+}
+
 
 .terminal{
   background: #222;
