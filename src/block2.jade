@@ -142,33 +142,10 @@ mixin refactoring-exercise-file(name)
 
 
 
-  +exercise(2, 4, "Test coverage")
-    p In this exercise we're going to attempt to achieve the mythical notion of <em>full test coverage</em>
-
-    p Start off by 
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/PhoneBook/PhoneBook/PhoneBook.cs") downloading the <code>PhoneBook</code> class
-      | . It's very similar to the one you've been working with before.
-
-    p Study the class and contemplate the details of what it does. What are the quirks? Think in terms of expected output in relation to varying input.
-
-    p In a perfect world, we would write tests untill we achieve full test coverage. In a perfect world it will then be <strong>impossible</strong> to introduce errors to the class without any tests failing. This is, in theory, the highest possible level of test coverage.
-
-    p In practice however it's all about compromise. It's not reasonable to assume that we can maintain a suite of tests that employ full test coverage.
-
-    p Your job is consequently to create a test suite for the <code>PhoneBook</code> class. Aiming for as high test coverage as possible. You are of course allowed to refactor the <code>PhoneBook</code> class, to make it easier for you to handle.
-
-    p When you believe you have achieved a high level of coverage. Grab a friend and let her or him try to make your tests report <em>false-positives</em>. A <em>false-positive</em> is when a test is passing, but the functionality it is supposed to test actually is broken. It's easy to get "snowblind" stairing at your own code so having someone else attempting to "break" it, is usually a good idea.
-
-    h3 Contemplation
-    p Does full test-coverage ensure perfect code? Is full test coverage possible? What is it good for? Not good for? How good is it? When is it relevant? When not? How much <em>can</em> we test? How much <em>should</em> we test? Is there a golden mean? Etc. Write a few sentances (max half-a-page) about your thoughts on the positives and negatives of test-coverage.
 
 
 
-
-
-
-
-  +exercise(2, 5, "Testing To Drive Design")
+  +exercise(2, 4, "Testing To Drive Design")
 
     figure.figure-right
       a(href="http://en.wikipedia.org/wiki/Test-driven_development#/media/File:Test-driven_development.PNG")
@@ -186,49 +163,6 @@ mixin refactoring-exercise-file(name)
         li Any number neither divisible by 3 nor 5 simply remain itself.
         li Your implementation of FizzBuzz must somehow allow easy "counting".<br>
           code "1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz"
-
-
-
-
-
-
-
-
-
-
-  +exercise(2, 6, "TDD Practice (optional)")
-    p Many developers use TDD to "drive" their design forward. Calling it Test Driven Design instead of simply Test Driven Development. Often times we loose focus and end up working on multiple things at once. This is unwanted for many reasons. For example it splits our attention, and cause our (version control) commits to be sprawled.
-
-    p On the other hand, many developers find the cost of TDD to be too high in relation to it's payoff. Some disregard testing alltogether. Some disregard the idea of using tests as a way to drive design. In this exercise we'll approach a common programming exercise using the teachings of test driven design, and then reflect upon our findings.
-
-    p A ``kata'' is used to practice one's programming skills. Much like musicians practice scales. This exercise asks you to perform, what has come to be known as, the Bowling Game Kata. The bowling game class exposes two public methods. Your job is to implement these bodies TDD-style.
-
-    p Remember that this is an exercise in Test Driven Design. So you must follow the <em>red-green-refactor</em>-cycle at all times. And reflect upon the design decisions that you are making as you go along.
-
-    pre
-      code.language-csharp
-        | void Roll(int pins)
-        | // Where pins is the number of pins knocked
-        | // down by the player in this roll
-        | 
-        | int Score()
-        | // Returns the current score at the given time
-
-    p The rules of bowling, and consequently the requirements of the game, are outlined below.
-    ul
-      li Each game consist of 10 frames (rounds)
-      li Each frame consist of 2 rolls
-      li Each roll can knock down 0-10 pins
-      li The score for the frame is the total number of pins knocked down in that frame + plus bonuses for strikes and spares
-      li A spare is when the player knocks down all 10 pins in two rolls
-      li The score of a spare is the number of pins knocked down in the next roll
-      li A strike is when the player knocks down all 10 pins in the first roll
-      li The score of a strike is the number of pins knocked down in the next frame
-      li A frame only consist of one roll if the player rolls a strike
-      li In the tenth frame the player will have one extra roll <em>if</em> a strike or spare is rolled
-
-    h3 Contemplation
-    p Write a few sentances (max half-a-page) and reflect upon your new won experiences and opinions about using tests as a means to drive design. Does it help? Does it not? Does it enforce good design decisions. Does it enforce bad design decisions? Is it worth it?
 
 
 
