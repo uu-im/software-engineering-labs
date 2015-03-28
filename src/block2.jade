@@ -118,19 +118,17 @@ mixin refactoring-exercise-file(name)
 
 
   +exercise(2, 3, "Debugging via Tests")
-    p In this exercise we're going to explore the idea of using tests as a means of locating bugs.
-
-    p Start off by 
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") downloading this <code>Matrix</code> class
-      |. Supposedly, it was written by a really lousy programmer. And consequently it contains a bunch of bugs. More specifically a bunch of logical errors.
-
-    p Create a new solution. Add in the <code>Matrix</code> class. And create a test project.
-
-    p Your job is to eliminate all bugs in the <code>Matrix</code> class. You must do this by introducing test cases that will help you determine where the errors actually reside.
-
-    p
-      em A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult (e.g.) Wikipedia to learn how (e.g.) matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Some knowledge about matrix operations is vital, in being able to write good test cases for the class.
-
+    p The purpose of this exercise is to use tests as a means of locating and fixing bugs. Matrix multiplication is not trivial. The person who built the class below thus failed. Your job is to use tests to locate and fix all bugs.
+    
+    ol
+      li Create a new Class Library project in Visual Studio.
+      li Download the class containing bugs, and add the code to your project.
+        ul.no-bullet
+          +vs-file
+            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") Matrix.cs
+      li Create a Test Project in the same Solution.
+      li Create and run tests one by one in order to locate any bugs. Test all public methods.
+      li Fix the bugs either when you've written all tests or when you've encountered them.
 
 
 
