@@ -10,7 +10,7 @@ namespace FizzBuzzTests
     [Test()]
     public void FirstTwo_GivesNumber()
     {
-      FizzBuzzer fb = getInstance(0);
+      IFizzBuzzer fb = getInstance(0);
       Assert.AreEqual("1", fb.Next());
       Assert.AreEqual("2", fb.Next());
     }
@@ -18,35 +18,35 @@ namespace FizzBuzzTests
     [Test()]
     public void Third_GivesFizz()
     {
-      FizzBuzzer fb = getInstance(2);
+      IFizzBuzzer fb = getInstance(2);
       Assert.AreEqual("Fizz", fb.Next());
     }
 
     [Test()]
     public void Fourth_GivesNumber()
     {
-      FizzBuzzer fb = getInstance(3);
+      IFizzBuzzer fb = getInstance(3);
       Assert.AreEqual("4", fb.Next());
     }
 
     [Test()]
     public void Fifth_GivesNumber()
     {
-      FizzBuzzer fb = getInstance(4);
+      IFizzBuzzer fb = getInstance(4);
       Assert.AreEqual("Buzz", fb.Next());
     }
 
     [Test()]
     public void Sixth_GivesNumber()
     {
-      FizzBuzzer fb = getInstance(5);
+      IFizzBuzzer fb = getInstance(5);
       Assert.AreEqual("Fizz", fb.Next());
     }
 
     [Test()]
     public void Fifteenth_GivesFizzBuzz()
     {
-      FizzBuzzer fb = getInstance(14);
+      IFizzBuzzer fb = getInstance(14);
       Assert.AreEqual("FizzBuzz", fb.Next());
     }
 
@@ -83,9 +83,9 @@ namespace FizzBuzzTests
 
 
 
-    private FizzBuzzer getInstance(int n)
+    private IFizzBuzzer getInstance(int n)
     {
-      FizzBuzzer fb = new FizzBuzzer();
+      IFizzBuzzer fb = new FizzBuzzer();
       for(int i=0; i<n; i++)
         fb.Next();
       return fb;

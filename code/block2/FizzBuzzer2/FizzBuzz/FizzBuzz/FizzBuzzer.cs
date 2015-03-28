@@ -2,7 +2,7 @@
 
 namespace FizzBuzz
 {
-  public class FizzBuzzer
+  public class FizzBuzzer : IFizzBuzzer
   {
     int n = 0;
 
