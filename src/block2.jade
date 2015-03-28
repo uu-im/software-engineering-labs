@@ -48,58 +48,34 @@ mixin refactoring-exercise-file(name)
 
 
 
-  h2#exercise-1 Exercise 1 &mdash; Introduction to testing
-  p In this exercise we're going to familiarize ourselves with the concept of unit testing.
-  ol
-    li Create a new Visual Studio Solution.
-    li Add a new 
-      code Class Library
-      |  project, and name it 
-      code MathLibrary
-      |.
-    li Add a new 
-      code Unit Test Project
-      |  and name it 
-      code MathLibraryTests
-    li Create a new class in your <code>MathLibrary</code> project. Name it <code>MathLib.cs</code>.
-    li Copy the contents of the  
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/MathLibrary/MathLib.cs") <code>MathLib</code> example class
-      |  and paste it into your class file.
-    li Create a new class in your <code>MathLibraryTests</code> project. Name it <code>MathLibTests</code>.
-    li Copy the contents of the 
-      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/TestProject/MathLibraryTests.cs") <code>MathLibTests</code> example class
-      |  and paste it into your class file.
-    li Add a reference (via <code>Solution Explorer</code>) to the <code>MathLibrary</code> project in the <code>MathLibraryTests</code> project. We do this because the test project is going to test classes in the <code>MathLibrary</code> project.
+  +exercise(1, 1, "Introduction to testing")
+    p In this exercise we're going to familiarize ourselves with the concept of unit testing.
+    ol
+      li Create a new Visual Studio Solution.
+      li Add a new 
+        code Class Library
+        |  project, and name it 
+        code MathLibrary
+        |.
+      li Add a new 
+        code Unit Test Project
+        |  and name it 
+        code MathLibraryTests
+      li Create a new class in your <code>MathLibrary</code> project. Name it <code>MathLib.cs</code>.
+      li Copy the contents of the  
+        a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/MathLibrary/MathLib.cs") <code>MathLib</code> example class
+        |  and paste it into your class file.
+      li Create a new class in your <code>MathLibraryTests</code> project. Name it <code>MathLibTests</code>.
+      li Copy the contents of the 
+        a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/TestProject/MathLibraryTests.cs") <code>MathLibTests</code> example class
+        |  and paste it into your class file.
+      li Add a reference (via <code>Solution Explorer</code>) to the <code>MathLibrary</code> project in the <code>MathLibraryTests</code> project. We do this because the test project is going to test classes in the <code>MathLibrary</code> project.
 
-  p <code>MathLib</code> contains a number of public static functions that perform math related operations. Not all methods are implemented. You must complete these implementations.
+    p <code>MathLib</code> contains a number of public static functions that perform math related operations. Not all methods are implemented. You must complete these implementations.
 
-  p <code>MathLibTests</code> contains a number of unit tests that aim to verify the functionality of all public methods in the <code>MathLib</code> class. Not all tests are implemented. You must complete these implementations.
+    p <code>MathLibTests</code> contains a number of unit tests that aim to verify the functionality of all public methods in the <code>MathLib</code> class. Not all tests are implemented. You must complete these implementations.
 
-  p You decide whether you wish to write each test before each implementation or vice versa. Do not add or remove any methods.
-
-
-  h2#exercise-2 Exercise 2 &mdash; Refactoring
-  p The purpose of this exercise is to practice the art of refactoring in controlled steps. Using tests to ensure correctnessa at each change. This exercise is designed by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>, the author of the book <a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>.
-
-  ol
-    li Create a new Console Application and introduce the code of the following classes into your project.
-      ul.no-bullet
-        +refactoring-exercise-file("Customer")
-        +refactoring-exercise-file("DVD")
-        +refactoring-exercise-file("DomainObject")
-        +refactoring-exercise-file("Movie")
-        +refactoring-exercise-file("Rental")
-        +refactoring-exercise-file("Program")
-
-    li Introduce the following integration tests to your project. Run the integration tests. One should pass and one should fail. Ensure that this is the case before continuing further.
-      ul.no-bullet
-        +vs-file
-          a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") CustomerIntegrationTests.cs
-
-    li Follow the instructions given in the following document step by step. Remember to run the integration tests between changes to ensure that you are not altering the behavior of the program.
-      ul
-        +file-text
-          a(href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html") Instructions.html
+    p You decide whether you wish to write each test before each implementation or vice versa. Do not add or remove any methods.
 
 
 
@@ -107,24 +83,53 @@ mixin refactoring-exercise-file(name)
 
 
 
+  +exercise(1, 2, "Refactoring")
+    p The purpose of this exercise is to practice the art of refactoring in controlled steps. Using tests to ensure correctnessa at each change. This exercise is designed by <a href="http://en.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a>, the author of the book <a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>.
+
+    ol
+      li Create a new Console Application and introduce the code of the following classes into your project.
+        ul.no-bullet
+          +refactoring-exercise-file("Customer")
+          +refactoring-exercise-file("DVD")
+          +refactoring-exercise-file("DomainObject")
+          +refactoring-exercise-file("Movie")
+          +refactoring-exercise-file("Rental")
+          +refactoring-exercise-file("Program")
+
+      li Introduce the following integration tests to your project. Run the integration tests. One should pass and one should fail. Ensure that this is the case before continuing further.
+        ul.no-bullet
+          +vs-file
+            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") CustomerIntegrationTests.cs
+
+      li Follow the instructions given in the following document step by step. Remember to run the integration tests between changes to ensure that you are not altering the behavior of the program.
+        ul
+          +file-text
+            a(href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html") Instructions.html
 
 
 
 
 
-  h2#exercise-3 Exercise 3 &mdash; Debugging via tests
-  p In this exercise we're going to explore the idea of using tests as a means of locating bugs.
 
-  p Start off by 
-    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") downloading this <code>Matrix</code> class
-    |. Supposedly, it was written by a really lousy programmer. And consequently it contains a bunch of bugs. More specifically a bunch of logical errors.
 
-  p Create a new solution. Add in the <code>Matrix</code> class. And create a test project.
 
-  p Your job is to eliminate all bugs in the <code>Matrix</code> class. You must do this by introducing test cases that will help you determine where the errors actually reside.
 
-  p
-    em A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult (e.g.) Wikipedia to learn how (e.g.) matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Some knowledge about matrix operations is vital, in being able to write good test cases for the class.
+
+
+
+  +exercise(2, 3, "Debugging via Tests")
+    p In this exercise we're going to explore the idea of using tests as a means of locating bugs.
+
+    p Start off by 
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") downloading this <code>Matrix</code> class
+      |. Supposedly, it was written by a really lousy programmer. And consequently it contains a bunch of bugs. More specifically a bunch of logical errors.
+
+    p Create a new solution. Add in the <code>Matrix</code> class. And create a test project.
+
+    p Your job is to eliminate all bugs in the <code>Matrix</code> class. You must do this by introducing test cases that will help you determine where the errors actually reside.
+
+    p
+      em A matrix is a two-dimensional array of elements (in this case numbers). If you are not familiar with matrices, consult (e.g.) Wikipedia to learn how (e.g.) matrix multiplication is performed, and how to calculate the inverse of a 2x2 matrix. Some knowledge about matrix operations is vital, in being able to write good test cases for the class.
 
 
 
@@ -139,165 +144,165 @@ mixin refactoring-exercise-file(name)
 
 
 
-  h2#exercise-4 Exercise 4 &mdash; Test coverage 
-  p In this exercise we're going to attempt to achieve the mythical notion of <em>full test coverage</em>
+  +exercise(2, 4, "Test coverage")
+    p In this exercise we're going to attempt to achieve the mythical notion of <em>full test coverage</em>
 
-  p Start off by 
-    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/PhoneBook/PhoneBook/PhoneBook.cs") downloading the <code>PhoneBook</code> class
-    | . It's very similar to the one you've been working with before.
+    p Start off by 
+      a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/PhoneBook/PhoneBook/PhoneBook.cs") downloading the <code>PhoneBook</code> class
+      | . It's very similar to the one you've been working with before.
 
-  p Study the class and contemplate the details of what it does. What are the quirks? Think in terms of expected output in relation to varying input.
+    p Study the class and contemplate the details of what it does. What are the quirks? Think in terms of expected output in relation to varying input.
 
-  p In a perfect world, we would write tests untill we achieve full test coverage. In a perfect world it will then be <strong>impossible</strong> to introduce errors to the class without any tests failing. This is, in theory, the highest possible level of test coverage.
+    p In a perfect world, we would write tests untill we achieve full test coverage. In a perfect world it will then be <strong>impossible</strong> to introduce errors to the class without any tests failing. This is, in theory, the highest possible level of test coverage.
 
-  p In practice however it's all about compromise. It's not reasonable to assume that we can maintain a suite of tests that employ full test coverage.
+    p In practice however it's all about compromise. It's not reasonable to assume that we can maintain a suite of tests that employ full test coverage.
 
-  p Your job is consequently to create a test suite for the <code>PhoneBook</code> class. Aiming for as high test coverage as possible. You are of course allowed to refactor the <code>PhoneBook</code> class, to make it easier for you to handle.
+    p Your job is consequently to create a test suite for the <code>PhoneBook</code> class. Aiming for as high test coverage as possible. You are of course allowed to refactor the <code>PhoneBook</code> class, to make it easier for you to handle.
 
-  p When you believe you have achieved a high level of coverage. Grab a friend and let her or him try to make your tests report <em>false-positives</em>. A <em>false-positive</em> is when a test is passing, but the functionality it is supposed to test actually is broken. It's easy to get "snowblind" stairing at your own code so having someone else attempting to "break" it, is usually a good idea.
+    p When you believe you have achieved a high level of coverage. Grab a friend and let her or him try to make your tests report <em>false-positives</em>. A <em>false-positive</em> is when a test is passing, but the functionality it is supposed to test actually is broken. It's easy to get "snowblind" stairing at your own code so having someone else attempting to "break" it, is usually a good idea.
 
-  h3 Contemplation
-  p Does full test-coverage ensure perfect code? Is full test coverage possible? What is it good for? Not good for? How good is it? When is it relevant? When not? How much <em>can</em> we test? How much <em>should</em> we test? Is there a golden mean? Etc. Write a few sentances (max half-a-page) about your thoughts on the positives and negatives of test-coverage.
-
-
+    h3 Contemplation
+    p Does full test-coverage ensure perfect code? Is full test coverage possible? What is it good for? Not good for? How good is it? When is it relevant? When not? How much <em>can</em> we test? How much <em>should</em> we test? Is there a golden mean? Etc. Write a few sentances (max half-a-page) about your thoughts on the positives and negatives of test-coverage.
 
 
 
 
 
-  h2#exercise-5 Exercise 5 &mdash; Testing to drive design
-  p In this exercise we're going to build more or less the same application (a little thing called <code>FizzBuzz</code>) three times. But each time we'll use a different approach. Namely three different approaches to testing.
 
-  p Below, three project specifications follow. Create all three as separate projects in the same <em>Visual Studio</em> solution. Name the projects as follows:
-  ol
-    li
-      code FizzBuzzTAD
-    li
-      code FizzBuzzTDD
-    li
-      code FizzBuzzSliming
-  p Also, you'll need to create a test project. For the sake of this project it's ok to keep all of your tests in one test project. However, you must put the tests in separate classes. Like so:
+
+  +exercise(2, 5, "Testing to drive design")
+    p In this exercise we're going to build more or less the same application (a little thing called <code>FizzBuzz</code>) three times. But each time we'll use a different approach. Namely three different approaches to testing.
+
+    p Below, three project specifications follow. Create all three as separate projects in the same <em>Visual Studio</em> solution. Name the projects as follows:
     ol
       li
-        code FizzBuzzTADTests.cs
+        code FizzBuzzTAD
       li
-        code FizzBuzzTDDTests.cs
+        code FizzBuzzTDD
       li
-        code FizzBuzzSlimingTests.cs
-  p ... or similarly.
+        code FizzBuzzSliming
+    p Also, you'll need to create a test project. For the sake of this project it's ok to keep all of your tests in one test project. However, you must put the tests in separate classes. Like so:
+      ol
+        li
+          code FizzBuzzTADTests.cs
+        li
+          code FizzBuzzTDDTests.cs
+        li
+          code FizzBuzzSlimingTests.cs
+    p ... or similarly.
 
-  p The rules of the game of FizzBuzz reads as follows:
-  ul
-    li <code>Fizz</code> is returned, when given a number divisible by 3
-    li <code>Buzz</code> is returned, when given a number divisible by 5
-    li <code>FizzBuzz</code> is returned, when given a number divisible by 3 <strong>and</strong> 5
-    li The input number itself is returned, when given an input number not divisible by 3 <strong>nor</strong> 5
-
-
-  h3 5.1 Test-after development (TAD)
-  p Create a new console project. Add a class called <code>FizzBuzz.cs</code>, and give it a public static method like so:
-  pre
-    code.language-csharp
-      | class FizzBuzz{
-      |     public static string FizzOrBuzz(int n)
-      |     {
-      |         // returns "Fizz" if divisible by 3
-      |         // returns "Buzz" if divisible by 5
-      |         // returns "FizzBuzz" if divisible by 3 and 5
-      |     }
-      | }
-  p Your job is now to...
-  ol
-    li Implement the body of the <code>FizzOrBuzz(int n)</code> function, so that it behaves according to specification.
-    p And when you're done. Then..
-    li Create a test project and write suitable tests that will ensure reasonable test coverage of the method.
-
-  p When you're done. Stop for a minute and consider how much code coverage you've achieved. Is it enough? Is it really hard to introduce errors without having tests that fail? Keep this question in mind as you move on to the next exercise.
+    p The rules of the game of FizzBuzz reads as follows:
+    ul
+      li <code>Fizz</code> is returned, when given a number divisible by 3
+      li <code>Buzz</code> is returned, when given a number divisible by 5
+      li <code>FizzBuzz</code> is returned, when given a number divisible by 3 <strong>and</strong> 5
+      li The input number itself is returned, when given an input number not divisible by 3 <strong>nor</strong> 5
 
 
-  h3 5.2 Test-driven development (TDD)
-  p We're now going to build the FizzBuzz application again, but this time through test-driven development (TDD). Create a new console project.
-  p Remember, that we are now developing software according to the rules of TDD. This means that we at all times must follow the steps below.
-  ol
-    li Introduce a (or change an existing) test.
-    li Watch the test fail (for the right reason).
-    li Write the minimal code needed to make it pass.
-  p An easy way to remember the above steps is to think of the idiom 
-    a(href="http://en.wikipedia.org/wiki/Test-driven_development") red-green-refactor
-    |. In essence the idea is we start by producing a state where we have a test that fails (red). Then we write enough code to make it pass (green). Only then, are we allowed to refactor code. When done we restart, by introducing another failing test.
-  p This time we have some new requirements though. Another public static method must be added to the FizzBuzzer:
-  pre
-    code.language-csharp
-      | public static string Count(int n){
-      |   // FizzBuzz from 1 all the way up to n.
-      |   // Example, if n = 5, then
-      |   // return "1 2 Fizz 4 Buzz"
-      | }
+    h3 5.1 Test-after development (TAD)
+    p Create a new console project. Add a class called <code>FizzBuzz.cs</code>, and give it a public static method like so:
+    pre
+      code.language-csharp
+        | class FizzBuzz{
+        |     public static string FizzOrBuzz(int n)
+        |     {
+        |         // returns "Fizz" if divisible by 3
+        |         // returns "Buzz" if divisible by 5
+        |         // returns "FizzBuzz" if divisible by 3 and 5
+        |     }
+        | }
+    p Your job is now to...
+    ol
+      li Implement the body of the <code>FizzOrBuzz(int n)</code> function, so that it behaves according to specification.
+      p And when you're done. Then..
+      li Create a test project and write suitable tests that will ensure reasonable test coverage of the method.
+
+    p When you're done. Stop for a minute and consider how much code coverage you've achieved. Is it enough? Is it really hard to introduce errors without having tests that fail? Keep this question in mind as you move on to the next exercise.
 
 
-  h3 5.3 "Sliming"
-  p Once again, we'll build the FizzBuzz application (with the new <code>Count(int n)</code>requirement). Once again, will we use use TDD. However this time we will "slime" every step of implementation. Start by creating a new console project.
-  p Sliming (fake it 'til you make it) is a tactic used as a means to force yourself to ensure high test-coverage. Usually, when we are "writing the minimal code needed, we tend to write "sensible" code (the implementation we actually want). However "sliming" propose we indeed really should write the simplest possible code, no matter how dumb it is.
-  p Say the goal is to produce a function such that <code>F(x)=x*x</code>. So we start by writing a test, that calls <code>F(2)</code>, and expects (asserts) a return value of <code>4</code>. If we are "sliming", then we write the simplest function we can possibly write to ensure the test is satisfied. So we write the following function:
-  pre
-    code.language-csharp
-      | int F(int x){
-      |   return 4;
-      | }
-  p Unintelligent code indeed. Say we continue by writing a new test, calling <code>F(10)</code>, that expects a return value of <code>100</code>. Since we are sliming, we will change our production code to the following:
-  pre
-    code.language-csharp
-      | int F(int x){
-      |   if(x == 2)
-      |     return 4;
-      |   else
-      |     return 100;
-      | }
-  p Utterly stupid code, and as humans we know this is not even close to the final behaviour we want. However, by doing this process, we are forced to write more (or better) tests. We only stop sliming when it becomes harder than writing the implementation we actually want to write.
-  p Your job is again to implement another version of the FizzBuzzer. If the above concepts however seem unfamiliar to you. Consult the reading material before you proceed.
-
-  h3 Contemplation (TAD, TDD and Sliming)
-  p What are the positives and negatives of TDD? TAD? Sliming? Write a few sentances (max half-a-page) about your thoughts on these concepts. When are they good to use? Less good? Was sliming helpful? Always? Never? Somwhat? Who are tests for? Is testing useful for only one or many things? What? Why? Does testing first improve design? If yes, in what way? If no, how come many claim that is the case?
+    h3 5.2 Test-driven development (TDD)
+    p We're now going to build the FizzBuzz application again, but this time through test-driven development (TDD). Create a new console project.
+    p Remember, that we are now developing software according to the rules of TDD. This means that we at all times must follow the steps below.
+    ol
+      li Introduce a (or change an existing) test.
+      li Watch the test fail (for the right reason).
+      li Write the minimal code needed to make it pass.
+    p An easy way to remember the above steps is to think of the idiom 
+      a(href="http://en.wikipedia.org/wiki/Test-driven_development") red-green-refactor
+      |. In essence the idea is we start by producing a state where we have a test that fails (red). Then we write enough code to make it pass (green). Only then, are we allowed to refactor code. When done we restart, by introducing another failing test.
+    p This time we have some new requirements though. Another public static method must be added to the FizzBuzzer:
+    pre
+      code.language-csharp
+        | public static string Count(int n){
+        |   // FizzBuzz from 1 all the way up to n.
+        |   // Example, if n = 5, then
+        |   // return "1 2 Fizz 4 Buzz"
+        | }
 
 
+    h3 5.3 "Sliming"
+    p Once again, we'll build the FizzBuzz application (with the new <code>Count(int n)</code>requirement). Once again, will we use use TDD. However this time we will "slime" every step of implementation. Start by creating a new console project.
+    p Sliming (fake it 'til you make it) is a tactic used as a means to force yourself to ensure high test-coverage. Usually, when we are "writing the minimal code needed, we tend to write "sensible" code (the implementation we actually want). However "sliming" propose we indeed really should write the simplest possible code, no matter how dumb it is.
+    p Say the goal is to produce a function such that <code>F(x)=x*x</code>. So we start by writing a test, that calls <code>F(2)</code>, and expects (asserts) a return value of <code>4</code>. If we are "sliming", then we write the simplest function we can possibly write to ensure the test is satisfied. So we write the following function:
+    pre
+      code.language-csharp
+        | int F(int x){
+        |   return 4;
+        | }
+    p Unintelligent code indeed. Say we continue by writing a new test, calling <code>F(10)</code>, that expects a return value of <code>100</code>. Since we are sliming, we will change our production code to the following:
+    pre
+      code.language-csharp
+        | int F(int x){
+        |   if(x == 2)
+        |     return 4;
+        |   else
+        |     return 100;
+        | }
+    p Utterly stupid code, and as humans we know this is not even close to the final behaviour we want. However, by doing this process, we are forced to write more (or better) tests. We only stop sliming when it becomes harder than writing the implementation we actually want to write.
+    p Your job is again to implement another version of the FizzBuzzer. If the above concepts however seem unfamiliar to you. Consult the reading material before you proceed.
+
+    h3 Contemplation (TAD, TDD and Sliming)
+    p What are the positives and negatives of TDD? TAD? Sliming? Write a few sentances (max half-a-page) about your thoughts on these concepts. When are they good to use? Less good? Was sliming helpful? Always? Never? Somwhat? Who are tests for? Is testing useful for only one or many things? What? Why? Does testing first improve design? If yes, in what way? If no, how come many claim that is the case?
 
 
 
 
 
-  h2#exercise-6 Exercise 6 &mdash; TDD Practice &mdash; optional
-  p Many developers use TDD to "drive" their design forward. Calling it Test Driven Design instead of simply Test Driven Development. Often times we loose focus and end up working on multiple things at once. This is unwanted for many reasons. For example it splits our attention, and cause our (version control) commits to be sprawled.
 
-  p On the other hand, many developers find the cost of TDD to be too high in relation to it's payoff. Some disregard testing alltogether. Some disregard the idea of using tests as a way to drive design. In this exercise we'll approach a common programming exercise using the teachings of test driven design, and then reflect upon our findings.
 
-  p A ``kata'' is used to practice one's programming skills. Much like musicians practice scales. This exercise asks you to perform, what has come to be known as, the Bowling Game Kata. The bowling game class exposes two public methods. Your job is to implement these bodies TDD-style.
+  +exercise(2, 6, "TDD Practice (optional)")
+    p Many developers use TDD to "drive" their design forward. Calling it Test Driven Design instead of simply Test Driven Development. Often times we loose focus and end up working on multiple things at once. This is unwanted for many reasons. For example it splits our attention, and cause our (version control) commits to be sprawled.
 
-  p Remember that this is an exercise in Test Driven Design. So you must follow the <em>red-green-refactor</em>-cycle at all times. And reflect upon the design decisions that you are making as you go along.
+    p On the other hand, many developers find the cost of TDD to be too high in relation to it's payoff. Some disregard testing alltogether. Some disregard the idea of using tests as a way to drive design. In this exercise we'll approach a common programming exercise using the teachings of test driven design, and then reflect upon our findings.
 
-  pre
-    code.language-csharp
-      | void Roll(int pins)
-      | // Where pins is the number of pins knocked
-      | // down by the player in this roll
-      | 
-      | int Score()
-      | // Returns the current score at the given time
+    p A ``kata'' is used to practice one's programming skills. Much like musicians practice scales. This exercise asks you to perform, what has come to be known as, the Bowling Game Kata. The bowling game class exposes two public methods. Your job is to implement these bodies TDD-style.
 
-  p The rules of bowling, and consequently the requirements of the game, are outlined below.
-  ul
-    li Each game consist of 10 frames (rounds)
-    li Each frame consist of 2 rolls
-    li Each roll can knock down 0-10 pins
-    li The score for the frame is the total number of pins knocked down in that frame + plus bonuses for strikes and spares
-    li A spare is when the player knocks down all 10 pins in two rolls
-    li The score of a spare is the number of pins knocked down in the next roll
-    li A strike is when the player knocks down all 10 pins in the first roll
-    li The score of a strike is the number of pins knocked down in the next frame
-    li A frame only consist of one roll if the player rolls a strike
-    li In the tenth frame the player will have one extra roll <em>if</em> a strike or spare is rolled
+    p Remember that this is an exercise in Test Driven Design. So you must follow the <em>red-green-refactor</em>-cycle at all times. And reflect upon the design decisions that you are making as you go along.
 
-  h3 Contemplation
-  p Write a few sentances (max half-a-page) and reflect upon your new won experiences and opinions about using tests as a means to drive design. Does it help? Does it not? Does it enforce good design decisions. Does it enforce bad design decisions? Is it worth it?
+    pre
+      code.language-csharp
+        | void Roll(int pins)
+        | // Where pins is the number of pins knocked
+        | // down by the player in this roll
+        | 
+        | int Score()
+        | // Returns the current score at the given time
+
+    p The rules of bowling, and consequently the requirements of the game, are outlined below.
+    ul
+      li Each game consist of 10 frames (rounds)
+      li Each frame consist of 2 rolls
+      li Each roll can knock down 0-10 pins
+      li The score for the frame is the total number of pins knocked down in that frame + plus bonuses for strikes and spares
+      li A spare is when the player knocks down all 10 pins in two rolls
+      li The score of a spare is the number of pins knocked down in the next roll
+      li A strike is when the player knocks down all 10 pins in the first roll
+      li The score of a strike is the number of pins knocked down in the next frame
+      li A frame only consist of one roll if the player rolls a strike
+      li In the tenth frame the player will have one extra roll <em>if</em> a strike or spare is rolled
+
+    h3 Contemplation
+    p Write a few sentances (max half-a-page) and reflect upon your new won experiences and opinions about using tests as a means to drive design. Does it help? Does it not? Does it enforce good design decisions. Does it enforce bad design decisions? Is it worth it?
 
 
 
