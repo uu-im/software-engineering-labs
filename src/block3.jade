@@ -1,4 +1,7 @@
+include mixins/deliverables
 include partials/layout
+
+
 +layout("Block 3")
   header
     h1 Software Engineering &mdash; Lab 3
@@ -14,38 +17,38 @@ include partials/layout
 
 
 
-
-
-
-
   h2 Deliverables
-  p This is a summary of the deliverables for this block.
+  p Please follow the below folder/file structure for the handin of this block.
 
-  +handin(1, "Modelling Use Cases with UML (optional)")
-    p One diagram in <code>pdf</code>-format.
+  +toc-exercises(3)
 
-  +handin(2, "UML Class Diagrams (optional)")
-    p One diagram in <code>pdf</code>-format.
+    +toc-exercise(1)
+      +toc-assignment
+        +file-img("use-case-diagram.[png|jpg|gif|pdf]")
 
-  +handin(3, "Reverse Engineering with UML")
-    p One diagram in <code>pdf</code>-format.
+    +toc-exercise(2)
+      +toc-assignment
+        +file-img("class-diagram.[png|jpg|gif|pdf]")
 
-  +handin(4, "Observer pattern")
-    p One Visual Studio solution.
+    +toc-exercise(3)
+      +toc-assignment
+        +vs-solution("ObserverPattern")
 
-  +handin(5, "Command pattern")
-    p One Visual Studio solution.
+    +toc-exercise(4)
+      +toc-assignment
+        +vs-solution("CommandPattern")
 
-  +handin(6, "Visitor pattern")
-    p One Visual Studio solution.
+    +toc-exercise(5)
+      +toc-assignment
+        +vs-solution("VisitorPattern")
 
-  +handin(7, "One more pattern (optional)")
-    p One Visual Studio solution.
+    +toc-exercise(6)
+      +toc-assignment
+        +file-img("reverse-engineered.[png|jpg|gif|pdf]")
 
-  +handin(8, "Applying design patterns to existing code (optional)")
-    ul
-      li One Visual Studio solution.
-      li One change log in <code>.txt</code>-format.
+    +toc-exercise(7)
+      +toc-assignment
+        +file-img("re-engineered.[png|jpg|gif|pdf]")
 
 
 
