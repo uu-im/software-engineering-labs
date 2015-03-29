@@ -88,50 +88,7 @@ include partials/layout
 
 
   +exercise(3, 4, "Command Pattern")
-    p The fragment below is the core of a calculator, implemented using the <em>Command Pattern</em>. Develop the rest of the code and demonstrate it running on a variety of sample input.
-
-    pre.language-csharp
-      code
-        | class CalculatorCommand : ICommand
-        | {
-        |   public char Operator{ get; private set; }
-        |   public int Operand{ get; private set; }
-        | 
-        |   private Calculator _calculator;
-        | 
-        |   public CalculatorCommand(Calculator calculator,
-        |     char @operator, int operand)
-        |   {
-        |     _calculator = calculator;
-        |     Operator = @operator;
-        |     Operand = operand;
-        |   }
-        | 
-        |   public void Execute()
-        |   {
-        |     _calculator.Operation(Operator, Operand);
-        |   }
-        | 
-        |   public void UnExecute()
-        |   {
-        |     _calculator.Operation(undo(Operator), Operand);
-        |   }
-        | 
-        |   private char undo(char @operator)
-        |   {
-        |     switch (@operator)
-        |     {
-        |       case '+': return '-';
-        |       case '-': return '+';
-        |       case '*': return '/';
-        |       case '/': return '*';
-        |       default: throw new
-        |        ArgumentException("@operator");
-        |     }
-        |   }
-        | }
-
-
+    p Use the command pattern example from the course book as inspiration, and implement the pattern for a different, but suitable, domain.
 
 
 
