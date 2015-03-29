@@ -53,19 +53,19 @@ include partials/layout
 
 
 
-  h2#exercise-1 Exercise 1 &mdash; Modelling Use Cases with UML
-  p Consider the requirements for the following library system:
+  +exercise(3, 1," Exercise 1 &mdash; Modelling Use Cases with UML")
+    p Consider the requirements for the following library system:
 
-  ul
-    li The library lends books and magazines to borrowers who registered in the system (as are the books and magazines).
-    li The library handles the purchase of new titles. Old books and magazines are removed when they are out of date or in poor condition.
-    li The librarian is an employee of the library who interacts with the customs (borrowers) and whose work is supported by the system.
-    li A borrower can reserve a book or magazine that is not currently available, so that when it is returned they're notified.
-    li The reservation is canceled when the borrower checks and the book or magazine, or through an explicit cancelling procedure.
-    li The librarian can create, update, and delete information about titles, borrowers, loans, and reservation in the system.
-  p
-    b Task 
-    | &mdash; Identify the actors and create a use case diagram of the library system.
+    ul
+      li The library lends books and magazines to borrowers who registered in the system (as are the books and magazines).
+      li The library handles the purchase of new titles. Old books and magazines are removed when they are out of date or in poor condition.
+      li The librarian is an employee of the library who interacts with the customs (borrowers) and whose work is supported by the system.
+      li A borrower can reserve a book or magazine that is not currently available, so that when it is returned they're notified.
+      li The reservation is canceled when the borrower checks and the book or magazine, or through an explicit cancelling procedure.
+      li The librarian can create, update, and delete information about titles, borrowers, loans, and reservation in the system.
+    p
+      b Task 
+      | &mdash; Identify the actors and create a use case diagram of the library system.
 
 
 
@@ -73,11 +73,11 @@ include partials/layout
 
 
 
-  h2#exercise-2 Exercise 2 &mdash; UML Class Diagrams
-  p A customer wants to make an order from a retail catalog. The customer can make the payment in one of these three kinds: cash, cheque, or credit card. The order contains order details, each with its associated item. Each order carries the date in which it has been posted and its status (pending, delivered, etc).
-  p
-    b Task 
-    | &mdash; Create a class diagram from the above description, begin with a noun and verb analysis.
+  +exercise(3, 2, "Exercise 2 &mdash; UML Class Diagrams")
+    p A customer wants to make an order from a retail catalog. The customer can make the payment in one of these three kinds: cash, cheque, or credit card. The order contains order details, each with its associated item. Each order carries the date in which it has been posted and its status (pending, delivered, etc).
+    p
+      b Task 
+      | &mdash; Create a class diagram from the above description, begin with a noun and verb analysis.
 
 
 
@@ -85,12 +85,12 @@ include partials/layout
 
 
 
-  h2#exercise-3 Exercise 3 &mdash; Reverse engineering with UML
-  p Reverse engineer the chat system you built in block one into UML. If you haven't completed your chat system yet &mdash; make sure you first comlplete it.
+  +exercise(3, 3, "Exercise 3 &mdash; Reverse engineering with UML")
+    p Reverse engineer the chat system you built in block one into UML. If you haven't completed your chat system yet &mdash; make sure you first comlplete it.
 
-  p
-    b Task 
-    | &mdash; Model class diagrams that represent the way your solution currently works.
+    p
+      b Task 
+      | &mdash; Model class diagrams that represent the way your solution currently works.
 
 
 
@@ -99,8 +99,8 @@ include partials/layout
 
 
 
-  h2#exercise-4 Exercise 4 &mdash; Observer Pattern
-  p Implement the <em>Observer pattern</em> that we discussed in the lectures, using the  Weather Station Project as inspiration. You will have to change the code from Java to C#.  Add the Heat Index display element as described on page 61 of the course book.
+  +exercise(3, 4, "Exercise 4 &mdash; Observer Pattern")
+    p Implement the <em>Observer pattern</em> that we discussed in the lectures, using the  Weather Station Project as inspiration. You will have to change the code from Java to C#.  Add the Heat Index display element as described on page 61 of the course book.
 
 
 
@@ -108,53 +108,53 @@ include partials/layout
 
 
 
-  h2#exercise-5 Exercise 5 &mdash; Command Pattern
-  p The fragment below is the core of a calculator, implemented using the <em>Command Pattern</em>. Develop the rest of the code and demonstrate it running on a variety of sample input.
+  +exercise(3, 5, "Exercise 5 &mdash; Command Pattern")
+    p The fragment below is the core of a calculator, implemented using the <em>Command Pattern</em>. Develop the rest of the code and demonstrate it running on a variety of sample input.
 
-  pre.language-csharp
-    code
-      | class CalculatorCommand : ICommand
-      | {
-      |   public char Operator{ get; private set; }
-      |   public int Operand{ get; private set; }
-      | 
-      |   private Calculator _calculator;
-      | 
-      |   // Constructor
-      |   public CalculatorCommand(Calculator calculator,
-      |     char @operator, int operand)
-      |   {
-      |     _calculator = calculator;
-      |     Operator = @operator;
-      |     Operand = operand;
-      |   }
-      | 
-      |   // Execute new command
-      |   public void Execute()
-      |   {
-      |     _calculator.Operation(Operator, Operand);
-      |   }
-      | 
-      |   // Unexecute last command
-      |   public void UnExecute()
-      |   {
-      |     _calculator.Operation(undo(Operator), Operand);
-      |   }
-      | 
-      |   // Returns opposite operator for given operator
-      |   private char undo(char @operator)
-      |   {
-      |     switch (@operator)
-      |     {
-      |       case '+': return '-';
-      |       case '-': return '+';
-      |       case '*': return '/';
-      |       case '/': return '*';
-      |       default: throw new
-      |        ArgumentException("@operator");
-      |     }
-      |   }
-      | }
+    pre.language-csharp
+      code
+        | class CalculatorCommand : ICommand
+        | {
+        |   public char Operator{ get; private set; }
+        |   public int Operand{ get; private set; }
+        | 
+        |   private Calculator _calculator;
+        | 
+        |   // Constructor
+        |   public CalculatorCommand(Calculator calculator,
+        |     char @operator, int operand)
+        |   {
+        |     _calculator = calculator;
+        |     Operator = @operator;
+        |     Operand = operand;
+        |   }
+        | 
+        |   // Execute new command
+        |   public void Execute()
+        |   {
+        |     _calculator.Operation(Operator, Operand);
+        |   }
+        | 
+        |   // Unexecute last command
+        |   public void UnExecute()
+        |   {
+        |     _calculator.Operation(undo(Operator), Operand);
+        |   }
+        | 
+        |   // Returns opposite operator for given operator
+        |   private char undo(char @operator)
+        |   {
+        |     switch (@operator)
+        |     {
+        |       case '+': return '-';
+        |       case '-': return '+';
+        |       case '*': return '/';
+        |       case '/': return '*';
+        |       default: throw new
+        |        ArgumentException("@operator");
+        |     }
+        |   }
+        | }
 
 
 
@@ -167,8 +167,8 @@ include partials/layout
 
 
 
-  h2#exercise-6 Exercise 6 &mdash; Visitor Pattern
-  p Use the <em>Visitor pattern</em> to calculate the salary of employees, that can be composed of secretaries and managers. Like we saw in the second week of the course.
+  +exercise(3, 6, "Exercise 6 &mdash; Visitor Pattern")
+    p Use the <em>Visitor pattern</em> to calculate the salary of employees, that can be composed of secretaries and managers. Like we saw in the second week of the course.
 
 
 
@@ -182,26 +182,26 @@ include partials/layout
 
 
 
-  h2#exercise-7 Exercise 7 &mdash; One more pattern
-  p Implement one of the following patterns, as implemented in the course book:
+  +exercise(3, 7, "Exercise 7 &mdash; One more pattern")
+    p Implement one of the following patterns, as implemented in the course book:
 
-  ul
-    li 
-      code Decorator pattern
-    li 
-      code Factory pattern
-    li 
-      code Singleton pattern
-    li 
-      code Adapter or Facade pattern
-    li 
-      code Template method pattern
-    li 
-      code Composite pattern
-    li 
-      code State pattern
-    li 
-      code Proxy pattern
+    ul
+      li 
+        code Decorator pattern
+      li 
+        code Factory pattern
+      li 
+        code Singleton pattern
+      li 
+        code Adapter or Facade pattern
+      li 
+        code Template method pattern
+      li 
+        code Composite pattern
+      li 
+        code State pattern
+      li 
+        code Proxy pattern
 
 
 
@@ -209,72 +209,72 @@ include partials/layout
 
 
 
-  h2#exercise-8 Exercise 8 &mdash; Applying design patterns to existing code
-  p When building the chat system in block 1, little attention was paid to design principles and patterns of software design. In this assignment you are expected to systematically analyze your chat system and make changes to the design.
+    +exercise(3, 8, "Exercise 8 &mdash; Applying design patterns to existing code")
+    p When building the chat system in block 1, little attention was paid to design principles and patterns of software design. In this assignment you are expected to systematically analyze your chat system and make changes to the design.
 
-  p 
-    b Task 1
-    |  &mdash; Refactor your chat system so that it uses <em>at least three patterns</em>. Keep a changelog.
+    p 
+      b Task 1
+      |  &mdash; Refactor your chat system so that it uses <em>at least three patterns</em>. Keep a changelog.
 
-  p Below are some suggestions for patterns and principles...
+    p Below are some suggestions for patterns and principles...
 
-  ul
-    li
-      b  Larman’s creator pattern
-      |  &mdash; Are objects created in the right place?
+    ul
+      li
+        b  Larman’s creator pattern
+        |  &mdash; Are objects created in the right place?
 
-    li
-      b  Larman’s expert pattern
-      |  &mdash; Is the responsibility to do things assigned to the correct classes?
+      li
+        b  Larman’s expert pattern
+        |  &mdash; Is the responsibility to do things assigned to the correct classes?
 
-    li
-      b  Dependency Inversion principle
-      |  &mdash; Are there dependencies between concrete system parts that may cause problems to maintain and extend the code? Could these dependencies be removed, e.g. through strategically design interfaces?
+      li
+        b  Dependency Inversion principle
+        |  &mdash; Are there dependencies between concrete system parts that may cause problems to maintain and extend the code? Could these dependencies be removed, e.g. through strategically design interfaces?
 
-    li
-      b  Observer pattern
-      |  &mdash; How is different parts of the system being notified of change in state? Could an event-driven solution be beneficial?
+      li
+        b  Observer pattern
+        |  &mdash; How is different parts of the system being notified of change in state? Could an event-driven solution be beneficial?
 
-    li
-      b  Decorator pattern
-      |  &mdash; Does any class need a change in its responsibility during runtime?
+      li
+        b  Decorator pattern
+        |  &mdash; Does any class need a change in its responsibility during runtime?
 
-    li
-      b  Factory pattern
-      |  &mdash; Is the system suffering from high coupling and dependencies or repetitive complex instantiation of objects?
+      li
+        b  Factory pattern
+        |  &mdash; Is the system suffering from high coupling and dependencies or repetitive complex instantiation of objects?
 
-    li
-      b  Singleton pattern
-      |  &mdash; Do your system need to keep track of objects from a specific type? Should the solution be simplified with just having a single object of that type?
+      li
+        b  Singleton pattern
+        |  &mdash; Do your system need to keep track of objects from a specific type? Should the solution be simplified with just having a single object of that type?
 
-    li
-      b  Command pattern
-      |  &mdash; Could some part of the system benefit from encapsulate method invocation?
+      li
+        b  Command pattern
+        |  &mdash; Could some part of the system benefit from encapsulate method invocation?
 
-    li
-      b  Model View Controller pattern
-      |  &mdash; Is managing the entire system overwhelming, could MVC keep it manageable.
+      li
+        b  Model View Controller pattern
+        |  &mdash; Is managing the entire system overwhelming, could MVC keep it manageable.
 
-    li
-      b  The single responsibility principle
-      |  &mdash; Does every single class in the solution have a single responsibility?
+      li
+        b  The single responsibility principle
+        |  &mdash; Does every single class in the solution have a single responsibility?
 
-    li
-      b  Open-closed principle
-      |  &mdash; Is the code possible to change without making changes to the existing code?
+      li
+        b  Open-closed principle
+        |  &mdash; Is the code possible to change without making changes to the existing code?
 
-    li
-      b  Interface segregation principle
-      |  &mdash; Are there interfaces in the code that could be logically separated into several smaller interfaces?
+      li
+        b  Interface segregation principle
+        |  &mdash; Are there interfaces in the code that could be logically separated into several smaller interfaces?
 
-    li etc...
+      li etc...
 
-  p Remember to keep a copy of your original chat system!
+    p Remember to keep a copy of your original chat system!
 
-  p Rmember to keep a written log of the changes you make and the reason for them. An example of an entry in this log could be:
+    p Rmember to keep a written log of the changes you make and the reason for them. An example of an entry in this log could be:
 
-  blockquote 
-    em May 1, 2013: Changed X. Because of Y. In accordance with pattern Z.
+    blockquote 
+      em May 1, 2013: Changed X. Because of Y. In accordance with pattern Z.
 
 
 
