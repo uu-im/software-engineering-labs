@@ -8,52 +8,139 @@ include partials/layout
 
 
   h2 Block 2
-  ul
-    li Testing
-      ul
-        li
-          a(href="https://www.youtube.com/watch?v=QCif_-r8eK4") What is TDD?
-          |  (~5 min video)
-        li
-          a(href="http://www.youtube.com/watch?v=5gMBGVNR8wE") TDD in Visual Studio using C#
-          |  (~17 min video)
-        li
-          a(href="https://www.youtube.com/watch?v=xX9hfPkA800") A TDD pair-programming session
-          |  (~2 h video)
-        li
-          a(href="http://feelings-erased.blogspot.se/2013/03/the-two-main-techniques-in-test-driven.html") "Sliming" / "Fake it 'til you make it"
-          |  (blog post) 
-        li
-          a(href="http://blog.james-carr.org/2006/11/03/tdd-anti-patterns/") TDD anti-patterns
-          |  (blog post) (i.e. things you should not do)
-    li Refactoring
-      ul
-        li
-          a(href="http://en.wikipedia.org/wiki/Code_refactoring") What is refactoring?
-          |  (Wikipedia)
-        li
-          a(href="http://www.cs.unc.edu/~stotts/723/refactor/chap1.html") Refactoring, a first example
-          |  (A great example of refactoring by Martin Fowler)
-        li Examples of Martin Fowler's refactoring technique (from his book 
-          a(href="http://martinfowler.com/books/refactoring.html") Refactoring &mdash; Improving the design of existing code
-          | ). Explained by some dude on youtube.
-          ol
-            li
-              a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qKWl5-XWAX6jACpfId_9-8Y") Composing methods
-              |  (video playlist)
-            li
-              a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qJX-E7GuBkKJ8-BoyiThrk7") Moving Features Between Objects
-              |  (video playlist)
-            li
-              a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qJ54Q3oJ3GNVj8WkFZd6y2y") Organizing data
-              |  (video playlist)
-            li
-              a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qIv4gbun2h268rBc2-RnyNH") Simplifying Conditional Expressions
-              |  (video playlist)
-            li
-              a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qJwgtU88VFGq6cmewrdorxh") Making Method Calls Simpler
-              |  (video playlist)
-            li
-              a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qLVoAoWooC0yk59RLwV4rfW") Dealing With Generalization
-              |  (video playlist)
+  h3 Testing
+  dl
+    dt
+      a(href="https://www.youtube.com/watch?v=QCif_-r8eK4") What is test-driven development?
+    dd  A 5 min video giving a high-level explanation of TDD.
+
+    dt
+      a(href="http://www.youtube.com/watch?v=5gMBGVNR8wE") Test-driven development in Visual Studio using C#
+    dd  A 17 min video demonstrating how test-driven development can be carried out in C#.
+
+    dt
+      a(href="https://www.youtube.com/watch?v=xX9hfPkA800") A TDD pair-programming session with Roy Osherove
+    dd  A 2 h video of a pair-programming session with Roy Osherove. A real-world situation resulting in real-world problems.
+
+    dt
+      a(href="http://feelings-erased.blogspot.se/2013/03/the-two-main-techniques-in-test-driven.html") Triangulation in Test-driven development
+    dd A blog post about an "extremer" approach to TDD that aim to result in higher test coverage.
+
+    dt
+      a(href="http://blog.james-carr.org/2006/11/03/tdd-anti-patterns/") TDD anti-patterns
+    dd  Blog post on things you "should not" do.
+
+
+  h3 Refactoring
+  dl
+    dt
+      a(href="http://en.wikipedia.org/wiki/Code_refactoring") What is refactoring?
+    dd Wikipedia page
+
+  p Below are a number video playlists that enact and explain some of the techniques from the great book by Martin Fowler called  
+    a(href="http://martinfowler.com/books/refactoring.html") Refactoring
+    |.
+
+  ol
+    li
+      a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qKWl5-XWAX6jACpfId_9-8Y") Composing methods
+    li
+      a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qJX-E7GuBkKJ8-BoyiThrk7") Moving Features Between Objects
+    li
+      a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qJ54Q3oJ3GNVj8WkFZd6y2y") Organizing data
+    li
+      a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qIv4gbun2h268rBc2-RnyNH") Simplifying Conditional Expressions
+    li
+      a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qJwgtU88VFGq6cmewrdorxh") Making Method Calls Simpler
+    li
+      a(href="https://www.youtube.com/playlist?list=PL3GKSsHsE_qLVoAoWooC0yk59RLwV4rfW") Dealing With Generalization
+
+
+
+  h2 Block 3
+  h3 Design patterns
+  dl
+    dt
+      a(href="http://shop.oreilly.com/product/9780596007126.do") Head First Design Patterns
+    dd The course book
+
+    dt
+      a(href="http://www.youtube.com/playlist?list=PLF206E906175C7E07") Design Patterns Video Tutorials by Derek Banas
+    dd Video playlist explaining design patterns through examples similar to the course book.
+
+    dt
+      a(href="http://www.youtube.com/playlist?list=PLGLfVvz_LVvSuz6NuHAzpM52qKM6bPlCV") Applied Design Datterns video tutorials by Derek Banas
+    dd Video playlist showing how design patterns can be applied while refactoring code towards the subjectively better.
+
+
+
+
+
+
+  h2 Principles considered in this course
+
+  dl
+    dt Larman's creator pattern
+    dd Are objects created in the right place?
+
+    dt Larman’s expert pattern
+    dd Is the responsibility to do things assigned to the correct classes?
+
+    dt Dependency Inversion principle
+    dd Are there dependencies between concrete system parts that may cause problems to maintain and extend the code? Could these dependencies be removed, e.g. through strategically design interfaces?
+
+    dt The single responsibility principle
+    dd Does every single class in the solution have a single responsibility?
+
+    dt Open-closed principle
+    dd Is the code possible to change without making changes to the existing code?
+
+    dt Interface segregation principle
+    dd Are there interfaces in the code that could be logically separated into several smaller interfaces?
+
+
+
+  h2 Patterns considered in this course
+
+  dl
+    dt Adapter or Facade
+    dd Do you need to make an incompatible object compatible without changing its internals?
+
+    dt Command
+    dd Could some part of the system benefit from encapsulating method invocation?
+
+    dt Composite
+    dd Can the parts be treated as the whole?
+
+    dt Decorator
+    dd Does any class need a change in its responsibility during runtime?
+
+    dt Factory
+    dd Is the system suffering from high coupling and dependencies or repetitive complex instantiation of objects?
+
+    dt Model View Controller
+    dd Is managing the entire system overwhelming, could MVC keep it manageable?
+
+    dt Observer
+    dd How is different parts of the system being notified of change in state? Could an event-driven solution be beneficial?
+
+    dt Proxy
+    dd Are you making complex calls to objects that could be bundled and proxied?
+
+    dt Singleton
+    dd Do your system need to keep track of objects from a specific type? Should the solution be simplified with just having a single object of that type?
+
+    dt State
+    dd Does behavior vary greatly depending on an object's state?
+
+    dt Strategy
+    dd Are there families of algorithms where the members are virtually interchangable?
+
+    dt Template method
+    dd Does an algorithm consist of recurring steps who's implementations can be deferred to subclasses.
+
+
+
+
+
 
