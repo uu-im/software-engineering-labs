@@ -161,46 +161,9 @@ include partials/layout
 
   p Refactor your UML representation created in the previous exercise, by introducing patterns and principles as you see fit.
 
-  p Below are some suggestions for patterns and principles to consider.
-
-  dl
-    dt Larman's creator pattern
-    dd Are objects created in the right place?
-
-    dt Larman’s expert pattern
-    dd Is the responsibility to do things assigned to the correct classes?
-
-    dt Dependency Inversion principle
-    dd Are there dependencies between concrete system parts that may cause problems to maintain and extend the code? Could these dependencies be removed, e.g. through strategically design interfaces?
-
-    dt Observer pattern
-    dd How is different parts of the system being notified of change in state? Could an event-driven solution be beneficial?
-
-    dt Decorator pattern
-    dd Does any class need a change in its responsibility during runtime?
-
-    dt Factory pattern
-    dd Is the system suffering from high coupling and dependencies or repetitive complex instantiation of objects?
-
-    dt Singleton pattern
-    dd Do your system need to keep track of objects from a specific type? Should the solution be simplified with just having a single object of that type?
-
-    dt Command pattern
-    dd Could some part of the system benefit from encapsulate method invocation?
-
-    dt Model View Controller pattern
-    dd Is managing the entire system overwhelming, could MVC keep it manageable.
-
-    dt The single responsibility principle
-    dd Does every single class in the solution have a single responsibility?
-
-    dt Open-closed principle
-    dd Is the code possible to change without making changes to the existing code?
-
-    dt Interface segregation principle
-    dd Are there interfaces in the code that could be logically separated into several smaller interfaces?
-
-
+  p Be sure to consider  
+    a(href="resources.html") all patterns discussed in this course
+    | .
 
 
 
@@ -225,6 +188,7 @@ include partials/layout
         code State pattern
       li 
         code Proxy pattern
+
 
 
 
