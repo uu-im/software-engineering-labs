@@ -9,14 +9,14 @@ gulp.task('default', ['development', 'watch', 'server']);
 
 gulp.task('d', ['development']);
 gulp.task('development', function(){
-  Tasks.build('tmp-www');
+  Tasks.build('tmp-www/software-engineering-labs');
 });
 
 gulp.task('watch', function(){
   var watchfiles = 
   gulp.watch(['src/**/*', 'code/**/*'], function(e){
     console.log('Changed: ' + e.path);
-    Tasks.build('tmp-www');
+    Tasks.build('tmp-www/software-engineering-labs');
   });
 });
 
