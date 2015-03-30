@@ -1,4 +1,7 @@
+include mixins/deliverables
 include partials/layout
+
+
 +layout("Block 4")
   header
     h1 Software Engineering &mdash; Lab 4
@@ -26,11 +29,12 @@ include partials/layout
 
 
   h2 Deliverables
-  p This is a summary of the deliverables for this block.
+  p Please follow the below folder/file structure for the handin of this block.
 
-  +handin(1, "Veichles")
-    p One Visual Studio solution
-
+  +toc-exercises(4)
+    +toc-exercise(1)
+      +toc-assignment
+        +vs-solution("Vehicles") 
 
 
 
