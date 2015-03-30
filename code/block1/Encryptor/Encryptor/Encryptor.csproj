@@ -33,16 +33,16 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Languages\MultiCipher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Translator.cs" />
     <Compile Include="EncryptoStream.cs" />
-    <Compile Include="Languages\RobberLanguage.cs" />
-    <Compile Include="Languages\CaesarCipher.cs" />
-    <Compile Include="Languages\LeetLanguage.cs" />
-    <Compile Include="Languages\ReverseLang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IAlgorithm.cs" />
+    <Compile Include="Algorithms\MultiCipher.cs" />
+    <Compile Include="Algorithms\RobberLanguage.cs" />
+    <Compile Include="Algorithms\CaesarCipher.cs" />
+    <Compile Include="Algorithms\LeetLanguage.cs" />
+    <Compile Include="Algorithms\ReverseLang.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
