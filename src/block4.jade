@@ -1,4 +1,7 @@
+include mixins/deliverables
 include partials/layout
+
+
 +layout("Block 4")
   header
     h1 Software Engineering &mdash; Lab 4
@@ -9,28 +12,15 @@ include partials/layout
     p Using code contracts we're now going to see how we can "guard" behavior and state. And also how to ensure that subclasses respect the restrictions set by their superclass.
 
 
-  h2 Study material
-  p Please do familiarize yourself with (as much as you find necessary of) the following study material before attempting to approach the corresponding lab exercises. Naturally, all of the study material is not mandatory. But in relation to the labs, you will benefit greatly from exploring it.
-
-  ul
-    li
-      a(href="http://research.microsoft.com/en-us/projects/contracts/userdoc.pdf") Code Contracts user manual &mdash; Microsoft Research
-    li
-      a(href="http://www.youtube.com/watch?v=xVhQ9yfo54I") .NET Code Contracts
-      |  (~ 27 min video)
-
-
-
-
-
 
 
   h2 Deliverables
-  p This is a summary of the deliverables for this block.
+  p Please follow the below folder/file structure for the handin of this block.
 
-  +handin(1, "Veichles")
-    p One Visual Studio solution
-
+  +toc-exercises(4)
+    +toc-exercise(1)
+      +toc-assignment
+        +vs-solution("Vehicles") 
 
 
 
