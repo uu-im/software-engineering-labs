@@ -1,3 +1,29 @@
+mixin layout(title)
+  doctype html
+  meta(charset="utf-8")
+  html(lang="en")
+    head
+      title= title
+      link(rel="stylesheet", href="/vt15/assets/css/main.css")
+      link(rel="stylesheet", href="/vt15/assets/css/prism.css")
+      link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+  body
+    .container
+      block
+    script(src="/vt15/assets/js/prism.js")
+    script(src="http://code.jquery.com/jquery-2.1.3.min.js")
+    script(src="/vt15/assets/js/main.js")
+
+
+
+mixin handin(n, title)
+  h3 Exercise 
+    =n
+    |  &mdash;  
+    a(href="#exercise-#{n}")= title
+  block
+
+
 mixin i-folder
   i.fa.fa-folder-open-o  
     if block
