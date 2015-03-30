@@ -3,7 +3,7 @@ include partials/layout
 
 mixin refactoring-exercise-file(name)
   +vs-file
-    a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalBefore/#{name}.cs") #{name}.cs
+    a(href="../code/block2/MovieRentalRefactoring/MovieRentalBefore/#{name}.cs") #{name}.cs
 
 
 
@@ -65,13 +65,13 @@ mixin refactoring-exercise-file(name)
       li Add the contents of the scaffold below.
         ul.no-bullet
           +vs-file
-            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/MathLibrary/MathLib.cs") MathLib.cs
+            a(href="../code/block2/MathLibrary/MathLibrary/MathLib.cs") MathLib.cs
       li Create a new class in your <code>MathLibraryTests</code> project. Name it <code>MathLibTests</code>.
       li Create a (or rename the default) class in your test project and name it <code>MathLibTests.cs</code>
       li Add the contents of the scaffold below.
         ul.no-bullet
           +vs-file
-            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MathLibrary/TestProject/MathLibraryTests.cs") MathLibTests.cs
+            a(href="../code/block2/MathLibrary/TestProject/MathLibraryTests.cs") MathLibTests.cs
       li Add a reference (via <code>Solution Explorer</code>) to the <code>MathLibrary</code> project in the <code>MathLibraryTests</code> project. We do this because the test project is going to test classes in the <code>MathLibrary</code> project, and thus need access to the classes.
 
     p <code>MathLib</code> contains a number of public static functions that perform math related operations. Not all methods are implemented. You must complete these implementations.
@@ -102,7 +102,7 @@ mixin refactoring-exercise-file(name)
       li Introduce the following integration tests to your project. Run the integration tests. One should pass and one should fail. Ensure that this is the case before continuing further.
         ul.no-bullet
           +vs-file
-            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") CustomerIntegrationTests.cs
+            a(href="../code/block2/MovieRentalRefactoring/MovieRentalTests/CustomerIntegrationTests.cs") CustomerIntegrationTests.cs
 
       li Follow the instructions given in the following document step by step. Remember to run the integration tests between changes to ensure that you are not altering the behavior of the program.
         ul
@@ -128,7 +128,7 @@ mixin refactoring-exercise-file(name)
       li Download the class containing bugs, and add the code to your project.
         ul.no-bullet
           +vs-file
-            a(href="https://raw.githubusercontent.com/chrokh/software-engineering-labs/master/code/block2/MatrixUtils/MatrixUtils/Matrix.cs") Matrix.cs
+            a(href="../code/block2/MatrixUtils/MatrixUtils/Matrix.cs") Matrix.cs
       li Create a Test Project in the same Solution.
       li Create and run tests one by one in order to locate any bugs. Test all public methods.
       li Fix the bugs either when you've written all tests or when you've encountered them.
