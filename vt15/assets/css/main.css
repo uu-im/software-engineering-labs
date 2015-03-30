@@ -1,0 +1,192 @@
+body{
+  padding: 12px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+}
+
+.container{
+  margin: auto auto;
+  max-width: 920px;
+}
+
+
+p, li{
+  line-height: 1.5em;
+}
+
+
+header{
+  margin-top:    1.5em;
+  margin-bottom: 1.5em;
+}
+
+
+h2{
+  margin-top: 3em;
+}
+
+
+a{
+  text-decoration: none;
+  color: #EC5751;
+  font-weight: bold;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+
+p  > code,
+li > code{
+  background: #dedede;
+  padding: 2px 3px;
+  border-radius: 3px;
+  color: #333;
+}
+
+
+img{
+  max-width: 100%;
+}
+img.img-md{
+  max-height: 250px;
+}
+img.img-sm{
+  max-height: 180px;
+}
+
+
+figure{
+  text-align: center;
+  background: #eee;
+  padding:    12px;
+  margin:     0;
+}
+figure span{
+  clear:      both;
+  display:    block;
+  font-size:  .8em;
+  margin-top: 8px;
+}
+
+@media(min-width: 920px){
+  figure.figure-right{
+    float:  right;
+    margin: 0 0 12px 12px;
+    background: transparent;
+    padding:    0;
+  }
+}
+
+
+pre{
+  clear: both;
+}
+
+
+.terminal{
+  background: #222;
+  padding:    1em;
+  color:      #fff;
+  position: relative;
+}
+
+
+@-webkit-keyframes flash {
+  0% {
+    background-color: rgba(200,150,0,.25);
+    background-color: rgba(236,87,81,.25);
+    opacity:1;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.flash{
+  -webkit-animation-name: flash;
+  -webkit-animation-duration: 800ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+
+
+.exercise-summary,
+.exercise-summary ol,
+.exercise-summary ul{
+  list-style-type: none;
+}
+.exercise-summary{
+  padding-left: 0;
+}
+
+
+
+table{
+  border:        0px solid #222;
+  text-align:    left;
+  background:    #f5f5f5;
+}
+table th{
+  border-bottom: 0px solid #222;
+  background:    #dedede;
+  text-align:    center;
+}
+table tr{
+  border-bottom: 1px solid #aaa;
+}
+table td,
+table th{
+  padding:       3px 6px;
+}
+table th{
+  padding:       8px 3px;
+}
+
+
+.cipher-specification{
+  font-size:      .9em;
+  width:          100%;
+  margin-bottom:  1.5em;
+}
+.cipher-specification tr td{
+  vertical-align: top;
+}
+.cipher-specification tr td:first-child{
+  text-align: right;
+  width: 33%;
+}
+
+
+
+ul.no-bullet{
+  list-style-type: none;
+}
+
+
+
+
+/* font awesome */
+.fa code a{
+  padding-left: 3px;
+}
+
+
+
+
+dl dt{
+  font-weight: bold;
+}
+dl dd{
+  margin-top:    3px;
+  margin-left:   0;
+  margin-bottom: 12px;
+}
+
+
+
+
+.text-lg{
+  font-size: 1.2em;
+}
