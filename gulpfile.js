@@ -74,7 +74,9 @@ var Tasks = {
         .pipe(gulp.dest(outdir + '/code'));
     });
 
-    gulp.src('./index.html')
-      .pipe(gulp.dest(root));
+    if(root!='./' && root!='.' && root!='' && root!=''){
+      gulp.src('./index.html')
+        .pipe(gulp.dest(root));
+    }
   }
 }
