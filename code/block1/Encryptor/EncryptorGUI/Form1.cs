@@ -102,9 +102,9 @@ namespace EncryptorGUI
 
   class PrintableAlgorithm
   {
-    public ILanguage Algorithm { get; private set; }
+    public IAlgorithm Algorithm { get; private set; }
 
-    public PrintableAlgorithm(ILanguage algorithm)
+    public PrintableAlgorithm(IAlgorithm algorithm)
     {
       Algorithm = algorithm;
     }

@@ -86,23 +86,10 @@ pre{
 
 .terminal{
   background: #222;
-  padding:    30px 1em 1em 1em;
+  padding:    1em;
   color:      #fff;
   position: relative;
 }
-.terminal::before{ 
-  content: "Command Prompt";
-  display: block;
-  background: #ddd;
-  color: #222;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 3px;
-  text-align: center;
-}
-
 
 
 @-webkit-keyframes flash {
@@ -137,11 +124,13 @@ pre{
 
 
 table{
-  border:        1px solid #222;
+  border:        0px solid #222;
   text-align:    left;
+  background:    #f5f5f5;
 }
 table th{
-  border-bottom: 1px solid #222;
+  border-bottom: 0px solid #222;
+  background:    #dedede;
   text-align:    center;
 }
 table tr{
@@ -150,6 +139,9 @@ table tr{
 table td,
 table th{
   padding:       3px 6px;
+}
+table th{
+  padding:       8px 3px;
 }
 
 

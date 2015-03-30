@@ -6,13 +6,13 @@ namespace Encryptor
 {
   class EncryptoStream
   {
-    ILanguage language;
+    IAlgorithm language;
     ConsoleKeyInfo lastKey;
     string input = "";
     string encrypted;
     string decrypted;
 
-    public EncryptoStream(ILanguage lang)
+    public EncryptoStream(IAlgorithm lang)
     {
       language = lang;
     }
