@@ -6,16 +6,16 @@ namespace Encryptor
 {
   class Translator
   {
-    private static IList<ILanguage> languages = new List<ILanguage>();
+    private static IList<IAlgorithm> languages = new List<IAlgorithm>();
 
-    public static void AddLanguage(ILanguage language)
+    public static void AddLanguage(IAlgorithm language)
     {
       languages.Add(language);
     }
 
     public static void Start()
     {
-      ILanguage language;
+      IAlgorithm language;
       LanguageStrategy strategy;
 
       while((language = LanguageSelector.Start(languages)) != null)
@@ -26,7 +26,7 @@ namespace Encryptor
 
   class LanguageStrategySelector
   {
-    public static LanguageStrategy Start(ILanguage lang)
+    public static LanguageStrategy Start(IAlgorithm lang)
     {
       if(lang == null)
         throw new ArgumentException("No language given");
@@ -38,7 +38,7 @@ namespace Encryptor
       return (LanguageStrategy)(alt.GetObject());
     }
 
-    private static IList<Alternative> alternativeList(ILanguage lang)
+    private static IList<Alternative> alternativeList(IAlgorithm lang)
     {
       return Alternative.CreateMany(
         new List<LanguageStrategy>(){
@@ -48,7 +48,7 @@ namespace Encryptor
       );
     }
 
-    private static IList<string> preStrings(ILanguage lang)
+    private static IList<string> preStrings(IAlgorithm lang)
     {
       return new List<string>(){
         lang.GetName() + "", ""
@@ -58,8 +58,8 @@ namespace Encryptor
 
   abstract class LanguageStrategy
   {
-    protected ILanguage language;
-    public LanguageStrategy(ILanguage lang)
+    protected IAlgorithm language;
+    public LanguageStrategy(IAlgorithm lang)
     {
       language = lang;
     }
@@ -74,7 +74,7 @@ namespace Encryptor
 
   class LanguageEncodeStrategy : LanguageStrategy
   {
-    public LanguageEncodeStrategy(ILanguage lang) : base(lang){}
+    public LanguageEncodeStrategy(IAlgorithm lang) : base(lang){}
     public override string Translate(string input)
     {
       return language.Encrypt(input);
@@ -87,7 +87,7 @@ namespace Encryptor
 
   class LanguageDecodeStrategy : LanguageStrategy
   {
-    public LanguageDecodeStrategy(ILanguage lang) : base(lang){}
+    public LanguageDecodeStrategy(IAlgorithm lang) : base(lang){}
     public override string Translate(string input)
     {
       return language.Decrypt(input);
@@ -148,12 +148,12 @@ namespace Encryptor
 
   class LanguageSelector
   {
-    static IList<ILanguage> languages;
-    static ILanguage selectedLanguage;
+    static IList<IAlgorithm> languages;
+    static IAlgorithm selectedLanguage;
     static int offset = 0;
     static bool selected;
 
-    public static ILanguage Start(IList<ILanguage> langs)
+    public static IAlgorithm Start(IList<IAlgorithm> langs)
     {
       if(langs.Count < 1)
         throw new ArgumentException("No languages given");
@@ -161,7 +161,7 @@ namespace Encryptor
       Alternative alt = AlternativeSelector.Start(
         Alternative.CreateMany(langs));
 
-      return (ILanguage)(alt.GetObject());
+      return (IAlgorithm)(alt.GetObject());
     }
   }
 
@@ -322,7 +322,7 @@ namespace Encryptor
       return obj;
     }
 
-    public static IList<Alternative> CreateMany(IList<ILanguage> langs)
+    public static IList<Alternative> CreateMany(IList<IAlgorithm> langs)
     {
       return langs.Select(l => new Alternative(l.GetName(), l))
         .ToList<Alternative>();

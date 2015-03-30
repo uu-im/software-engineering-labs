@@ -4,28 +4,28 @@ using System.Linq;
 
 namespace Encryptor
 {
-  public class MultiCipher : ILanguage
+  public class MultiCipher : IAlgorithm
   {
-    IList<ILanguage> algorithms = new List<ILanguage>();
+    IList<IAlgorithm> algorithms = new List<IAlgorithm>();
 
     public MultiCipher(){}
-    public MultiCipher(ILanguage algorithm)
+    public MultiCipher(IAlgorithm algorithm)
     {
       Add(algorithm);
     }
-    public MultiCipher(IList<ILanguage> algorithms)
+    public MultiCipher(IList<IAlgorithm> algorithms)
     {
       Add(algorithms);
     }
 
-    public void Add(ILanguage algorithm)
+    public void Add(IAlgorithm algorithm)
     {
       this.algorithms.Add(algorithm);
     }
 
-    public void Add(IList<ILanguage> algorithms)
+    public void Add(IList<IAlgorithm> algorithms)
     {
-      foreach (ILanguage a in algorithms)
+      foreach (IAlgorithm a in algorithms)
         this.algorithms.Add(a);
     }
 
@@ -33,7 +33,7 @@ namespace Encryptor
     {
       string output = input;
 
-      foreach(ILanguage a in algorithms)
+      foreach(IAlgorithm a in algorithms)
         output = a.Encrypt(output);
 
       return output;

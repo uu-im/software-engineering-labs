@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Encryptor
 {
-  public class CaesarCipher : ILanguage
+  public class CaesarCipher : IAlgorithm
   {
     int shift;
 

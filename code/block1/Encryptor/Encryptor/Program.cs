@@ -20,7 +20,7 @@ namespace Encryptor
 
     static void two()
     {
-      ILanguage lang = new ReverseLang();
+      IAlgorithm lang = new ReverseLang();
       EncryptoStream ls = new EncryptoStream(lang);
       ls.Start();
     }
