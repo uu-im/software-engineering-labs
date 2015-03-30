@@ -42,8 +42,8 @@ namespace Encryptor
     {
       return Alternative.CreateMany(
         new List<LanguageStrategy>(){
-          new LanguageEncodeStrategy(lang),
-          new LanguageDecodeStrategy(lang),
+          new LanguageEncryptStrategy(lang),
+          new LanguageDecryptStrategy(lang),
         }
       );
     }
@@ -72,9 +72,9 @@ namespace Encryptor
 
   }
 
-  class LanguageEncodeStrategy : LanguageStrategy
+  class LanguageEncryptStrategy : LanguageStrategy
   {
-    public LanguageEncodeStrategy(IAlgorithm lang) : base(lang){}
+    public LanguageEncryptStrategy(IAlgorithm lang) : base(lang){}
     public override string Translate(string input)
     {
       return language.Encrypt(input);
@@ -85,9 +85,9 @@ namespace Encryptor
     }
   }
 
-  class LanguageDecodeStrategy : LanguageStrategy
+  class LanguageDecryptStrategy : LanguageStrategy
   {
-    public LanguageDecodeStrategy(IAlgorithm lang) : base(lang){}
+    public LanguageDecryptStrategy(IAlgorithm lang) : base(lang){}
     public override string Translate(string input)
     {
       return language.Decrypt(input);
