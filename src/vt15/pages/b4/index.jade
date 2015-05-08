@@ -79,7 +79,7 @@ include ../../_mixins
   p Since we're moving over to using invariants. Remember to <em>remove</em> the now unnecessary guard conditions that throw <code>ArgumentException</code>'s.
 
   p If you've progressed correctly, build the project, and then wait a couple of minutes for the static checker to run. You'll notice a couple of "squigglies" show up &mdash; indicating paths that will lead to erroneous states. Which are the potentially erroneous states and why do they happen? Discuss with a partner.
-  p Eliminate the errors through (1) removing the parameter-free constructor in the base class, and (2) calling the base constructor with a parameter from the subclass's constructor. As follows:
+  p Eliminate the errors through (1) removing the parameter-free constructor in the base class, and (2) calling the base constructor with a parameter from the subclass's constructor.
 
   p The project should now be free of static errors, and we have increased the level of "correctness" in the code as it is now significantly more difficult to create a subclass that breaks the invariant rules of the superclass.
 
