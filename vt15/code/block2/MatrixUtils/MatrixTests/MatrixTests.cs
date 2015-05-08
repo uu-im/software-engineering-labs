@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RefactoredMatrix;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
