@@ -1,147 +1,69 @@
-<!DOCTYPE html><meta charset="utf-8"><html lang="en"><head><title>Block 4</title><link rel="stylesheet" href="/software-engineering-labs/vt15/assets/css/main.css"><link rel="stylesheet" href="/software-engineering-labs/vt15/assets/css/prism.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></head></html><body><div class="container"><header><h1>Software Engineering &mdash; Lab 4</h1></header><div class="preamble"><p>Using code contracts we're now going to see how we can "guard" behavior and state. Also how to ensure that subclasses respect the restrictions set by their superclasses.</p><p><em>This lab instruction is being adjusted to ease the learning experience. It will be available on Monday. Please pardon the interruption. This lab is short and you will be able to complete it during the lab sessions.</em></p></div><!--h2 Deliverables
-p Please follow the below folder/file structure for the handin of this block.
-
-+toc-exercises(4)
-  +toc-exercise(1)
-    +toc-assignment
-      +vs-solution("Vehicles") 
-      
-      
-      
-      
-+exercise(4, 1, "State-space, behavior and Code Contracts")
-p At the lectures you've discussed an example with vehicles with different weights. We're going to implement that example and attempt to enforce behaviour and state-space through the use of contracts. Let's start off with some basic classes:
-
-pre
-  code.language-csharp
-    | class RoadVehicle
-    | {
-    |     public double Weight { get; protected set; }
-    | 
-    |     public RoadVehicle() { }
-    |     public RoadVehicle(double weight)
-    |     {
-    |         if (weight < 0.5 || 10.0 < weight)
-    |             throw new ArgumentException();
-    | 
-    |         Weight = weight;
-    |     }
-    | }
-    | 
-    | class Automobile : RoadVehicle
-    | {
-    |     public Automobile(double weight)
-    |     {
-    |         if (weight < 0.2 || 13 < weight)
-    |             throw new ArgumentException();
-    |         
-    |         Weight = weight;
-    |     }
-    | }      
-    
-p Try recalling the discussion you had in the lecture. Notice how the subclass above ignores the restrictions posed by the superclass's constructor. A simple mistake you may say, but surely an easy one to make.
-
-
-h3 Setting up Visual Studio to use Code Contracts
-p To enable Visual Studios static and runtime contract checking, right-click your project in the <em>Solution Explorer</em> and choose </em>Properties</em>. Select the <em>Code Contracts</em> tab  and make sure to check <em>Perform Runtime Contract Checking</em>, <em>Perform Static Contract Checking</em> and also to set the <em>Warning Level</em> to <em>High</em>. Save the configuration file. Whenever you now build the project, the <em>Background contract analysis</em> will be run, and you can track its progress in the <em>Output</em>-pane.
-
-h3 Using invariants to enforce the weight
-p Now, let's make use of invariants instead of exceptions as to force any subclass to follow the restrictions on weight. Add the following method to the RoadVehicle class:
-
-pre
-  code.language-csharp
-    | /* RoadVehicle */
-    | [ContractInvariantMethod]
-    | private void ObjectInvariant()
-    | {
-    |     Contract.Invariant(0.5 < Weight && Weight < 10.0);
-    | }
-    
-p Invariants in C# are added through void-returning private methods decorated with <code>[ContractInvariantMethod]</code>. The method must never be called from anywhere by the user code.
-
-p Do the same thing for the Automobile class but using the weight restrictions of the automobile.
-p Since we're moving over to using invariants. Remember to <em>remove</em> the now unnecessary guard conditions that throw <code>ArgumentException</code>'s.
-
-p If you've progressed correctly, build the project, and then wait a couple of minutes for the static checker to run. You'll notice a couple of "squigglies" show up &mdash; indicating paths that will lead to erroneous states. Which are the potentially erroneous states and why do they happen? Discuss with a partner.
-p Eliminate the errors through (1) removing the parameter-free constructor in the base class, and (2) calling the base constructor with a parameter from the subclass's constructor.
-
-p The project should now be free of static errors, and we have increased the level of "correctness" in the code as it is now significantly more difficult to create a subclass that breaks the invariant rules of the superclass.
-
-p Let's have a look at how code contracts can help us realize there are problems with our code. There is still a major problem with our code, and we will find it when we try instantiating an automobile with edge case weight. Put the following code in the main entry point of the application, run the program and take note of the exception that arise.
-
-pre
-  code.language-csharp Automobile car = new Automobile(12.0);
-  
-p We should now realize that the conceptual problem with our code is that we're actually violating Liskov's substitution principle. Discuss with a partner why that is.
-
-
-
-h3 Rethinking the automobile class
-p Now that we've realized that an automobile cannot possible be a ground vehicle if the weight of the automobile is greater than the maximum allowed weight for anything that is a ground vehicle. Let's rethink. Instead, rewrite the invariant of the automobile so that the invariant enforces the following.
-
-pre
-  code.language-csharp 1 < Weight && Weight < 7.5
-  
-  
-  
-  
-  
-h3 Pre- and post-conditions
-p Now, we'll leave the invariants and talk about pre- and post-conditions. Let's introduce the concept of passengers to the automobile class. Implement the following method and it's required members:
-
-pre
-  code.language-csharp
-    | /* Automobile */
-    | public void SetPassengers(int n)
-    | {
-    |   if (n > 5)
-    |     throw new ArgumentException("Could not fit all passengers");
-    | 
-    |   _currentPassengers = n;
-    | }
-    
-    
-    
-    
-    
-h4 Pre-
-p Let's replace the exception-throwing code above with a pre-condition. You can think of pre-conditions as a way to make sure that a method is only allowed to be called with valid input. Rewrite the method like so:
-
-pre
-  code.language-csharp
-    | public void SetPassengers(int n)
-    | {
-    |   Contract.Requires(n <= 5);
-    |   _currentPassengers = n;
-    | }
-    
-p Now, to test whether or not this works, put the following code in the main entry of the application:
-pre
-  code.language-csharp
-    | Automobile am = new Automobile(4);
-    | am.SetPassengers(2); // Should be ok
-    | am.SetPassengers(6); // Should not be ok
-p Rebuild the project and notice what errors that the static checker finds. Now we need not even run the application before the checker finds our mistakes.
-p Experiment with how the static checker behaves when we are using variables instead of primitives. Use a variables instead of a hard-coded number.
-
-
-
-
-h4 Post-
-p Now let's instead focus on post-conditions. Quite intuitively, if pre-conditions ensure correctness of state upon entry in a method, post-conditions ensure correctness of state upon exit out of a method. Using post-conditions it is often possible to mathematically and specifically describe what the method "actually do". To write post-conditions we use the ensures-method:
-pre
-  code.language-csharp
-    | Contract.Ensures(statement);
-    | // Where the statement evaluates to true or false
-p Write a post-condition that enforce the implementation of the SetPassenger-method. Run the application to see if your post-condition passes. To verify that you've written a correct post-condition, "break" the code by changing the implementation to an incorrect one, such as:
-pre
-  code.language-csharp _currentPassengers = n + 1;
-  
-  
-  
-  
-h3 Extend the classes
-p If you've completed all of the above. Think of some new behavior that could be added to either the sub- and/or the superclass. Implement that behavior and then write invariants, pre- and/or post-conditions to "protect" it. Try choosing something not concerned with arithmetic.
-
-
---></div><script src="/software-engineering-labs/vt15/assets/js/prism.js"></script><script src="http://code.jquery.com/jquery-2.1.3.min.js"></script><script src="/software-engineering-labs/vt15/assets/js/main.js"></script></body>
+<!DOCTYPE html><meta charset="utf-8"><html lang="en"><head><title>Block 4</title><link rel="stylesheet" href="/software-engineering-labs/vt15/assets/css/main.css"><link rel="stylesheet" href="/software-engineering-labs/vt15/assets/css/prism.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></head></html><body><div class="container"><header><h1>Software Engineering &mdash; Lab 4</h1></header><div class="preamble"><p>Using code contracts we're now going to see how we can "guard" behavior and state. Also how to ensure that subclasses respect the restrictions set by their superclasses.</p></div><h2>Deliverables</h2><p>Please follow the below folder/file structure for the handin of this block.</p><ol class="exercise-summary"><i class="fa fa-file-zip-o"> <code>B4.zip</code></i><li><ol><li><i class="fa fa-folder-open-o">   <code>Ex1</code></i><ol><li><i class="fa fa-folder-open-o"> <code>Vehicles</code> (VS solution)</i></li></ol></li></ol></li></ol><h2><a data-target="e1" class="hideable">4.1 State-space, behavior and Code Contracts</a></h2><div id="e1"></div><p>At the lectures you've discussed an example with vehicles of different weights. We're going to implement that example and attempt to enforce behaviour and state-space through the use of contracts. Let's start off with some basic classes:</p><pre><code class="language-csharp">class RoadVehicle
+{
+    public double Weight { get; protected set; }
+ 
+    public RoadVehicle() { }
+    public RoadVehicle(double weight)
+    {
+        if (weight < 0.5 || 10.0 < weight)
+            throw new ArgumentException();
+ 
+        Weight = weight;
+    }
+}
+ 
+class Automobile : RoadVehicle
+{
+    public Automobile(double weight)
+    {
+        if (weight < 0.2 || 13 < weight)
+            throw new ArgumentException();
+        
+        Weight = weight;
+    }
+}      </code></pre><p>Try recalling the discussion you had in the lecture. Notice how the subclass above ignores the restrictions posed by the superclass's constructor. A simple mistake you may say, but surely an easy one to make. We're violiating Liskov's substitution principle.</p><h3>Setting up Visual Studio to use Code Contracts</h3><p>To enable Visual Studios static and runtime contract checking, right-click your project in the <em>Solution Explorer</em> and choose </em>Properties</em>.</p><p>Uncheck <em>Check in background</em> but do check <em>Fail build on warnings</em>. It takes significant time for the static checker to run, and since we want to make deliberate changes step by step we want to be sure when the static checker runs, and when it finishes.</p><p>Select the <em>Code Contracts</em> tab  and make sure to check <em>Perform Runtime Contract Checking</em>, <em>Perform Static Contract Checking</em> and also to set the <em>Warning Level</em> to <em>High</em>.</p><p>Save the configuration file. Whenever you now build the project the static checker will run. You will notice that building takes significantly longer time than before. Upon errors, your build will fail, and errors will be reported in the error pane.</p><h2>Pre- and post-conditions</h2><p>We're now going to replace the <code>ArgumentException</code>'s with pre- and post-conditions.</p><b>RoadVehicle</b><ul><li>Add a pre-condition to the constructor that limits the argument <code>weight</code> to the range <code>0.5 - 10</code>.</li><li>Add a post-condition to the constructor, ensuring that the instance variable <code>Weight</code> is set to the value of the argument <code>weight</code>.</li></ul><b>Automobile</b><ul><li>Add a pre-condition to the constructor that limits the argument <code>weight</code> to the range <code>0.2 - 13</code>.</li><li>Add a post-condition to the constructor, ensuring that the instance variable <code>Weight</code> is set to the value of the argument <code>weight</code>.</li></ul><p>Don't forget to remove the <code>ArgumentException</code> throws as they are now superflous.</p><p>Build the project and observe the error list. We should be ok. Why? Discuss with a partner.</p><h3>Syntax</h3><p>Pre- and post conditions can be added to any method in C# when using the Code Contracts library. They must all be added in the beginning of the body of a method. I.e. before the actual work of the method is performed. Syntax examples below.</p><pre><code class="language-csharp">Contract.Requies(statement); // Pre-condition
+Contract.Ensures(statement); // Post-condition</code></pre><h2>Adding invariants</h2><p>Actually we didn't really violate Liskov's substitution principle in the original case, nor in the one above. The argument less constructor in the superclass indicates that there actually are no restrictions on the weight of a RoadVehicle and thus the Automobile indeed is a specialization of the RoadVehicle.</p><p>Discuss the implications of this with a partner. What does it mean? How should it have been designed? Why is it not enough to limit the range of the constructor argument <code>weight</code>?</p><p>What do you think will happen if we add invariants that force the classes to maintain their respective weight ranges? Discuss with a partner. Make sure you have a hypotheses before actually adding the invariants in the code.</p><ul><li>Add an invariant to <code>RoadVehicle</code>, ensuring that <code>Weight</code> remains in the range <code>0.5 - 10</code>.</li><li>Add an invariant to <code>Automobile</code>, ensuring that <code>Weight</code> remains in the range <code>0.2 - 13</code>.</li></ul><p>Invariants in C# are added through private void returning instance methods decorated with <code>[ContractInvariantMethod]</code>. These method must never be called from anywhere by the user code. Syntax as below:</p><pre><code class="language-csharp">[ContractInvariantMethod]
+private void ObjectInvariant()
+{
+    Contract.Invariant(expression);
+}</code></pre><!-- precode.language-csharp
+  |class RoadVehicle
+  |{
+  |    public double Weight { get; protected set; }
+  | 
+  |    public RoadVehicle() { }
+  |    public RoadVehicle(double weight)
+  |    {
+  |        Contract.Requires(0.5 < weight && weight < 10);
+  |        Contract.Ensures(Weight = weight);
+  |        Weight = weight;
+  |    }
+  |    
+  |    [ContractInvariantMethod]
+  |    private void ObjectInvariant()
+  |    {
+  |        Contract.Invariant(0.5 < Weight && Weight < 10.0);
+  |    }
+  |}
+  | 
+  |class Automobile : RoadVehicle
+  |{
+  |    public Automobile(double weight)
+  |    {
+  |        Contract.Requires(0.2 < weight && weight < 13);
+  |        Contract.Ensures(Weight = weight);
+  |        Weight = weight;
+  |    }
+  |    
+  |    [ContractInvariantMethod]
+  |    private void ObjectInvariant()
+  |    {
+  |        Contract.Invariant(0.2 < Weight && Weight < 13);
+  |    }
+  |}      
+  --><h3>Rethinking the automobile class</h3><p>Now that we're actually limiting weight in the superclass we're successfully violating Liskov's substition principle, and thus need to redesign. Obviously we must have misinterpreted the requirements.</p><p>Rewrite the weight range rules of the superclass to something more appropriate. Rewrite it to a range that is both reasonable from a real-world-perspective, and causes the Automobile to be a proper subclass.</p><h3>Add methods</h3><p>Add at least two methods to the superclass, and at least two methods to the subclass. One of the methods of the superclass should be overriden in the subclass.</p><p>Remember to model things that make real-world sense, and also respect Liskov's substitution principle. Remember the principles of Contravariance and Covariance that you've talked about in class.</p><p>Here are some random examples of method signatures, but you are completely free to make up any methods you see fit.</p><pre><code class="language-csharp">AddPassenger(string name);
+RemovePassenger(Passenger p);
+RemoveWheel(int position);
+SetWheels(int num);
+Accellerate();
+TurnWheel(double deg);</code></pre></div><script src="/software-engineering-labs/vt15/assets/js/prism.js"></script><script src="http://code.jquery.com/jquery-2.1.3.min.js"></script><script src="/software-engineering-labs/vt15/assets/js/main.js"></script></body>
