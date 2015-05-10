@@ -53,21 +53,28 @@ include ../../_mixins
       |     }
       | }      
 
-  p Try recalling the discussion you had in the lecture. Notice how the subclass above ignores the restrictions posed by the superclass's constructor. A simple mistake you may say, but surely an easy one to make. We're violiating Liskov's substitution principle.
+  p Try recalling the discussion you had in the lecture. Notice how the subclass above ignores the restrictions posed by the superclass's constructor. A simple mistake you may say, but surely an easy one to make. We're violating Liskov's substitution principle.
 
 
   h3 Setting up Visual Studio to use Code Contracts
   p To enable Visual Studios static and runtime contract checking, right-click your project in the <em>Solution Explorer</em> and choose </em>Properties</em>.
 
-  p Uncheck <em>Check in background</em> but do check <em>Fail build on warnings</em>. It takes significant time for the static checker to run, and since we want to make deliberate changes step by step we want to be sure when the static checker runs, and when it finishes.
-
   p Select the <em>Code Contracts</em> tab  and make sure to check <em>Perform Runtime Contract Checking</em>, <em>Perform Static Contract Checking</em> and also to set the <em>Warning Level</em> to <em>High</em>.
+
+  p Uncheck <em>Check in background</em> but do check <em>Fail build on warnings</em>. It takes significant time for the static checker to run, and since we want to make deliberate changes step by step we want to be sure when the static checker runs, and when it finishes.
   
-  p Save the configuration file. Whenever you now build the project the static checker will run. You will notice that building takes significantly longer time than before. Upon errors, your build will fail, and errors will be reported in the error pane.
+  p Save the configuration file. Whenever you now build the project the static checker will run. You will notice that building takes significantly longer. Upon errors, your build will fail, and errors will be reported in the error pane.
 
 
   h2 Pre- and post-conditions
-  p We're now going to replace the <code>ArgumentException</code>'s with pre- and post-conditions.
+  p We're now going to replace the <code>ArgumentException</code>'s with preconditions, but also add post-conditions that ensure that our methods behave as expected.
+
+  p Pre- and post conditions can be added to any method in C# when using the Code Contracts library. They must all be added in the beginning of the body of a method. I.e. before the actual work of the method is performed. Syntax examples below.
+  pre
+    code.language-csharp
+      |Contract.Requies(expression); // Pre-condition
+      |Contract.Ensures(expression); // Post-condition
+
 
   b RoadVehicle
   ul
@@ -83,24 +90,14 @@ include ../../_mixins
 
   p Build the project and observe the error list. We should be ok. Why? Discuss with a partner.
 
-  h3 Syntax
-  p Pre- and post conditions can be added to any method in C# when using the Code Contracts library. They must all be added in the beginning of the body of a method. I.e. before the actual work of the method is performed. Syntax examples below.
-  pre
-    code.language-csharp
-      |Contract.Requies(statement); // Pre-condition
-      |Contract.Ensures(statement); // Post-condition
 
 
   h2 Adding invariants
-  p Actually we didn't really violate Liskov's substitution principle in the original case, nor in the one above. The argument less constructor in the superclass indicates that there actually are no restrictions on the weight of a RoadVehicle and thus the Automobile indeed is a specialization of the RoadVehicle.
+  p Actually we didn't really violate Liskov's substitution principle in the original case, nor in the one above. The argument-less constructor in the superclass indicates that there actually aren't any restrictions on the weight of a RoadVehicle and thus that the Automobile indeed is a proper specialization of the RoadVehicle.
 
   p Discuss the implications of this with a partner. What does it mean? How should it have been designed? Why is it not enough to limit the range of the constructor argument <code>weight</code>?
 
   p What do you think will happen if we add invariants that force the classes to maintain their respective weight ranges? Discuss with a partner. Make sure you have a hypotheses before actually adding the invariants in the code.
-
-  ul
-    li Add an invariant to <code>RoadVehicle</code>, ensuring that <code>Weight</code> remains in the range <code>0.5 - 10</code>.
-    li Add an invariant to <code>Automobile</code>, ensuring that <code>Weight</code> remains in the range <code>0.2 - 13</code>.
 
   p Invariants in C# are added through private void returning instance methods decorated with <code>[ContractInvariantMethod]</code>. These method must never be called from anywhere by the user code. Syntax as below:
 
@@ -111,6 +108,12 @@ include ../../_mixins
       | {
       |     Contract.Invariant(expression);
       | }
+
+  ul
+    li Add an invariant to <code>RoadVehicle</code>, ensuring that <code>Weight</code> remains in the range <code>0.5 - 10</code>.
+    li Add an invariant to <code>Automobile</code>, ensuring that <code>Weight</code> remains in the range <code>0.2 - 13</code>.
+
+  p What errors do we get? Why? Did they correspond to your assumptions? 
 
 
   // pre
@@ -150,17 +153,17 @@ include ../../_mixins
       |    }
       |}      
 
-  h3 Rethinking the automobile class
+  h2 Reinterpreting the requirements
   p Now that we're actually limiting weight in the superclass we're successfully violating Liskov's substition principle, and thus need to redesign. Obviously we must have misinterpreted the requirements.
 
   p Rewrite the weight range rules of the superclass to something more appropriate. Rewrite it to a range that is both reasonable from a real-world-perspective, and causes the Automobile to be a proper subclass.
 
 
-  h3 Add methods
+  h2 Add methods
 
   p Add at least two methods to the superclass, and at least two methods to the subclass. One of the methods of the superclass should be overriden in the subclass.
 
-  p Remember to model things that make real-world sense, and also respect Liskov's substitution principle. Remember the principles of Contravariance and Covariance that you've talked about in class.
+  p Remember to model things that make real-world sense, and also respect Liskov's substitution principle. Remember the principles of <em>Contravariance</em> and <em>Covariance</em> that you've talked about in class.
 
   p Here are some random examples of method signatures, but you are completely free to make up any methods you see fit.
 
