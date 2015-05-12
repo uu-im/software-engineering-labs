@@ -61,9 +61,11 @@ include ../../_mixins
 
   p Select the <em>Code Contracts</em> tab  and make sure to check <em>Perform Runtime Contract Checking</em>, <em>Perform Static Contract Checking</em> and also to set the <em>Warning Level</em> to <em>High</em>.
 
-  p Uncheck <em>Check in background</em> but do check <em>Fail build on warnings</em>. It takes significant time for the static checker to run, and since we want to make deliberate changes step by step we want to be sure when the static checker runs, and when it finishes.
+  p Ensure <em>Show squigglies</em> is checked, so that error locations are showed in the code editor.
 
-  p Also uncheck <em>Infer requires</em> and <em>Infer ensures</em>.
+  p Uncheck <em>Check in Background</em> but do check <em>Fail build on warnings</em>. It takes significant time for the static checker to run, and since we want to make deliberate changes step by step we want to be sure when the static checker runs, and when it finishes.
+
+  p Also uncheck <em>Infer Requires</em> and <em>Infer Ensures</em>.
   
   p Save the configuration file. Whenever you now build the project the static checker will run. You will notice that building takes significantly longer. Upon errors, your build will fail, and errors will be reported in the error pane.
 
