@@ -91,10 +91,11 @@ mixin file-img(name)
     code=name
 
 mixin file-text(name)
-  +i-text
-    code=name
-      if block
-        block
+  li
+    +i-text
+      code=name
+        if block
+          block
 
 
 
