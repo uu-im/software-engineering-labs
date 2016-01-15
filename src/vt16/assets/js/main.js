@@ -1,6 +1,6 @@
 $(function(){
   var symbols = {
-    show: ' (click to expand)', //&#9654;
+    show: '', //&#9654;
     hide: '&#9660;'
   }
 
@@ -19,4 +19,6 @@ $(function(){
     }
     e.preventDefault();
   })
+
+  $('.hideable').click();
 });
