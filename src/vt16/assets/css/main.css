@@ -108,8 +108,7 @@ pre{
 
 @-webkit-keyframes flash {
   0% {
-    background-color: rgba(200,150,0,.25);
-    background-color: rgba(236,87,81,.25);
+    background-color: rgba(0,0,0,.25);
     opacity:1;
   }
   100% {
