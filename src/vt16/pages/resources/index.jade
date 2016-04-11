@@ -120,26 +120,25 @@ include ../../_mixins
 
 
 
-  h2 Principles considered in this course
+  h2 Design principles and guidelines considered in this course
+  p While we encourage you to explore the vast array of principles, guidelines and refactoring techniques that exist out there, you should at least consider the following:
 
-  dl
-    dt Larman's creator pattern
-    dd Are objects created in the right place?
+  ul
+    li
+      a(href="https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)") The SOLID design principles
 
-    dt Larman’s expert pattern
-    dd Is the responsibility to do things assigned to the correct classes?
+    li
+      a(href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)") Low coupling, high cohesion
 
-    dt Dependency Inversion principle
-    dd Are there dependencies between concrete system parts that may cause problems to maintain and extend the code? Could these dependencies be removed, e.g. through strategically design interfaces?
+  p Further, you should of course also exercise basic "housekeeping" of your code:
+  ul
+    li Indent properly.
+    li Be consistent in the "style" you write code (e.g. whitespace, cuddled curly-brackets, etc.).
+    li Use sensible variable names.
+    li Never leave old commented code.
+    li Never leave "dead" code.
 
-    dt The single responsibility principle
-    dd Does every single class in the solution have a single responsibility?
 
-    dt Open-closed principle
-    dd Is the code possible to change without making changes to the existing code?
-
-    dt Interface segregation principle
-    dd Are there interfaces in the code that could be logically separated into several smaller interfaces?
 
 
 
