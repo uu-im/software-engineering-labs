@@ -13,6 +13,7 @@ gulp.task('development', function(){
 });
 
 gulp.task('watch', function(){
+  Tasks.build('tmp-www/software-engineering-labs');
   gulp.watch(['src/**/*', 'code/**/*'], function(e){
     console.log('Changed: ' + e.path);
     Tasks.build('tmp-www/software-engineering-labs');
