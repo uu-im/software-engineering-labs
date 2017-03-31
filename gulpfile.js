@@ -13,11 +13,11 @@ gulp.task('development', function(){
 });
 
 gulp.task('watch', function(){
-  var watchfiles = 
   gulp.watch(['src/**/*', 'code/**/*'], function(e){
     console.log('Changed: ' + e.path);
     Tasks.build('tmp-www/software-engineering-labs');
   });
+  Tasks.server();
 });
 
 gulp.task('p', ['production']);
