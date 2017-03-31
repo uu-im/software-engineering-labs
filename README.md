@@ -62,4 +62,4 @@ All `.jade` files are compiled into `html` while all other formats are blindly p
 
 ## Credits
 
-Labs up to and including 2016 created by [chrokh](https://github.com/chrokh).
+Labs up to and including 2017 created by [chrokh](https://github.com/chrokh).
