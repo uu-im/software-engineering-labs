@@ -1,0 +1,242 @@
+include ../../_mixins
+
++layout("Block 1")
+  header
+    h1 Software Engineering &mdash; Lab 1
+
+
+  .preamble
+    p In this first block we'll refresh our object oriented skills by revisiting concepts such as constructors, public and private membership, interfaces and inheritance as well building GUIs using Windows Forms. Finally we'll take our first peek into the world of design patterns by implementing the <em>iterator pattern</em>.
+
+
+  h2 Seminar hand in
+  p Your job is to build a Phone Book as a <code>C#</code> GUI application. Use the phone book example discussed in class as inspiration. Your phone book must support the following functionality:
+  ul
+    li CRUD users with first name, last name, address, and phone number.
+    li CRUD companies with company name, address and phone number.
+    li CRUD user groups (i.e. collection of users) with name and phone number.
+    li All CRUD actions must be persistant (e.g. by writing to file)
+    li You must make use of the iterator pattern** when listing entries.
+  p
+    em ** Either by using IEnumerable or by implementing the pattern yourself from scratch
+
+
+
+  h2 Exercises
+
+  +exercise(1, 1, "Interfaces")
+    p The purpose of this exercise is to get up to speed, familiarize ourselves with C#, and explore the concept of programming towards interfaces.
+
+    p Consider the following scenario. You are running a company that creates encryption algorithms. All algorithms are two-way. In other words, they can encrypt strings as well as decrypt strings.
+
+    p Your company is currently aiming to implement all your algorithms in C# and bundle them all as a single DLL.
+
+    p To facilitate standardization you've decided to create an interface for what all classes that contain encryption algorithms should look like. See below.
+
+    pre
+      code.language-csharp
+        | interface IAlgorithm {
+        |   string Encrypt(string input);
+        |   string Decrypt(string input);
+        |   string GetName();
+        | }
+
+    p Your job is now to create a class for each encryption algorithm. Each class must implement the interface properly, and must encrypt and decrypt according to specification.
+
+    p I will show you how to implement the first algorithm, but you then have to implement the rest on your own.
+
+    p The following is the specification for the first algorithm.
+
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") Reversal algorithm
+      tr
+        td Name
+        td The Reversal Algorithm
+      tr
+        td Description
+        td Reverses the input string character by character.
+      tr
+        td Example input
+        td
+          code "Abc xyz"
+      tr
+        td Example output
+        td
+          code "zyx cbA"
+
+    p Let's implement this algorithm. Create a new visual studio C# console project. Add a new interface file and copy in the <code>IAlgorithm</code> interface. Create a new class and copy in the following code.
+
+    pre
+      code.language-csharp
+        | class ReversalAlgorithm : IAlgorithm
+        | {
+        |   string Encrypt(string input)
+        |   {
+        |     string reversed = "";
+        |     for(int i=input.Length-1; i>=0; i--)
+        |       reversed += input[i];
+        |     return reversed;
+        |   }
+        |   
+        |   string Decrypt(string input)
+        |   {
+        |     return Encrypt(input);
+        |   }
+        |   
+        |   string GetName()
+        |   {
+        |     return "The Reversal Algorithm";
+        |   }
+        | }
+
+    p Congratulations, you've now implemented the first one of the algorithms.
+
+    p Notice how the class implements the interface in the top using the syntax <code>class ClassName : InterfaceName</code>.
+
+    p Notice also how we reuse the Encrypt method in the Decrypt method since they essentially behave the same in this algorithm.
+
+    p If you're wondering what the implications are of stating that the <code>ReversalAlgorithm</code> class implents the <code>IAlgorithm</code> interface, try temporarily removing one of the methods from the class and then compile the project by pressing F5. You get an error. Why?
+
+    p Make sure your implementation is correct by pasting in the following program in to the main entry point of your application (most often the static <code>Main</code> method of the <code>Program</code> class in the <code>Program.cs</code> file).
+
+    pre
+      code.language-csharp
+        | IAlgorithm algo = new ReversalAlgorithm();
+        | string encrypted = algo.Encrypt("Hello world");
+        | string decrypted = algo.Decrypt("sdrawkcaB");
+        | Console.WriteLine("Hello world => " + encrypted);
+        | Console.WriteLine("sssdrawkcaB => " + decrypted);
+        | Console.ReadKey();
+
+    pre.terminal
+      | Hello world => dlrow olleH
+      | sssdrawkcaB => Backwardsss
+
+    p Notice that on the first line in the example program we're declaring the variable <code>algo</code> to be of type <code>IAlgorithm</code> not of type <code>ReversalAlgorithm</code>. This is the power of interfaces. Just like inheritance allows us to declare the base type and then instantiate any of the super types, interfaces allow us to declare the interface and then instantiate any one class that implements that interface.
+
+    p This means that we can write programs towards the interfaces without knowing what kind of classes and implementations will show up in the future. As an example. Download the example class in the link below, add it to your project and then rewrite your main program as below.
+
+    p
+      a(href="../code/block1/Encryptor/Encryptor/EncryptoStream.cs")
+        +i-text EncryptoStream.cs
+
+    pre
+      code.language-csharp
+        | IAlgorithm algorithm = new ReversalAlgorithm();
+        | 
+        | EncryptoStream stream = new EncryptoStream(algorithm);
+        | 
+        | stream.Start();
+
+    p You should now have a program that allows you to interactively encrypt and decrypt strings using your algorithm, and if you type in "Hello world" your terminal screen should look as follows.
+
+    pre.terminal
+      | The Reversal Algorithm
+      | 
+      | > Hello world
+      | 
+      | ENCRYPTED: dlrow olleH
+      | 
+      | DECRYPTED: Hello world
+
+
+    p Let me tell you one final piece before I'll leave you to implementing the rest of the algorithms. Remember that interfaces only specifies the minimal requirements of a class. Interfaces do pose set any further restrictions on the class. This means that each class can do more than just these methods. This will be necessary since some of the algorithms are not as static as the reversal algorithm. The Caesar cipher, for example, requires that you give it a number that represents the number of shifts you want to shift a word with.
+
+    p You're now ready to implement the rest of the algorithms. The specifications follow below.
+
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") Caesar Cipher
+      tr
+        td Name
+        td n-step Caesar Cipher
+      tr
+        td Description
+        td
+          p Replaces each alphabetical character with an alphabetical character n steps further in the alphabet. The number of steps must be able to be assigned by the code that use the class, through for example the constructor.
+          p Note: This cipher cannot maintain case (i.e. upper or lower) when decrypting. Nor can it decrypt numbers properly.
+      tr
+        td Example input
+        td
+          code "Abcxyz"
+      tr
+        td Example output (n=1)
+        td
+          code "Bcdyza"
+
+
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") 1337 Lang
+      tr
+        td Name
+        td Language of the 1337's
+      tr
+        td Description
+        td Replaces specific characters with numbers. Forces all strings to be lower case before encryption or decryption.
+      tr
+        td Charater replacement scheme
+        td
+          code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
+      tr
+        td Example input
+        td
+          code "Abcxyz"
+      tr
+        td Example output
+        td
+          code "46cxyz"
+
+
+    table.table-border.cipher-specification
+      tr
+        th(colspan="2") Multicipher
+      tr
+        td Name
+        td Generic multicipher
+      tr
+        td Description
+        td Any number of <code>IAlgorithm</code> objects can be added to an instance of the <code>Multicipher</code> class at runtime. When encrypting, the algorithm runs each sub-algorithm on the input one after one. When decrypting it runs the algorithms one after one in the reverse order, but decrypting this time.
+      tr
+        td Charater replacement scheme
+        td
+          code a=&gt;4, b=&gt;6, e=&gt;3, g=&gt;9, i=&gt;!, l=&gt;1, o=&gt;0, t=&gt;7
+      tr
+        td Example input
+        td
+          code "Abcxyz"
+      tr
+        td Example output (assuming given both CaesarCipher(1) and 1337 Lang in that order)
+        td
+          code "6cdyz4"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  +exercise(1, 2, "GUI Programming &amp; Event Handling")
+    p The assignment is now to create a graphical user interface that allows the user to select any combination of algorithms and then encrypt and decrypt strings using that particular combination.
+    p You are allowed to hard-code the instantiation of the algorithms that the user can choose from.
+    p Any particular algorithm must be allowed to be used multiple times in the combination.
+    p The algorithms that the user selects must then be fed into a <code>MultiCipher</code> instance.
+    p The user can then encrypt and decrypt strings using that particular <code>MultiCipher</code>.
+    p Design the application any way you wish. See below gif for a runtime example.
+    img(src="../assets/img/encryptor-gui-example.gif")
+
+
+
+
+
+
