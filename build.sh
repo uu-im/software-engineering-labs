@@ -29,5 +29,3 @@ echo "Devlopment build is now found in $OUTDIR"
 cp -r $OUTDIR/* .
 
 echo "Devlopment build is now found in ."
-
-node_modules/http-server/bin/http-server tmp-www
