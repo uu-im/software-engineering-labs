@@ -28,4 +28,4 @@ echo "Devlopment build is now found in $OUTDIR"
 
 cp -r $OUTDIR/* .
 
-echo "Devlopment build is now found in ."
+echo "Production build is now found in ."
