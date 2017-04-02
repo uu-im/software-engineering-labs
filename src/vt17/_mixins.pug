@@ -20,7 +20,7 @@ mixin handin(n, title)
   h3 Exercise 
     =n
     |  &mdash;  
-    a(href="#exercise-#{n}")= title
+    a(href=`#exercise-${n}`)= title
   block
 
 
@@ -101,9 +101,9 @@ mixin file-text(name)
 
 mixin exercise(bignum, num, name)
   h3
-    a.hideable(data-target="e#{num}") #{bignum}.#{num} 
+    a.hideable(data-target=`e${num}`) #{bignum}.#{num}
       != name
-  div(id="e#{num}")
+  div(id=`e${num}`)
     if block
       block
 
