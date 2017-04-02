@@ -101,7 +101,7 @@ mixin file-text(name)
 
 mixin exercise(bignum, num, name)
   h3
-    a.hideable(data-target=`e${num}`) #{bignum}.#{num}
+    a.hideable(data-target=`e${num}`) #{bignum}.#{num}  
       != name
   div(id=`e${num}`)
     if block
