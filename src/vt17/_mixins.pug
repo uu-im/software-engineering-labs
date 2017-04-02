@@ -108,27 +108,55 @@ mixin exercise(bignum, num, name)
       block
 
 
+
+mixin easyMaterial(name)
+  -var anchor = name.toLowerCase().replace(/ /g, '-').replace(/[^a-zA-Z-]/g, '')
+  h3
+    a.hideable(data-target=anchor)
+      +easy(name)
+  div(id=anchor)
+    if block
+      block
+
+
+mixin mediumMaterial(name)
+  -var anchor = name.toLowerCase().replace(/ /g, '-').replace(/[^a-zA-Z-]/g, '')
+  h3
+    a.hideable(data-target=anchor)
+      +medium(name)
+  div(id=anchor)
+    if block
+      block
+
+
+mixin hardMaterial(name)
+  -var anchor = name.toLowerCase().replace(/ /g, '-').replace(/[^a-zA-Z-]/g, '')
+  h3
+    a.hideable(data-target=anchor)
+      +hard(name)
+  div(id=anchor)
+    if block
+      block
+
+
 mixin easy(text)
   span.easy
     i.fa.fa-star
-    |  
-  =text
+    |  !{text}
 
 
 mixin medium(text)
   span.medium
     i.fa.fa-star
     i.fa.fa-star
-    |  
-  =text
+    |  !{text}
 
 mixin hard(text)
   span.hard
     i.fa.fa-star
     i.fa.fa-star
     i.fa.fa-star
-    |  
-  =text
+    |  !{text}
 
 
 mixin youtube(path)
