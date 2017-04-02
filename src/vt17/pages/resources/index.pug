@@ -1,0 +1,160 @@
+include ../../_mixins
+
+
++layout('Resources')
+  header
+    h1 Study material
+
+  p Please do familiarize yourself with (as much as you find necessary of) the following study material before attempting to approach the corresponding lab exercises. Naturally, all of the study material is not mandatory. However, you will notice how you greatly benefit from exploring this material.
+
+
+
+
+
+  h3 Legend
+  p
+    b
+      +easy('Introductory')
+    |  Please use this material to get up to speed. This material is too easy to be part of the course, but may be very helpful if any of the concepts are completely new to you.
+  p
+    b
+      +medium('Appropriate')
+    |   This material is on par with the level of the course.
+  p
+    b
+      +hard('Advanced')
+    |  This might feel a bit more advanced than the contents of the course. But remember to always challenge yourself!
+
+
+
+
+  +divider
+
+
+
+  h2 Block 1
+
+
+  +easyMaterial("I don't know C# &mdash; where should I start?")
+    p This is a C# video tutorial series with 100 videos starting from the absolute basics.
+    +youtube("https://www.youtube.com/embed/videoseries?list=PLAC325451207E3105")
+    p This is a C# video tutorial series of 200 videos that start from the basics and also cover Windows Forms (i.e. GUI programming).
+    +youtube("https://www.youtube.com/embed/x_9lfHjYtVg&list=PL0EE421AE8BCEBA4A")
+
+  +mediumMaterial("How are iterators used in OO languages?")
+    p A brief video explaining what iterators are and how they implemented and used in Java, by Natan Schultz.
+    +youtube("https://www.youtube.com/embed/53cFp9P9ao8")
+
+  +mediumMaterial("How do I implement Iterator Pattern in C#?")
+    p Derek Banas shows how to implement the Iterator Design Pattern in Java, by Derek Banas. Java is incredibly similar to C#.
+    +youtube("https://www.youtube.com/embed/VKIzUuMdmag")
+
+
+
+
+
+  h2 Block 2 &mdash; Testing
+
+  +easyMaterial("What is TDD?")
+    p A 5 min video giving a high-level explanation of TDD.
+    +youtube("https://www.youtube.com/embed/QCif_-r8eK4")
+
+  +easyMaterial("What does TDD look like in the real world?")
+    p A 2 h video of a pair-programming session with Roy Osherove. A real-world situation resulting in real-world problems. A TDD pair-programming session with Roy Osherove.
+    +youtube("https://www.youtube.com/embed/xX9hfPkA800")
+
+  +mediumMaterial("How do I do TDD in C# with Visual Studio?")
+    p A 17 min video demonstrating how test-driven development can be carried out in C#.
+    +youtube("https://www.youtube.com/embed/5gMBGVNR8wE")
+
+  +mediumMaterial("How can I achieve high test coverage? What is Triangulation?")
+    p A blog post about a more "extreme" approach to TDD that aims to result in higher test coverage.
+      a(href="http://feelings-erased.blogspot.se/2013/03/the-two-main-techniques-in-test-driven.html") Triangulation in Test-driven development
+
+  +hardMaterial("Are there TDD anti-patterns?")
+    p Blog post on things you "should not" do.
+      a(href="http://blog.james-carr.org/2006/11/03/tdd-anti-patterns/") TDD anti-patterns
+
+  +hardMaterial("How much implementation code should I write before I write the next test?")
+    p Robert C. Martin suggests a more rigorous approach to TDD. Video. There is also a
+      a(href="https://8thlight.com/blog/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html")  blog post
+      |  on the same topic.
+    +youtube("https://www.youtube.com/embed/B93QezwTQpI")
+
+
+
+
+  h2 Block 2 &mdash; Refactoring
+
+  +easyMaterial("What is refactoring?")
+    p Wikipedia page
+      a(href="http://en.wikipedia.org/wiki/Code_refactoring") What is refactoring?
+
+  +mediumMaterial("What should I refactor?")
+    p Below are a number video playlists that enact and explain some of the techniques from the great book by Martin Fowler called  
+      a(href="http://martinfowler.com/books/refactoring.html") Refactoring
+      |.
+
+    h4 Composing Methods
+    +youtube("https://www.youtube.com/embed/videoseries?list=PL3GKSsHsE_qKWl5-XWAX6jACpfId_9-8Y")
+
+    h4 Moving Features Between Objects
+    +youtube("https://www.youtube.com/embed/videoseries?list=PL3GKSsHsE_qJX-E7GuBkKJ8-BoyiThrk7")
+
+    h4 Organizing Data
+    +youtube("https://www.youtube.com/embed/videoseries?list=PL3GKSsHsE_qJ54Q3oJ3GNVj8WkFZd6y2y")
+
+    h4 Simplifying Conditional Expressions
+    +youtube("https://www.youtube.com/embed/videoseries?list=PL3GKSsHsE_qIv4gbun2h268rBc2-RnyNH")
+
+    h4 Making Method Calls Simpler
+    +youtube("https://www.youtube.com/embed/videoseries?list=PL3GKSsHsE_qJwgtU88VFGq6cmewrdorxh")
+
+    h4 Dealing With Generalization
+    +youtube("https://www.youtube.com/embed/videoseries?list=PL3GKSsHsE_qLVoAoWooC0yk59RLwV4rfW")
+
+
+  +mediumMaterial("I need more examples of refactoring...")
+    p Derek banas has a long series where he applies refactoring step by step. This might help if you want a little more narrative and context.
+    +youtube("https://www.youtube.com/embed/videoseries?list=PLGLfVvz_LVvSuz6NuHAzpM52qKM6bPlCV")
+
+
+
+  h2 Block 3 &mdash; Design Patterns
+
+  +easyMaterial("Is Head First: Design Patterns a useful book?")
+    p Of course it is. It's the course book. Read it.  
+      a(href="http://shop.oreilly.com/product/9780596007126.do") Head First Design Patterns
+
+  +mediumMaterial("Is it true that Christopher has made videos on Design Patterns?")
+    p Indeed. I hope they help. Let me know if I can make them better somehow.
+
+    h4 Strategy Pattern
+    +youtube("https://www.youtube.com/embed/v9ejT8FO-7I")
+
+    h4 Observer Pattern
+    +youtube("https://www.youtube.com/embed/_BpmfnqjgzQ")
+
+    h4 Decorator Pattern
+    +youtube("https://www.youtube.com/embed/GCraGHx6gso")
+
+  +mediumMaterial("Are there videos showing code examples of Design Patterns?")
+    p Indeed. Derek Banas has made a whole lot of screencasts with code examples of popular patterns.
+    +youtube("https://www.youtube.com/embed/videoseries?list=PLF206E906175C7E07")
+
+
+
+
+  h2 Block 4 &mdash; Code Contracts
+
+  +mediumMaterial("What is Design By Contract?")
+    a(href="https://www.youtube.com/watch?v=VPEBcJYXfX4") Click here for video.
+
+  +mediumMaterial("How can I use Code Contracts in Visual Studio?")
+    +youtube("https://www.youtube.com/embed/iKd9MYOQijY")
+
+  +mediumMaterial("What are Code Contracts and how can I use them in .NET?")
+    +youtube("https://www.youtube.com/embed/xVhQ9yfo54I")
+
+
+

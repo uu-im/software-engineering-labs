@@ -1,4 +1,4 @@
-namespace EncryptorGUI
+﻿namespace EncryptorGUI
 {
   partial class Form1
   {

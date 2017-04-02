@@ -1,0 +1,69 @@
+<!DOCTYPE html><meta charset="utf-8"><html lang="en"><head><title>Block 4</title></head></html><body><div class="container"><header><h1>Software Engineering &mdash; Lab 4</h1></header><div class="preamble"><p>Using code contracts we're now going to see how we can "guard" behavior and state. Also how to ensure that subclasses respect the restrictions set by their superclasses.</p></div><h2>Seminar hand in</h2><p>There will be no seminar for this block. Please participate actively in the guest lectures and workshops.</p><h2>Exercises</h2><h3><a class="hideable" data-target="e1">4.1  State-space, behavior and Code Contracts</a></h3><div id="e1"><p>At the lectures you've discussed an example with vehicles of different weights. We're going to implement that example and attempt to enforce behaviour and state-space through the use of contracts. Let's start off with some basic classes:</p><pre><code class="language-csharp">class RoadVehicle
+{
+    public double Weight { get; protected set; }
+ 
+    public RoadVehicle() { }
+    public RoadVehicle(double weight)
+    {
+        if (weight < 0.5 || 10.0 < weight)
+            throw new ArgumentException();
+ 
+        Weight = weight;
+    }
+}
+ 
+class Automobile : RoadVehicle
+{
+    public Automobile(double weight)
+    {
+        if (weight < 0.2 || 13 < weight)
+            throw new ArgumentException();
+        
+        Weight = weight;
+    }
+}      </code></pre><p>Try recalling the discussion you had in the lecture. Notice how the subclass above ignores the restrictions posed by the superclass's constructor. A simple mistake you may say, but surely an easy one to make. We're violating Liskov's substitution principle.</p><h3>Setting up Visual Studio to use Code Contracts</h3><p>To enable Visual Studios static and runtime contract checking, right-click your project in the <em>Solution Explorer</em> and choose </em>Properties</em>.</p><p>Select the <em>Code Contracts</em> tab  and make sure to check <em>Perform Runtime Contract Checking</em>, <em>Perform Static Contract Checking</em> and also to set the <em>Warning Level</em> to <em>High</em>.</p><p>Ensure <em>Show squigglies</em> is checked, so that error locations are showed in the code editor.</p><p>Uncheck <em>Check in Background</em> but do check <em>Fail build on warnings</em>. It takes significant time for the static checker to run, and since we want to make deliberate changes step by step we want to be sure when the static checker runs, and when it finishes.</p><p>Also uncheck <em>Infer Requires</em> and <em>Infer Ensures</em>.</p><p>Save the configuration file. Whenever you now build the project the static checker will run. You will notice that building takes significantly longer. Upon errors, your build will fail, and errors will be reported in the error pane.</p><h2>Pre- and post-conditions</h2><p>We're now going to replace the <code>ArgumentException</code>'s with preconditions, but also add post-conditions that ensure that our methods behave as expected.</p><p>Pre- and post conditions can be added to any method in C# when using the Code Contracts library. They must all be added in the beginning of the body of a method. I.e. before the actual work of the method is performed. Syntax examples below.</p><pre><code class="language-csharp">Contract.Requies(expression); // Pre-condition
+Contract.Ensures(expression); // Post-condition</code></pre><b>RoadVehicle</b><ul><li>Add a pre-condition to the constructor that limits the argument <code>weight</code> to the range <code>0.5 - 10</code>.</li><li>Add a post-condition to the constructor, ensuring that the instance variable <code>Weight</code> is set to the value of the argument <code>weight</code>.</li></ul><b>Automobile</b><ul><li>Add a pre-condition to the constructor that limits the argument <code>weight</code> to the range <code>0.2 - 13</code>.</li><li>Add a post-condition to the constructor, ensuring that the instance variable <code>Weight</code> is set to the value of the argument <code>weight</code>.</li></ul><p>Don't forget to remove the <code>ArgumentException</code> throws as they are now superflous.</p><p>Build the project and observe the error list. We should be ok. Why? Discuss with a partner.</p><h2>Adding invariants</h2><p>Actually we didn't really violate Liskov's substitution principle in the original case, nor in the one above. The argument-less constructor in the superclass indicates that there actually aren't any restrictions on the weight of a RoadVehicle and thus that the Automobile indeed is a proper specialization of the RoadVehicle.</p><p>Discuss the implications of this with a partner. What does it mean? How should it have been designed? Why is it not enough to limit the range of the constructor argument <code>weight</code>?</p><p>What do you think will happen if we add invariants that force the classes to maintain their respective weight ranges? Discuss with a partner. Make sure you have a hypotheses before actually adding the invariants in the code.</p><p>Invariants in C# are added through private void returning instance methods decorated with <code>[ContractInvariantMethod]</code>. These method must never be called from anywhere by the user code. Syntax as below:</p><pre><code class="language-csharp">[ContractInvariantMethod]
+private void ObjectInvariant()
+{
+    Contract.Invariant(expression);
+}</code></pre><ul><li>Add an invariant to <code>RoadVehicle</code>, ensuring that <code>Weight</code> remains in the range <code>0.5 - 10</code>.</li><li>Add an invariant to <code>Automobile</code>, ensuring that <code>Weight</code> remains in the range <code>0.2 - 13</code>.</li></ul><p>What errors do we get? Why? Did they correspond to your assumptions? </p><!-- precode.language-csharp
+  |class RoadVehicle
+  |{
+  |    public double Weight { get; protected set; }
+  | 
+  |    public RoadVehicle() { }
+  |    public RoadVehicle(double weight)
+  |    {
+  |        Contract.Requires(0.5 < weight && weight < 10);
+  |        Contract.Ensures(Weight = weight);
+  |        Weight = weight;
+  |    }
+  |    
+  |    [ContractInvariantMethod]
+  |    private void ObjectInvariant()
+  |    {
+  |        Contract.Invariant(0.5 < Weight && Weight < 10.0);
+  |    }
+  |}
+  | 
+  |class Automobile : RoadVehicle
+  |{
+  |    public Automobile(double weight)
+  |    {
+  |        Contract.Requires(0.2 < weight && weight < 13);
+  |        Contract.Ensures(Weight = weight);
+  |        Weight = weight;
+  |    }
+  |    
+  |    [ContractInvariantMethod]
+  |    private void ObjectInvariant()
+  |    {
+  |        Contract.Invariant(0.2 < Weight && Weight < 13);
+  |    }
+  |}      
+--><h2>Reinterpreting the requirements</h2><p>Now that we're actually limiting weight in the superclass we're successfully violating Liskov's substition principle, and thus need to redesign. Obviously we must have misinterpreted the requirements.</p><p>Rewrite the weight range rules of the superclass to something more appropriate. Rewrite it to a range that is both reasonable from a real-world-perspective, and causes the Automobile to be a proper subclass.</p><h2>Add methods</h2><p>Add at least two methods to the superclass, and at least two methods to the subclass. One of the methods of the superclass should be overriden in the subclass.</p><p>Remember to model things that make real-world sense, and also respect Liskov's substitution principle. Remember the principles of <em>Contravariance</em> and <em>Covariance</em> that you've talked about in class.</p><p>Here are some random examples of method signatures, but you are completely free to make up any methods you see fit.</p><pre><code class="language-csharp"> AddPassenger(string name);
+RemovePassenger(Passenger p);
+RemoveWheel(int position);
+SetWheels(int num);
+Accellerate();
+TurnWheel(double deg);</code></pre></div><h3><a class="hideable" data-target="e2">4.2  Phone Book Contracts</a></h3><div id="e2"><p>Introduce Code Contracts to the Phone Book that you refined in Block 2, but originally built in Block 1. Make sure that you do consider both pre-conditions, post-conditions and invariants. Further, make sure that you always know why you are introducing a particular constraint. Lastly, do remember to respect <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov's substitution priciple</a> , and the concepts of covariance and contravariance.</p></div></div><link rel="stylesheet" href="/software-engineering-labs/vt17/assets/css/main.css"><link rel="stylesheet" href="/software-engineering-labs/vt17/assets/css/prism.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><script src="/software-engineering-labs/vt17/assets/js/prism.js"></script><script src="http://code.jquery.com/jquery-2.1.3.min.js"></script><script src="/software-engineering-labs/vt17/assets/js/main.js"></script></body>
