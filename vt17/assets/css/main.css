@@ -2,6 +2,7 @@ body{
   padding: 12px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 18px;
+  color:     #111;
 }
 
 .container{
@@ -28,7 +29,6 @@ h1 {
 
 h2 {
   font-size:  2em;
-  margin-top: 3em;
 }
 
 h3 {
@@ -37,6 +37,10 @@ h3 {
 
 h3 a {
   color: #333;
+}
+
+h4 {
+  font-weight: bold;
 }
 
 
@@ -199,7 +203,34 @@ dl dd{
 
 
 
+.easy {
+  color: orange;
+}
+.medium {
+  color: green;
+}
+.hard {
+  color: red;
+}
+
+
 
 .text-lg{
   font-size: 1.2em;
 }
+
+
+iframe.youtube {
+  width:  100%;
+}
+
+
+.divider {
+  margin-top:    1em;
+  margin-bottom: 1em;
+  text-align:    center;
+  font-size:     4em;
+  color:         #dedede;
+}
+
+
