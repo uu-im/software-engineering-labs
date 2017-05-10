@@ -2,8 +2,9 @@ include ../../_mixins
 
 
 mixin refactoring-exercise-file(name)
+  -path = "../code/block2/MovieRentalRefactoring/MovieRentalBefore/" + name + ".cs"
   +vs-file
-    a(href="../code/block2/MovieRentalRefactoring/MovieRentalBefore/#{name}.cs") #{name}.cs
+    a(href=path) #{name}.cs
 
 
 
